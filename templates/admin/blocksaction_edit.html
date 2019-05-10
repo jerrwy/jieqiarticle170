@@ -1,0 +1,132 @@
+
+<script language="javascript" type="text/javascript">
+<!--
+function x(obj)
+{
+    for(var i = 0; i< obj.length; i++){
+       if(obj[i].checked) return obj[i].value;
+	}
+}
+
+function jieqiFormValidate_blockedit(obj){
+  if(obj.blockname.value == ""){
+    alert("请输入区块名称");
+    obj.blockname.focus();
+    return false;
+  }
+  var blockname = obj.blockname.value;
+  var side = obj.side.value;
+  var publish = x(obj.publish);
+  var title = obj.title.value;
+  {?if $blockSet['hasvars']>0?}
+  var vars = obj.vars.value;
+  var template = obj.template.value;
+  {?else?}
+  var vars = '';
+  var template = '';
+  {?/if?}
+  var varcontent = obj.varcontent.value;
+  //alert(varcontent);
+  var str = "&blockname="+blockname+"&side="+side+"&publish="+publish+"&vars="+vars+"&template="+template+"&title="+title+"&varcontent="+varcontent;
+  Ajax.Request('{?$jieqi_url?}/admin/blocksaction.php?action=editajax'+str,{onComplete:change_block})	
+  return false;
+}
+function change_block(){
+  var key = {?$key?};
+   var obj = document.blockedit;
+   var title = obj.title.value;
+   var bid = obj.bid.value;
+   var module = obj.module.value;
+   var filename = obj.filename.value;
+   var classname = obj.classname.value;
+  {?if $blockSet['hasvars']>0?}
+   var vars = obj.vars.value;
+   var template = obj.template.value;
+  {?else?}
+   var vars = '';
+   var template = '';
+  {?/if?}
+   var contenttype = obj.contenttype.value;
+   var custom = obj.custom.value;
+   var publish = x(obj.publish);
+   var hasvars = obj.hasvars.value; 
+   //alert(vars); 
+  str = this.response;//alert(str);alert($("block_title_"+key).title);
+  $("block_title_"+key).title = str;
+  $("block_subject_"+key).innerHTML = title;
+  Ajax.Update("/blockshow.php?bid="+bid+"&module="+module+"&filename="+filename+"&classname="+classname+"&vars="+vars+"&template="+template+"&contenttype="+contenttype+"&custom="+custom+"&publish="+publish+"&hasvars="+hasvars+"", {outid:"block_content_"+key, tipid:"block_content_"+key, onLoading:"正在载入..."});
+  closeDialog();
+}
+//-->
+</script>
+<table width="600" cellspacing="0" align="center"><tr><td>
+<div id="content"><br />
+<form name="blockedit" id="blockedit" action="{?$jieqi_url?}/admin/blocksaction.php?action=edited&key={?$key?}&modules={?$modules?}&file={?$file?}&name={?$name?}" target="_self" method="post" onSubmit="return jieqiFormValidate_blockedit(this);">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>编辑系统区块</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">区块文件</td>
+  <td class="even">{?$blockSet['filename']?}.php</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">模块名称</td>
+  <td class="even">{?$blockSet['modnamer']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">区块名称</td>
+  <td class="even"><input type="text" class="text" name="blockname" id="blockname" size="30" maxlength="50" value="{?$blockSet['blockname']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">显示位置</td>
+  <td class="even"><select class="select"  size="1" name="side" id="side" disabled="disabled">
+<option value="0" {?if $blockSet['side']=='0'?}selected{?/if?}>左边</option>
+<option value="1" {?if $blockSet['side']=='1'?}selected{?/if?}>右边</option>
+<option value="2" {?if $blockSet['side']=='2'?}selected{?/if?}>中左</option>
+<option value="3" {?if $blockSet['side']=='3'?}selected{?/if?}>中右</option>
+<option value="4" {?if $blockSet['side']=='4'?}selected{?/if?}>中上</option>
+<option value="5" {?if $blockSet['side']=='5'?}selected{?/if?}>中中</option>
+<option value="6" {?if $blockSet['side']=='6'?}selected{?/if?}>中下</option>
+<option value="7" {?if $blockSet['side']=='7'?}selected{?/if?}>顶部</option>
+<option value="8" {?if $blockSet['side']=='8'?}selected{?/if?}>底部</option>
+</select></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">是否显示</td>
+  <td class="even"><input type="radio" class="radio" name="publish" value="0" {?if $blockSet['publish']=='0'?}checked{?/if?}/>不显示
+<input type="radio" class="radio" name="publish" value="1" {?if $blockSet['publish']=='1'?}checked{?/if?}/>仅登录前显示
+<input type="radio" class="radio" name="publish" value="2" {?if $blockSet['publish']=='2'?}checked{?/if?}/>仅登录后显示
+<input type="radio" class="radio" name="publish" value="3" {?if $blockSet['publish']=='3'?}checked{?/if?} />都显示
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">区块标题</td>
+  <td class="even"><textarea class="textarea" name="title" id="title" rows="3" cols="60">{?$blockSet['title']?}</textarea></td>
+</tr>
+{?if $blockSet['hasvars']>0?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">区块参数</td>
+  <td class="even"><textarea class="textarea" name="vars" id="vars" rows="3" cols="60">{?$blockSet['vars']?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">模板文件名称</td>
+  <td class="even"><input type="text" class="text" name="template" id="template" size="30" maxlength="50" value="{?$blockSet['template']?}" /></td>
+</tr>{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even">
+	<input type="hidden" name="varcontent" value="{?$blockSet.var?}">
+	<input type="hidden" name="bid" value="{?$blockSet.bid?}">
+	<input type="hidden" name="module" value="{?$blockSet.module?}">
+	<input type="hidden" name="filename" value="{?$blockSet.filename?}">
+	
+	<input type="hidden" name="classname" value="{?$blockSet.classname?}">
+	<input type="hidden" name="contenttype" value="{?$blockSet.contenttype?}">
+	<input type="hidden" name="custom" value="{?$blockSet.custom?}">
+	<input type="hidden" name="hasvars" value="{?$blockSet.hasvars?}">
+  <input type="submit" class="button" name="submit"  id="submit" value="保存区块" /></td>
+</tr>
+</table>
+</form>
+
+<br /></div>
+</td></tr></table>

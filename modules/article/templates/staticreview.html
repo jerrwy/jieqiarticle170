@@ -1,0 +1,3 @@
+{?section name=i loop=$reviewrows?}
+ ¡õ {?if $reviewrows[i].topflag == 1?}<span class="hottext">[¶¥]</span>{?/if?}{?if $reviewrows[i].goodflag == 1?}<span class="hottext">[¾«]</span>{?/if?}{?$reviewrows[i].content?}<br />---- {?$reviewrows[i].postdate?} {?$reviewrows[i].username?} ·¢±í<hr />
+{?/section?}

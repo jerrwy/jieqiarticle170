@@ -1,0 +1,63 @@
+<form name="frmquery" method="post" action="{?$jieqi_url?}/admin/users.php">
+<table class="grid" width="100%" align="center">
+  <tr class="odd" align="center">
+	<td>
+	<a href="users.php">全部会员</a>{?section name=i loop=$grouprows?} | <a href="users.php?groupid={?$grouprows[i].groupid?}">{?$grouprows[i].groupname?}</a>{?/section?}
+	</td>
+  </tr>
+  <tr>
+    <td class="even" align="right">
+	<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="hide">
+      <tr>
+        <td width="30%" valign="middle">会员数：{?$rowcount?}</td>
+        <td width="70%" align="right" valign="middle">
+		用户名称：
+        <input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50">
+	    <input name="keytype" type="radio" value="uname" checked="checked" />
+		用户名 
+		<input name="keytype" type="radio" value="name" />昵称 
+        <input type="submit" name="Submit" value="搜 索" class="button">&nbsp;&nbsp;
+        </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</form>
+<br />
+<form action="" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>用户列表</caption>
+  <tr align="center" class="head">
+    <td width="18%" valign="middle">用户名</td>
+	<td width="18%" valign="middle">昵称</td>
+    <td width="12%" valign="middle">注册日期</td>
+    <td width="12%" valign="middle">等级</td>
+    <td width="10%" valign="middle">经验值</td>
+    <td width="10%" valign="middle">积分</td>
+    <td width="10%" valign="middle">虚拟货币</td>
+    <td width="15%" valign="middle">操作</td>
+  </tr>
+  {?section name=i loop=$userrows?}
+  <tr valign="middle">
+    <td class="even"><a href="{?function jieqi_geturl:'system':'user':$userrows[i].userid?}" target="_blank">{?$userrows[i].username?}</a></td>
+	<td align="center" class="odd">{?$userrows[i].name?}</td>
+    <td align="center" class="even">{?$userrows[i].regdate?}</td>
+    <td class="even">{?$userrows[i].group?}</td>
+    <td align="center" class="odd">{?$userrows[i].experience?}</td>
+    <td align="center" class="even">{?$userrows[i].score?}</td>
+    <td align="center" class="odd">{?$userrows[i].egold?}</td>
+    <td align="center" class="even"><a href="{?$jieqi_url?}/admin/usermanage.php?id={?$userrows[i].userid?}">管理</a></td>
+  </tr>
+  {?/section?}
+</table>
+</form>
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">{?$url_jumppage?}</td>
+  </tr>
+</table>
+

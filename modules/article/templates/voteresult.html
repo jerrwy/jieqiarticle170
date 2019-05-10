@@ -1,0 +1,23 @@
+<br />
+<table class="grid" width="90%" align="center">
+  <tr>
+    <th colspan="4">{?$title?}</th>
+  </tr>
+  {?section name=i loop=$resultrows?}
+  <tr>
+    <td width="40%" class="odd">{?$resultrows[i].item?}</td>
+    <td width="15%" align="center" class="even">共：{?$resultrows[i].stat?}票</td>
+    <td width="15%" align="center" class="odd">百分比：{?$resultrows[i].percent?}%</td>
+	<td width="30%" align="center" class="even"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr height="10">
+        <td bgcolor="#0099FF" width="{?$resultrows[i].percent?}%"></td>
+        <td width="{?$resultrows[i].recent?}%"></td>
+      </tr>
+    </table></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="4" class="foot" align="right"><a href="javascript:window.close();">关 闭</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</table>
+<br /><br />

@@ -1,0 +1,70 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<script language="javascript">
+function check_confirm(){
+	var checkform = document.getElementById('checkform');
+	var checknum = 0;
+	for (var i=0; i < checkform.elements.length; i++){
+	 if (checkform.elements[i].name == 'checkid[]' && checkform.elements[i].checked == true) checknum++; 
+	}
+	if(checknum == 0){
+		alert('请先选择要操作的书目！');
+		return false;
+	}
+	var newclassid = document.getElementById('newclassid');
+	if(newclassid.value == -1){
+		if(confirm('确实要将选中书目移出书架么？')) return true;
+		else return false;
+	}else{
+		return true;
+	}
+}
+</script>
+<form action="" method="post" name="checkform" id="checkform" onsubmit="return check_confirm();">
+<div class="gridtop">
+您的书架可收藏 {?$maxbookcase?} 本，已收藏 {?$nowbookcase?} 本，本组有 {?$classbookcase?} 本。
+{?if $maxmarkclass > 0?}
+&nbsp;&nbsp;&nbsp;&nbsp;选择分组
+  <select name="classlist" onchange="javascript:document.location='bookcase.php?classid='+this.value;">
+    <option value="0"{?if $classid == 0?} selected="selected"{?/if?}>默认书架</option>
+	{?section name=i loop=$markclassrows?}
+    <option value="{?$markclassrows[i].classid?}"{?if $classid == $markclassrows[i].classid?} selected="selected"{?/if?}>第{?$markclassrows[i].classid?}组书架</option>
+	{?/section?}
+  </select>
+{?/if?}
+  </div>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <th width="21%">文章名称</th>
+    <th width="30%">最新章节</th>
+    <th width="30%">书签</th>
+    <th width="7%">更新</th>
+    <th width="7%">操作</th>
+  </tr>
+{?section name=i loop=$bookcaserows?}
+  <tr>
+    <td class="odd" align="center">
+	<input type="checkbox" id="checkid[]" name="checkid[]" value="{?$bookcaserows[i].caseid?}">    </td>
+    <td class="even">{?if $bookcaserows[i].hasnew == 1?}<span class="hottext">新</span>{?/if?}<a href="{?$bookcaserows[i].url_index?}" target="_blank">{?$bookcaserows[i].articlename?}</a></td>
+    <td class="odd"><a href="{?$bookcaserows[i].url_lastchapter?}" target="_blank">{?$bookcaserows[i].lastchapter?}</a>
+	{?if $bookcaserows[i].obookchapter != ""?}<br /><span class="hottext">[VIP]</span><a href="readbookcase.php?bid={?$bookcaserows[i].caseid?}&oid={?$bookcaserows[i].obookid?}&ocid={?$bookcaserows[i].obookchapterid?}" target="_blank">{?$bookcaserows[i].obookchapter?}</a>{?/if?}
+	</td>
+    <td class="even"><a href="{?$bookcaserows[i].url_articlemark?}" target="_blank">{?$bookcaserows[i].articlemark?}</a></td>
+    <td class="odd" align="center">{?$bookcaserows[i].lastupdate|date:"m-d"?}
+	{?if $bookcaserows[i].obookupdate != ""?}<br /><span class="hottext">{?$bookcaserows[i].obookupdate|date:"m-d"?}</span>{?/if?}</td>
+    <td class="even" align="center"><a href="javascript:if(confirm('确实要将本书移出书架么？')) document.location='{?$bookcaserows[i].url_delete?}';">移除</a></td>
+{?/section?}  </tr>
+<tr>
+    <td colspan="6" align="center" class="foot">选中项目
+	<select name="newclassid" id="newclassid">
+	<option value="-1" selected="selected">移出书架</option>
+	<option value="0">移到默认书架</option>
+	{?section name=i loop=$markclassrows?}
+    <option value="{?$markclassrows[i].classid?}">移到第{?$markclassrows[i].classid?}组书架</option>
+	{?/section?}
+  </select> <input name="btnsubmit" type="submit" value=" 确认 " class="button" /><input name="clsssid" type="hidden" value="{?$classid?}" /></td>
+    </tr>
+</table>
+</form>
+

@@ -1,0 +1,52 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<script type="text/javascript">
+<!--
+function frmnewmessage_validate(){
+  if(typeof(document.frmnewmessage.receiver) != "undefined"){
+    if(document.frmnewmessage.receiver.value == "" ){
+      alert("请输入收件人");
+	  document.frmnewmessage.receiver.focus();
+	  return false;
+    }
+  }
+  if(document.frmnewmessage.title.value == ""){
+    alert("请输入标题");
+	window.document.frmnewmessage.title.focus();
+	return false;
+  }
+}
+//-->
+</script>
+<form name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>写新消息</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">收件人</td>
+  <td class="even">
+  {?if $tosys > 0?}
+  网站管理员<input type="hidden" name="tosys" id="tosys" value="{?$tosys?}" />
+  {?else?}
+  <input type="text" class="text" name="receiver" id="receiver" size="30" maxlength="30" value="{?$receiver?}" />
+  {?/if?}
+  </td>
+</tr>
+  <tr valign="middle" align="left"><td class="odd" width="25%">标题</td>
+  <td class="even"><input type="text" class="text" name="title" id="title" size="30" maxlength="100" value="{?$title?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">内容</td>
+  <td class="even"><textarea class="textarea" name="content" id="content" rows="12" cols="60">{?$content?}</textarea></td>
+</tr>
+{?if $needscore == 1?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">提示</td>
+  <td class="even"><span class="hottext">您已经超出每天发送 {?$maxdaymsg?} 条消息的限制，如要继续发送，将消耗您的积分 {?$sendmsgscore?} 点</span></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="发 送" /><input type="hidden" name="action" id="action" value="newmessage" /></td>
+</tr>
+</table>
+</form>

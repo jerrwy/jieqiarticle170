@@ -1,0 +1,16 @@
+<div class="tc">
+<div id="login">
+<form name="frmlogin" method="post" action="{?$url_login?}">
+<ul>
+<li>用户名：{?if $jieqi_username == ''?}<input type="text" class="text" size="20" maxlength="30" style="width:120px" name="username" onKeyPress="javascript: if (event.keyCode==32) return false;">{?else?}{?$jieqi_username?}{?/if?}</li>
+<li>密　码：<input type="password" class="text" size="20" maxlength="30" style="width:120px" name="password"></li>
+{?if $show_checkcode == 1?}
+<li>验证码：<input type="text" class="text" size="8" maxlength="8" name="checkcode">
+&nbsp;<img src="{?$url_checkcode?}" style="cursor:pointer;" onclick="this.src='{?$url_checkcode?}';"></li>
+{?/if?}
+<li>　　　　<input type="submit" class="login_button" value="&nbsp;" name="submit"><input type="hidden" name="action" value="login"></li>
+<li><a href="{?$jieqi_url?}/">返回首页</a>&nbsp;&nbsp;<a href="javascript:history.back(1);">返回上页</a>&nbsp;&nbsp;<a href="{?$jieqi_url?}/getpass.php">取回密码</a></li>
+</ul>
+</form>
+</div>
+</div>

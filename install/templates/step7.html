@@ -1,0 +1,32 @@
+<div class="block-head">{?$step_menu7?}</div>
+<div class="block-title">{?$step_title?}</div>
+<div class="block-summary">{?$step_summary?}</div>
+<form name="form1" method="post" action="{?$next_page?}">
+<div class="block-content">
+	<table cellpadding="0" cellspacing="1">
+		<tr class="font-bold">
+			<td width="6%">选择</td>
+			<td width="40%">模块名称</td>
+			<td width="54%">安装状态</td>
+		</tr>
+		{?section name=i loop=$mod_list?}
+		<tr>
+			<td><input type="checkbox" name="mod_name[]" value="{?$mod_list[i].name?}" onclick="doCheck();" {?if $mod_list[i].status == 0?} disabled="true"{?elseif $mod_list[i].status != 3?} checked="checked"{?/if?} /></td>
+			<td>{?$mod_list[i].name?}({?$mod_list[i].caption?})</td>
+			<td>{?if $mod_list[i].status == 3?}<span class="span-blue">已经安装</span>
+			    {?elseif $mod_list[i].status == 1?}<span class="span-green">可以安装</span>
+			    {?elseif $mod_list[i].status == 2?}<span class="span-red">必须安装</span>
+				{?else?}<span class="span-red">不可安装，请配置SQL文件</span>
+				{?/if?}
+			</td>
+		</tr>
+		{?/section?}
+	</table>
+</div>
+<div class="block-menu">
+	<input type="button" name="bt0" value="返回安装首页" class="button" onclick="window.location='./index.php';"><span class="span-space"></span>
+	<input type="button" name="bt1" value="重新测试" class="button" onclick="location.reload();">
+	<input type="submit" name="bt2" value="下一步" class="button">
+</div>
+</form>
+<script language="javascript" src="js/checkbox.js"></script>

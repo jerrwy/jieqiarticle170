@@ -1,0 +1,220 @@
+<div style="width:100%;padding-top:3px;padding-bottom:3px;text-align:left;">
+<a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a> &gt; <a href="{?$jieqi_modules['forum']['url']?}/topiclist.php?fid={?$forumid?}&page={?$lpage?}">{?$forumname?}</a> &gt; {?$title?}
+</div>
+
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/newpost.gif" border="0" alt="发表新主题"></a>
+{?if $islock == 0?}&nbsp;&nbsp;<a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}&tid={?$topicid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/reply.gif" border="0" alt="回复主题"></a>{?/if?}</div>
+<div class="fr">{?$url_jumppage?}</div>
+<div class="cb"></div>
+</div>
+
+<table class="grid" width="100%" align="center">
+    <tr>
+        <th width="20%" class="title">作者</th>
+        <th width="80%" align="left" class="title">标题</th>
+    </tr>
+</table>
+{?section name=i loop=$postrows?}
+<table class="grid" width="100%" align="center">
+    <tr>
+		<td width="20%" class="odd" valign="top">
+		<div style="padding:5px 0px 5px 15px;line-height:150%;">
+		{?if $postrows[i].userid > 0?}
+			<img src="{?function jieqi_geturl:'system':'avatar':$postrows[i].userid:'l':$postrows[i].avatar?}" class="avatar" alt="头像"><br />
+			<strong><a href="{?function jieqi_geturl:'system':'user':$postrows[i].userid?}" target="_blank">{?$postrows[i].username?}</a></strong><br />
+  			{?if $jieqi_modules['badge']['publish'] > 0?}
+  				{?if $postrows[i].groupurl != ""?}<img src="{?$postrows[i].groupurl?}" border="0" title="{?$postrows[i].groupname?}"><br />{?/if?}
+				{?if $postrows[i].honorurl != ""?}<img src="{?$postrows[i].honorurl?}" border="0" title="{?$postrows[i].honor?}"><br />{?/if?}
+  				{?section name=j loop=$postrows[$i['key']]['badgerows']?}
+				<img src="{?$postrows[$i['key']]['badgerows'][$j['key']]['imageurl']?}" border="0" title="{?$postrows[$i['key']]['badgerows'][$j['key']]['caption']?}">
+				{?/section?}
+				{?if $postrows[$i['key']]['badgerows']|count > 0?}<br />{?/if?}
+			{?else?}
+				{?$postrows[i].groupname?}<br />
+				{?$postrows[i].honor?}<br />
+  			{?/if?}
+			加入日期：{?$postrows[i].regdate|date:"Y-m-d"?}<br />
+			经　　验：{?$postrows[i].experience?}<br />
+			积　　分：{?$postrows[i].score?}<br /><br />
+			<a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$postrows[i].useruname|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends{?$i['order']?}" href="javascript:;" onclick="Ajax.Tip(event, '{?$jieqi_url?}/addfriends.php?id={?$postrows[i].userid?}', 3000);">加为好友</a><br />
+			<a href="{?function jieqi_geturl:'system':'user':$postrows[i].userid?}" target="_blank">查看资料</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$postrows[i].userid?}" target="_blank">会 客 室</a>
+		{?else?}
+			<strong>游客</strong><br /><br /><br /><br /><br />
+		{?/if?}
+		</div>
+		</td>
+        <td width="80%" class="even" valign="top">
+		<div class="fl"><strong>标题：{?$postrows[i].subject?}</strong></div>
+		<div class="fr"><a href="#pid{?$postrows[i].postid?}" name="pid{?$postrows[i].postid?}">{?$postrows[i].order?}#</a>&nbsp;</div>
+		<hr />
+		{?section name=m loop=$postrows[i].attachimages?}
+		<img src="{?$postrows[i]['attachimages'][m].url?}" border="0" onload="if(this.width>screen.width*0.75) {this.resized=true; this.width=screen.width*0.75;}" onmouseover="if(this.resized) this.style.cursor='hand';" onclick="if(this.resized) window.open('{?$postrows[i]['attachimages'][m].url?}');"><br /><br />
+		{?/section?}
+		{?section name=n loop=$postrows[i].attachfiles?}
+		<img src="{?$jieqi_modules['forum']['url']?}/images/attach.gif" border="0" /><strong>附件:</strong><a href="{?$postrows[i]['attachfiles'][n].url?}">{?$postrows[i]['attachfiles'][n].name?}</a>({?$postrows[i]['attachfiles'][n].size_k?}K)<br /><br />
+		{?/section?}
+		<div class="c_content">{?$postrows[i].posttext?}</div>
+		</td>
+    </tr>
+    <tr>
+        <td valign="middle" class="odd">{?$postrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+        <td valign="middle" class="even">
+            <table class="hide" width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td align="right"><a href="javascript:if(confirm('确实要删除该帖子么？')) document.location='{?$jieqi_modules['forum']['url']?}/delpost.php?fid={?$forumid?}&tid={?$topicid?}&pid={?$postrows[i].postid?}';"><img src="{?$jieqi_modules['forum']['url']?}/images/icon_delete.gif" border="0" alt="删除帖子"></a> <a href="{?$jieqi_modules['forum']['url']?}/postedit.php?fid={?$forumid?}&tid={?$topicid?}&pid={?$postrows[i].postid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/icon_edit.gif" border="0" alt="编辑帖子"></a> <a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}&tid={?$topicid?}&pid={?$postrows[i].postid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/icon_quote.gif" border="0" alt="引用回复"></a></td>
+                </tr>
+            </table></td>
+    </tr>
+</table>
+{?/section?}
+
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/newpost.gif" border="0" alt="发表新主题"></a>
+{?if $islock == 0?}&nbsp;&nbsp;<a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}&tid={?$topicid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/reply.gif" border="0" alt="回复主题"></a>{?/if?}</div>
+<div class="fr">{?$url_jumppage?}</div>
+<div class="cb"></div>
+</div>
+
+<form name="frmpost" id="frmpost" action="{?$jieqi_modules['forum']['url']?}/newpost.php?do=submit" method="post" onsubmit="javascript:if(window.document.frmpost.posttext.value == ''){alert('请输入回复内容！');window.document.frmpost.posttext.focus();return false;}">
+<table class="grid" width="100%" align="center">
+    <caption>快速回复</caption>
+    <tr>
+      <td width="10%" class="odd">标题：</td>
+      <td width="90%" class="even"><input type="text" class="text" name="topictitle" id="topictitle" size="60" maxlength="60" value=""></td>
+    </tr>
+    <tr>
+      <td class="odd">内容：</td>
+      <td class="even"><textarea name="posttext" cols="60" rows="8" id="posttext" class="textarea" onkeydown="javascript:if((event.ctrlKey && event.keyCode == 13)||(event.altKey && event.keyCode == 83)) window.document.frmpost.submit();"></textarea>
+	  <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("posttext");});</script>
+		<input type="hidden" name="fid" id="fid" value="{?$forumid?}">
+		<input type="hidden" name="tid" id="tid" value="{?$topicid?}">
+		<input type="hidden" name="action" id="action" value="newpost"></td>
+    </tr>
+{?if $postcheckcode > 0?}
+	<tr>
+      <td class="odd">验证码：</td>
+      <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+    </tr>
+{?/if?}
+    <tr>
+      <td colspan="2" class="odd"><span class="hottext">（按 Ctrl＋Enter 直接提交）</span><input type="submit" class="button" name="btnpost" id="btnpost" value=" 发 表 "></td>
+    </tr>
+</table>
+</form>
+{?if $ismaster > 0?}
+<table class="grid" width="100%">
+  <tr>
+    <th align="center">
+	[<a id="set_top" href="javascript:;" onclick="set_top();"></a>]
+	[<a id="set_good" href="javascript:;" onclick="set_good();"></a>]
+	[<a id="set_lock" href="javascript:;" onclick="set_lock();"></a>]
+	[<a id="set_push" href="javascript:;" onclick="set_push();">提前</a>]
+
+	<script language="javascript" type="text/javascript">
+	//初始化变量
+	var istop = {?$istop?};
+	var isgood = {?$isgood?};
+	var islock = {?$islock?};
+	
+	var toptext = (istop > 0) ? '解除置顶' : '置顶';
+	$('set_top').setValue(toptext);
+	var goodtext = (isgood > 0) ? '解除加精' : '加精';
+	$('set_good').setValue(goodtext);
+	var locktext = (islock > 0) ? '解除锁定' : '锁定';
+	$('set_lock').setValue(locktext);
+	
+	//置顶处理函数
+	function set_top_loading(){
+		$('set_top').setValue('处理中..');
+	}
+	function set_top_complate(){
+		if(this.response == '1'){
+			if(istop > 0){
+				istop = 0;
+				toptext = '置顶';
+			}else{
+				istop = 1;
+				toptext = '解除置顶';
+			}
+			$('set_top').setValue(toptext);
+		}else{
+			alert(this.response.replace(/<br[^<>]*>/g,'\n'));
+			$('set_top').setValue(toptext);
+		}
+	}
+	function set_top(){
+		var url = (istop > 0) ? '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=untop' : '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=top';
+		Ajax.Request(url, {onLoading:set_top_loading, onComplete:set_top_complate});
+	}
+	
+	//加精处理函数
+	function set_good_loading(){
+		$('set_good').setValue('处理中..');
+	}
+	function set_good_complate(){
+		if(this.response == '1'){
+			if(isgood > 0){
+				isgood = 0;
+				goodtext = '加精';
+			}else{
+				isgood = 1;
+				goodtext = '解除加精';
+			}
+			$('set_good').setValue(goodtext);
+		}else{
+			alert(this.response.replace(/<br[^<>]*>/g,'\n'));
+			$('set_good').setValue(goodtext);
+		}
+	}
+	function set_good(){
+		var url = (isgood > 0) ? '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=nogood' : '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=good';
+		Ajax.Request(url, {onLoading:set_good_loading, onComplete:set_good_complate});
+	}
+	
+	//处理锁定函数
+	function set_lock_loading(){
+		$('set_lock').setValue('处理中..');
+	}
+	function set_lock_complate(){
+		if(this.response == '1'){
+			if(islock > 0){
+				islock = 0;
+				locktext = '锁定';
+			}else{
+				islock = 1;
+				locktext = '解除锁定';
+			}
+			$('set_lock').setValue(locktext);
+		}else{
+			alert(this.response.replace(/<br[^<>]*>/g,'\n'));
+			$('set_lock').setValue(locktext);
+		}
+	}
+	function set_lock(){
+		var url = (islock > 0) ? '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=unlock' : '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=lock';
+		Ajax.Request(url, {onLoading:set_lock_loading, onComplete:set_lock_complate});
+	}
+	
+	//提前处理函数
+	function set_push_loading(){
+		$('set_push').setValue('处理中..');
+	}
+	function set_push_complate(){
+		if(this.response == '1'){
+			$('set_push').setValue('已提前');
+		}else{
+			alert(this.response.replace(/<br[^<>]*>/g,'\n'));
+			$('set_push').setValue('提前');
+		}
+	}
+	function set_push(){
+		var url = '{?$jieqi_modules['forum']['url']?}/topicset.php?tid={?$topicid?}&action=push';
+		Ajax.Request(url, {onLoading:set_push_loading, onComplete:set_push_complate});
+	}
+	</script>
+	</th>
+  </tr>
+</table>
+{?/if?}

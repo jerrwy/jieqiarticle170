@@ -1,0 +1,62 @@
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a> &gt; <a href="{?$jieqi_modules['forum']['url']?}/topiclist.php?fid={?$forumid?}">{?$forumname?}</a></div>
+<div class="fr">版主：{?section name=i loop=$masters?}<a href="{?function jieqi_geturl:'system':'user':$masters[i].uid?}">{?$masters[i].uname?}</a> {?/section?}</div>
+</div>
+
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/newpost.gif" border="0" alt="发表新主题"></a></div>
+<div class="fr">{?$url_jumppage?}</div>
+<div class="cb"></div>
+</div>
+<table class="grid" width="100%" align="center">
+  <tr height="26" align="center">
+    <th colspan="3" class="title">主题</th>
+    <th width="12%" class="title">发表人</th>
+    <th width="13%" class="title">回复/查看</th>
+    <th width="25%" class="title">最后发表</th>
+  </tr>
+  {?if $page==1?}
+  {?section name=i loop=$forumtops?}
+  <tr height="26">
+    <td width="3%" align="center" valign="middle" class="odd"><img src="{?$jieqi_modules['forum']['url']?}/images/topic_top.gif" border="0"></td>
+    <td width="3%" align="center"  valign="middle" class="even"><img src="{?$jieqi_modules['forum']['url']?}/images/icon_topics.gif" border="0"></td>
+    <td width="44%" valign="middle" class="odd"><a href="{?$jieqi_modules['forum']['url']?}/showtopic.php?tid={?$forumtops[i].topicid?}"><span class="hottext">{?$forumtops[i].title?}</span></a>&nbsp;</td>
+    <td align="center" valign="middle" class="even"><a href="{?function jieqi_geturl:'system':'user':$forumtops[i].posterid?}" target="_blank">{?$forumtops[i].poster?}</a></td>
+    <td align="center" valign="middle" class="odd">{?$forumtops[i].replies?}/{?$forumtops[i].views?}</td>
+    <td valign="middle" class="even">{?$forumtops[i].topictime|date:"m-d H:i"?} <a href="{?function jieqi_geturl:'system':'user':$forumtops[i].replierid?}" target="_blank">{?$forumtops[i].replier?}</a> 发表</td>
+  </tr>
+  {?/section?}
+  {?/if?}
+  {?section name=i loop=$topicrows?}
+  <tr height="26">
+    <td width="3%" align="center" valign="middle" class="odd">
+	{?if $topicrows[i].istop > 0?}
+	<img src="{?$jieqi_modules['forum']['url']?}/images/topic_top.gif" border="0">
+	{?elseif $topicrows[i].islock > 0?}
+	<img src="{?$jieqi_modules['forum']['url']?}/images/topic_lock.gif" border="0">
+	{?elseif $topicrows[i].isgood > 0?}
+	<img src="{?$jieqi_modules['forum']['url']?}/images/topic_good.gif" border="0">
+	{?else?}
+	<img src="{?$jieqi_modules['forum']['url']?}/images/topic_normal.gif" border="0">
+	{?/if?}
+	</td>
+    <td width="3%" align="center"  valign="middle" class="even"><img src="{?$jieqi_modules['forum']['url']?}/images/icon_topics.gif" border="0"></td>
+    <td width="44%" valign="middle" class="odd"><a href="{?$jieqi_modules['forum']['url']?}/showtopic.php?tid={?$topicrows[i].topicid?}&lpage={?$page?}">{?$topicrows[i].title?}</a>&nbsp;</td>
+    <td align="center" valign="middle" class="even"><a href="{?function jieqi_geturl:'system':'user':$topicrows[i].posterid?}" target="_blank">{?$topicrows[i].poster?}</a></td>
+    <td align="center" valign="middle" class="odd">{?$topicrows[i].replies?}/{?$topicrows[i].views?}</td>
+    <td valign="middle" class="even">
+	{?if $topicrows[i].replytime > 0?}
+	{?if $topicrows[i].replierid > 0?}
+	{?$topicrows[i].replytime|date:"m-d H:i"?} <a href="{?function jieqi_geturl:'system':'user':$topicrows[i].replierid?}" target="_blank">{?$topicrows[i].replier?}</a> 发表
+	{?else?}
+	{?$topicrows[i].replytime|date:"m-d H:i"?} <i>游客</i> 发表
+	{?/if?}
+	{?/if?}</td>
+  </tr>
+  {?/section?}
+</table>
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}"><img src="{?$jieqi_modules['forum']['url']?}/images/newpost.gif" border="0" alt="发表新主题"></a></div>
+<div class="fr">{?$url_jumppage?}</div>
+<div class="cb"></div>
+</div>

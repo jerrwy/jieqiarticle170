@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>{?$jieqi_page_title?}</title>
+<meta http-equiv="content-type" content="text/html; charset={?$jieqi_charset?}">
+<link href="templates/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div id="header"><span class="title1">{?$jieqi_page_head?}</span></div>
+
+<div id="main">
+	<div id="left">
+		<div {?if $current_step == 0?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu0?}</div>
+		<div {?if $current_step == 1?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu1?}</div>
+		<div {?if $current_step == 2?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu2?}</div>
+		<div {?if $current_step == 3?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu3?}</div>
+		<div {?if $current_step == 4?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu4?}</div>
+		<div {?if $current_step == 5?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu5?}</div>
+		<div {?if $current_step == 6?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu6?}</div>
+		<div {?if $current_step == 7?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu7?}</div>
+		<div {?if $current_step == 8?} class="step-on" {?else?} class="step-off"{?/if?}>{?$step_menu8?}</div>
+	</div>
+
+	<div id="right">{?$jieqi_content?}</div>
+	<div class="clear"></div>
+</div>
+
+<div id="footer">Powered by JIEQI CMS &copy;2004-2013 <br />技术支持：<a href="http://www.jieqi.com" target="_blank">杰奇网络</a></div>
+</body>
+</html>

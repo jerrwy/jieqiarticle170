@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$article_title?}-{?$jieqi_title?}-{?$sortname?}-{?$jieqi_sitename?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" href="{?$jieqi_local_url?}/configs/article/page.css" type="text/css" media="all"  />
+<script type="text/javascript">
+<!--
+var preview_page = "{?$preview_page?}";
+var next_page = "{?$next_page?}";
+var index_page = "{?$index_page?}";
+var article_id = "{?$article_id?}";
+var chapter_id = "{?$chapter_id?}";
+function jumpPage() {
+  var event = document.all ? window.event : arguments[0];
+  if (event.keyCode == 37) document.location = preview_page;
+  if (event.keyCode == 39) document.location = next_page;
+  if (event.keyCode == 13) document.location = index_page;
+}
+document.onkeydown=jumpPage;
+-->
+</script>
+</head>
+<body bgcolor="#f6f6f6">
+<div id="adtop"><script type="text/javascript" src="{?$jieqi_local_url?}/configs/article/pagetop.js"></script></div>
+<div id="headlink">
+<div id="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a>-&gt;<a href="{?$url_bookroom?}">书库首页</a>-&gt;<a href="{?$url_articleinfo?}">{?$article_title?}</a></div>
+<div id="linkright"><a href="{?$preview_page?}">上一页</a> | <a href="{?$index_page?}">返回书目</a> | <a href="{?$next_page?}">下一页</a> | <a href="{?$dynamic_url?}/addbookcase.php?bid={?$articleid?}&cid={?$chapterid?}" target="_blank">加入书签</a> | <a href="{?$dynamic_url?}/uservote.php?id={?$articleid?}" target="_blank">推荐本书</a> | <a href="{?$url_articleinfo?}">返回书页</a></div>
+</div>
+<div id="title">{?$jieqi_title?}</div>
+<div id="content">{?$jieqi_content?}</div>
+<div id="footlink"><a href="{?$preview_page?}">上一页</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$index_page?}">返回目录</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$next_page?}">下一页</a></div>
+<div id="adbottom"><script type="text/javascript" src="{?$jieqi_local_url?}/configs/article/pagebottom.js"></script></div>
+</body>
+</html>

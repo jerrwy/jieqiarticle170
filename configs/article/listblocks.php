@@ -1,0 +1,6 @@
+<?php 
+$jieqiBlocks[0]=array('bid'=>0, 'blockname'=>'ÅÅ ÐÐ °ñ', 'module'=>'article', 'filename'=>'block_toplist', 'classname'=>'BlockArticleToplist', 'side'=>JIEQI_SIDEBLOCK_LEFT, 'title'=>'ÅÅ ÐÐ °ñ', 'vars'=>'', 'template'=>'', 'contenttype'=>JIEQI_CONTENT_TXT, 'custom'=>0, 'publish'=>3, 'hasvars'=>0);
+
+
+$jieqiBlocks[1]=array('bid'=>0, 'blockname'=>'ÎÄÕÂËÑË÷', 'module'=>'article', 'filename'=>'block_search', 'classname'=>'BlockArticleSearch', 'side'=>JIEQI_SIDEBLOCK_LEFT, 'title'=>'ÎÄÕÂËÑË÷', 'vars'=>'', 'template'=>'', 'contenttype'=>JIEQI_CONTENT_TXT, 'custom'=>0, 'publish'=>3, 'hasvars'=>0);
+?>

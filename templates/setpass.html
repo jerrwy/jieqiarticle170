@@ -1,0 +1,38 @@
+<script language="javascript" type="text/javascript">
+<!--
+function frmsetpass_validate(){
+  if(document.frmsetpass.newpass.value == ""){
+    alert("请输入密码");
+    document.frmsetpass.newpass.focus();
+    return false;
+  }
+  if(document.frmsetpass.repass.value == ""){
+    alert("请输入重复密码");
+    document.frmsetpass.repass.focus();
+    return false;
+  }
+}
+//-->
+</script>
+
+<form name="frmsetpass" id="frmsetpass" action="setpass.php?do=submit" method="post" onsubmit="return frmsetpass_validate();">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>重设密码</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">用户名</td>
+  <td class="even">{?$username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">密码</td>
+  <td class="even"><input type="password" class="text" name="newpass" id="newpass" size="25" maxlength="20" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">重复密码<span class="hottext">(必填)</span></td>
+  <td class="even"><input type="password" class="text" name="repass" id="repass" size="25" maxlength="20" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /><input type="hidden" name="action" id="action" value="newpass" /><input type="hidden" name="id" id="id" value="{?$id?}" /><input type="hidden" name="checkcode" id="checkcode" value="{?$checkcode?}" /></td>
+</tr>
+</table>
+</form>

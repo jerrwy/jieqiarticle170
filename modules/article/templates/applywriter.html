@@ -1,0 +1,50 @@
+<script language="javascript" type="text/javascript">
+function formcheck(){
+  if(document.getElementById('applytext').value == "") {
+    alert('请输入申请文章样章！');
+	document.getElementById('applytext').focus();
+    return false;
+  }
+}
+
+function textstatnum(){
+  alert('当前长度 '+ document.getElementById('applytext').value.length + ' 个字节。');
+}
+</script>
+<br />
+<form action="{?$jieqi_modules['article']['url']?}/applywriter.php" method="post" onsubmit="return formcheck();">
+<table class="grid" width="600" align="center">
+  <caption>作者申请</caption>
+  <tr>
+    <td class="odd"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="hide">
+      <tr>
+        <td width="5%">&nbsp;</td>
+        <td width="90%" align="left">一、作者申请条例：<br />
+  &nbsp;&nbsp;&nbsp; 1、发表文章必须为原创作品。<br />
+  &nbsp;&nbsp;&nbsp; 2、有比较稳定的写作时间和写作速度。<br />
+  &nbsp;&nbsp;&nbsp; 3、文章内容不得含有色情、政治及其他违规内容。<br />
+  <br />
+          二、申请要求：<br />
+  &nbsp;&nbsp;&nbsp; 申请原创作者必须提交不少于10000字节(相当于5000汉字)的原创文章样章，由斑竹审核通过才能发表文章。<br /><br />
+  (注：如果后台设置成申请作者不需要审核，则不需要提交任何内容，直接点同意申请就升级成作者)
+  <br /><br />
+ <br /> 
+ 请在下面输入文章样章： 
+ <input name="textstat" type="button" class="button" onclick="textstatnum();" value=" 字数统计 " />
+ <br />
+  <textarea id="applytext" name="applytext" cols="60" rows="8"></textarea>
+              <br />
+              <br />
+          </td>
+        <td width="5%">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="foot">
+	<input name="action" type="hidden" value="applywriter" /><input name="submit" type="submit" id="submit" class="button" value=" 同意并申请 " />
+	</td>
+  </tr>
+</table>
+</form>
+<br /><br />

@@ -1,0 +1,143 @@
+*{
+    margin:0;
+	padding:0;
+}
+	
+body {
+	padding-right: 0px;
+	padding-left: 0px;
+	font-size: 12px;
+	padding-bottom: 0px;
+	margin: 0px;
+	color: #000000;
+	padding-top: 0px;
+	font-family: 宋体, 新细明体, verdana, arial, sans-serif;
+	text-align: center;
+}
+
+form {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; padding-top: 0px
+}
+
+table {
+	text-align: left
+}
+
+table td {
+	font-size: 12px; 
+	font-family: 宋体, 新细明体, verdana, arial, sans-serif;
+}
+
+a {
+	color: #1f3a87; background-color: transparent; text-decoration: none
+}
+
+a:hover {
+	color: #ff6600
+}
+
+hr {
+	border-right: #83b0e1 1px solid; 
+	border-top: #83b0e1 1px solid; 
+	border-left: #83b0e1 1px    solid;
+	border-bottom: #83b0e1 1px solid;
+	height: 1px
+}
+
+ul {
+	clear: both; 
+	padding-right: 0px; 
+	padding-left: 0px; 
+	padding-bottom: 0px; 
+	margin: 0px; 
+	padding-top: 0px; 
+	list-style-type: none;
+	text-align: left
+}
+
+li {
+	list-style-type: none;
+}
+
+#leftmenu {
+	width: 100%; 
+	height: 100%;
+}
+
+.block {
+    width:155px;
+    margin-top:5px;
+}
+
+.blocktitle {
+    width:142px;
+	margin:0 auto;
+	background-image: url("images/bg02.gif");
+	line-height:26px;
+	font-size:14px;
+	color:#ffffff;
+	font-weight:bold;
+	background-repeat: no-repeat;
+	background-position: left center;  
+}
+.blocktitle a{
+	color: #ffffff;
+}
+.content_w{
+	background-image: url("images/bgs_02.gif");
+	background-repeat: repeat-x;
+	background-position: bottom;
+	border-left:1px solid #bdbcbd;
+	border-right:1px solid #bdbcbd;
+}
+
+.block_b{
+    height:4px;
+	font-size:0px;
+	background-image: url("images/bgs_03.gif");
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+.block_t{
+    height:5px;
+	font-size:0px;
+	background-image: url("images/bgs_01.gif");
+	background-repeat: no-repeat;
+	background-position: top;
+}
+
+.blockcontent {
+    width:92%;
+	margin:0 auto;
+}
+
+.menulist{
+    padding:10px 0;
+}
+
+.menulist li{
+   display: inline;
+}
+
+.menulist a{
+	display:block;
+	text-align:left;
+	margin:0 auto;
+	padding:3px 0px 4px 15px;
+	background-image: url("images/bg04.gif");
+	background-repeat: no-repeat;
+	background-position: left top;
+	line-height: normal;
+}
+
+.menulist a:hover{
+ 	background-image: url("images/bg04_hover.gif");
+}
+   
+.hd {
+	display: none
+}
+.in {
+	cursor: hand
+}

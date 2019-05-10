@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$jieqi_pagetitle?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" rev="stylesheet" href="{?$jieqi_themeurl?}style.css" type="text/css" media="all" />
+<script language="javascript" type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+<script language="javascript" type="text/javascript" src="{?$jieqi_themeurl?}theme.js"></script>
+{?$jieqi_head?}
+</head>
+<body>
+<div class="main m_top">
+<div class="fl">&nbsp;{?if $jieqi_userid == 0?}{?$jieqi_sitename?}欢迎您，您可以选择[<a href="javascript:;" onclick="openDialog('{?$jieqi_user_url?}/login.php?jumpurl={?$jieqi_thisurl|urlencode?}&ajax_gets=jieqi_contents', false);">登录</a>]或者[<a href="javascript:;" onclick="openDialog('{?$jieqi_user_url?}/register.php?ajax_gets=jieqi_contents', false);">注册新用户</a>]！{?elseif $jieqi_newmessage == 0?}{?$jieqi_sitename?}欢迎您，{?$jieqi_username?} [<a href="{?$jieqi_user_url?}/logout.php">退出登录</a>]{?else?}{?$jieqi_sitename?}欢迎您，{?$jieqi_username?} [<a href="{?$jieqi_user_url?}/logout.php">退出登录</a>] [<a href="{?$jieqi_url?}/message.php?box=inbox"><span class="hottext">您有新消息</span></a>]{?/if?}</div>
+<div class="fr"><a href="{?$url_gb2312?}">简体版</a> · <a href="{?$url_big5?}">繁体版</a>&nbsp;&nbsp;</div>
+</div>
+
+<div class="main m_head">
+<div class="h_logo"><a href="{?$jieqi_url?}/"><img src="{?$jieqi_themeurl?}logo.gif" border="0" alt="{?$jieqi_sitename?}" /></a></div>
+<div class="h_banner">{?$jieqi_banner?}</div>
+<div class="h_link">
+  <ul class="ulitem">
+  <li><a onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('{?$jieqi_url?}');" href="#">设为首页</a>&nbsp;</li>
+  <li><a href="mailto:{?$jieqi_email?}">联系我们</a>&nbsp;</li>
+  <li><a href="javascript:window.external.addFavorite('{?$jieqi_url?}','{?$jieqi_sitename?}')">加入收藏</a>&nbsp;</li>
+  </ul>
+</div>
+</div>
+
+<div class="main m_menu">
+<ul id="jieqi_menu">
+<li><a href="{?$jieqi_url?}/">返回首页</a></li>
+{?if $jieqi_modules['news']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['news']['url']?}/">本站新闻</a></li>
+{?/if?}
+{?if $jieqi_modules['article']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['article']['url']?}/">在线书库</a>
+  <ul>
+    <li><a href="{?$jieqi_modules['article']['url']?}/articlelist.php?class=0">分类阅读</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/toplist.php?sort=allvisit">排 行 榜</a></li>
+  </ul>
+</li>
+{?/if?}
+{?if $jieqi_modules['obook']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['obook']['url']?}/">电子书店</a>
+  <ul>
+    <li><a href="{?$jieqi_modules['obook']['url']?}/obooklist.php?class=0">全部书籍</a></li>
+  </ul>
+</li>
+{?/if?}
+{?if $jieqi_modules['cartoon']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['cartoon']['url']?}/">在线漫画</a>
+  <ul>
+    <li><a href="{?$jieqi_modules['cartoon']['url']?}/cartoonlist.php?class=0">分类阅读</a></li>
+    <li><a href="{?$jieqi_modules['cartoon']['url']?}/toplist.php?sort=allvisit">漫画排行</a></li>
+  </ul>
+</li>
+{?/if?}
+{?if $jieqi_modules['space']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['space']['url']?}/">个人空间</a></li>
+{?/if?}
+{?if $jieqi_modules['group']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['group']['url']?}/">圈子交友</a></li>
+{?/if?}
+{?if $jieqi_modules['info']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['info']['url']?}/">分类信息</a></li>
+{?/if?}
+{?if $jieqi_modules['quiz']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['quiz']['url']?}/">你问我答</a></li>
+{?/if?}
+{?if $jieqi_modules['pay']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php">帐户冲值</a></li>
+{?/if?}
+{?if $jieqi_modules['note']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['note']['url']?}/">访客留言</a></li>
+{?/if?}
+{?if $jieqi_modules['vote']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['vote']['url']?}/">投票调查</a></li>
+{?/if?}
+{?if $jieqi_modules['forum']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['forum']['url']?}/">交流论坛</a>
+  <ul>
+    <li><a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a></li>
+    <li><a href="{?$jieqi_modules['forum']['url']?}/search.php">论坛搜索</a></li>
+  </ul>
+</li>
+{?/if?}
+<li><a href="{?$jieqi_url?}/userdetail.php">用户面板</a>
+  <ul>
+	<li><a href="{?$jieqi_url?}/message.php?box=inbox">收 件 箱</a></li>
+	<li><a href="{?$jieqi_url?}/ptopics.php?oid=self">会 客 室</a></li>
+	{?if $jieqi_modules['article']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['article']['url']?}/bookcase.php">小说书架</a></li>
+	{?/if?}
+	{?if $jieqi_modules['obook']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['obook']['url']?}/obookcase.php">电子书书架</a></li>
+	<li><a href="{?$jieqi_modules['obook']['url']?}/buylog.php">我的电子书</a></li>
+	{?/if?}
+	{?if $jieqi_modules['pay']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php">帐户冲值</a></li>
+	{?/if?}
+	{?if $jieqi_modules['article']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['article']['url']?}/applywriter.php">申请作者</a></li>
+	{?/if?}
+	<li><a href="{?$jieqi_url?}/useredit.php">修改资料</a></li>
+	<li><a href="{?$jieqi_url?}/userlist.php">会员列表</a></li>
+	<li><a href="{?$jieqi_user_url?}/logout.php">退出登录</a></li>
+  </ul>
+</li>
+{?if $jieqi_modules['article']['publish'] > 0?}
+<li><a href="{?$jieqi_modules['article']['url']?}/myarticle.php">作家工具</a>
+  <ul>
+    <li><a href="{?$jieqi_modules['article']['url']?}/newarticle.php">新建小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php">我的小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/newdraft.php">新建草稿</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php">草 稿 箱</a></li>
+	{?if $jieqi_modules['obook']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['obook']['url']?}/newobook.php">新建电子书</a></li>
+	<li><a href="{?$jieqi_modules['obook']['url']?}/masterpage.php">我的电子书</a></li>
+	{?/if?}
+	{?if $jieqi_modules['cartoon']['publish'] > 0?}
+	<li><a href="{?$jieqi_modules['cartoon']['url']?}/newcartoon.php">新建漫画</a></li>
+	<li><a href="{?$jieqi_modules['cartoon']['url']?}/masterpage.php">我的漫画</a></li>
+	{?/if?}
+  </ul>
+</li>
+{?/if?}
+{?if $jieqi_group == 2?}<li><a href="{?$jieqi_url?}/admin/index.php">网站管理</a></li>{?/if?}
+</ul>
+</div>
+
+{?if $jieqi_top_bar != ""?}<div class="main">{?$jieqi_top_bar?}</div>{?/if?}
+{?if $jieqi_showtblock == 1?}
+{?section name=i loop=$jieqi_tblocks?}
+  <div class="main">
+  <div class="block">
+  {?if $jieqi_tblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_tblocks[i].title?}</div>{?/if?}
+  <div class="blockcontent">{?$jieqi_tblocks[i].content?}</div>
+  </div>
+  </div>
+{?/section?}
+{?/if?}
+
+{?if $jieqi_showcblock == 1?}
+<div class="main" id="topm">
+<div id="cleft">
+{?section name=i loop=$jieqi_clblocks?}
+  <div class="block">
+  {?if $jieqi_clblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_clblocks[i].title?}</div>{?/if?}
+  <div class="blockcontent">{?$jieqi_clblocks[i].content?}</div>
+  </div>
+{?/section?}
+</div>
+<div id="cright">
+{?section name=i loop=$jieqi_crblocks?}
+  <div class="block">
+  {?if $jieqi_crblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_crblocks[i].title?}</div>{?/if?}
+  <div class="blockcontent">{?$jieqi_crblocks[i].content?}</div>
+  </div>
+{?/section?}
+</div>
+</div>
+{?/if?}
+
+<div class="main">
+{?if $jieqi_showlblock == 1?}
+<div id="left">
+{?section name=i loop=$jieqi_lblocks?}
+<div class="block">
+{?if $jieqi_lblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_lblocks[i].title?}</div>{?/if?}
+<div class="blockcontent">{?$jieqi_lblocks[i].content?}</div>
+</div>
+{?/section?}  
+</div>
+  {?if $jieqi_showrblock == 1?}<div id="centers">{?else?}<div id="centerm">{?/if?}
+{?else?}
+  {?if $jieqi_showrblock == 1?}<div id="centerm">{?else?}<div id="centerl">{?/if?}
+{?/if?}
+{?if $jieqi_showcblock == 1?}
+{?section name=i loop=$jieqi_ctblocks?}
+<div class="block">
+{?if $jieqi_ctblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_ctblocks[i].title?}</div>{?/if?}
+<div class="blockcontent">{?$jieqi_ctblocks[i].content?}</div>
+</div>
+{?/section?}
+{?section name=i loop=$jieqi_cmblocks?}
+<div class="block">
+{?if $jieqi_cmblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_cmblocks[i].title?}</div>{?/if?}
+<div class="blockcontent">{?$jieqi_cmblocks[i].content?}</div>
+</div>
+{?/section?}
+{?/if?}
+{?if $jieqi_contents != ""?}<div id="content">{?$jieqi_contents?}</div>{?/if?}
+{?if $jieqi_showcblock == 1?}
+{?section name=i loop=$jieqi_cbblocks?}
+<div class="block">
+{?if $jieqi_cbblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_cbblocks[i].title?}</div>{?/if?}
+<div class="blockcontent">{?$jieqi_cbblocks[i].content?}</div>
+</div>
+{?/section?}
+{?/if?}
+</div>
+{?if $jieqi_showrblock == 1?}
+<div id="right">
+{?section name=i loop=$jieqi_rblocks?}
+<div class="block">
+{?if $jieqi_rblocks[i].title != ""?}<div class="blocktitle"><span>{?$jieqi_rblocks[i].title?}</span></div>{?/if?}
+<div class="blockcontent">{?$jieqi_rblocks[i].content?}</div>
+</div>
+{?/section?}
+</div>
+{?/if?}
+</div>
+
+{?if $jieqi_showbblock == 1?}
+{?section name=i loop=$jieqi_bblocks?}
+  <div class="main">
+  <div class="block">
+  {?if $jieqi_bblocks[i].title != ""?}<div class="blocktitle">{?$jieqi_bblocks[i].title?}</div>{?/if?}
+  <div class="blockcontent">{?$jieqi_bblocks[i].content?}</div>
+  </div>
+  </div>
+{?/section?}
+{?/if?}
+{?if $jieqi_bottom_bar != ""?}<div class="main">{?$jieqi_bottom_bar?}</div>{?/if?}
+
+<div class="main m_foot">
+技术支持：<a href="http://www.jieqi.com/" target="_blank">杰奇网络</a> | 执行时间：{?$jieqi_exetime?}秒
+</div>
+</body>
+</html>

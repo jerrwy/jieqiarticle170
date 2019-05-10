@@ -1,0 +1,25 @@
+<form name="frmreview" method="post" action="{?$article_dynamic_url?}/reviewedit.php">
+<table class="grid" width="100%" align="center">
+  <caption>编辑书评：</caption>
+  <tr>
+    <td class="odd" width="25%">标题</td>
+    <td class="even"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="{?$subject?}" /></td>
+  </tr>
+  <tr>
+    <td class="odd" width="25%">内容</td>
+    <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" cols="60" rows="12">{?$posttext?}</textarea>
+    <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+    </td>
+  </tr>
+{?if $postcheckcode > 0?}
+<tr>
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+  <tr>
+    <td class="odd" width="25%">&nbsp;<input type="hidden" name="yid" id="yid" value="{?$postid?}" /><input type="hidden" name="action" id="action" value="update" /></td>
+    <td class="even"><input type="submit" name="Submit" class="button" value=" 发表书评 "></td>
+  </tr>
+</table>
+</form>

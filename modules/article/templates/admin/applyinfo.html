@@ -1,0 +1,7 @@
+<div class="c_title">作家申请信息</div>
+<hr />
+<div class="c_head">申请时间：{?$applytime?} | 申请人：<a href="{?function jieqi_geturl:'system':'user':$applyuid?}" target="_blank">{?$applyname?}</a> | 申请内容字数：{?$applysize?}</div>
+<hr />
+<div class="c_content">{?$applytext?}</div>
+<hr />
+<div class="tr"><a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=confirm&id={?$applyid?}">审核</a> <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=refuse&id={?$applyid?}">拒绝</a> <a href="javascript:if(confirm('确实要删除该申请记录么？')) document.location='{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=delete&id={?$applyid?}'">删除</a><br /><br /></div>

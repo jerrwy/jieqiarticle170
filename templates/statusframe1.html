@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{?$jieqi_charset?}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="icon" href="{?$jieqi_url?}/favicon.ico" type="image/x-icon" />
+<title>{?$jieqi_pagetitle?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/themes/{?$jieqi_theme?}/styleframe.css" />
+{?$jieqi_head?}
+</head>
+<body>
+<table width="95%"  border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td valign="middle" class="odd" height="10"></td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd">用户名：{?$jieqi_username?}</td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd">等&nbsp;&nbsp;级：{?$jieqi_groupname?}</td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd" height="10"></td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd"><a href="{?$jieqi_url?}/userdetail.php" target="_top">查看资料</a> | <a href="{?$jieqi_modules['article']['url']?}/bookcase.php" target="_top">我的书架</a></td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd">{?if $jieqi_newmessage>0?}<a href="{?$jieqi_url?}/message.php?box=inbox" target="_top"><span class="hottext">您有短信</span></a>{?else?}<a href="{?$jieqi_url?}/message.php?box=inbox" target="_top">查看短信</a>{?/if?} | <a href="{?$jieqi_user_url?}/loginframe.php?action=logout" target="_self">退出登陆</a></td>
+  </tr>
+</table>
+<br><br><br>
+</body>
+</html>

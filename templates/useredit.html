@@ -1,0 +1,71 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<form name="useredit" id="useredit" action="{?$jieqi_url?}/useredit.php?do=submit" method="post" onsubmit="return jieqiFormValidate_useredit();">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>用户资料修改 | <a href="passedit.php">修改用户密码</a></caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">用户名</td>
+  <td class="even">{?$username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">昵称</td>
+  <td class="even"><input type="text" class="text" name="nickname" id="nickname" size="25" maxlength="39" value="{?$nickname?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">Email</td>
+  <td class="even"><input type="text" class="text" name="email" id="email" size="25" maxlength="60" value="{?$email?}" />
+&nbsp;<input type="checkbox" class="checkbox" name="viewemail" value="1"{?if $viewemail == 1?} checked="checked"{?/if?} />公开邮箱
+</td>
+</tr>
+<tr valign="middle" align="left">
+<td class="odd" width="25%">性别</td>
+<td class="even">
+<input type="radio" class="radio" name="sex" value="1"{?if $sex == 1?} checked="checked"{?/if?}  />男
+<input type="radio" class="radio" name="sex" value="2"{?if $sex == 2?} checked="checked"{?/if?} />女
+<input type="radio" class="radio" name="sex" value="0"{?if $sex == 0?} checked="checked"{?/if?}  />保密
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">QQ</td>
+  <td class="even"><input type="text" class="text" name="qq" id="qq" size="25" maxlength="15" value="{?$qq?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">MSN</td>
+  <td class="even"><input type="text" class="text" name="msn" id="msn" size="25" maxlength="30" value="{?$msn?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">网站</td>
+  <td class="even"><input type="text" class="text" name="url" id="url" size="25" maxlength="100" value="{?$url?}" /></td>
+</tr>
+
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">是否接受站长Email</td>
+  <td class="even"><input type="radio" class="radio" name="adminemail" value="1"{?if $adminemail == 1?} checked="checked"{?/if?} />是
+<input type="radio" class="radio" name="adminemail" value="0"{?if $adminemail == 0?} checked="checked"{?/if?} />否
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">用户签名</td>
+  <td class="even"><textarea class="textarea" name="sign" id="sign" rows="6" cols="60">{?$sign?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">个人简介</td>
+  <td class="even"><textarea class="textarea" name="intro" id="intro" rows="6" cols="60">{?$intro?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="update" /></td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="保 存" /></td>
+</tr>
+</table>
+</form>
+
+<script language="javascript" type="text/javascript">
+<!--
+function jieqiFormValidate_useredit(){
+  if(document.useredit.email.value == ""){
+    alert("请输入Email");
+    document.useredit.email.focus();
+    return false;
+  }
+}
+//-->
+</script>

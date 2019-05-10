@@ -1,0 +1,103 @@
+<br />
+<br />
+<table class="grid" width="600" align="center">
+  <tr align="center">
+    <td colspan="3" class="title"><a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$name|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends" href="javascript:;" onclick="Ajax.Tip(event, '{?$jieqi_url?}/addfriends.php?id={?$uid?}', 3000);">加为好友</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$uid?}">会客室</a></td>
+  </tr>
+  <tr>
+    <th colspan="3">基本信息</th>
+  </tr>
+  <tr align="left">
+    <td width="100" class="odd">用户ID：</td>
+    <td width="280" class="even">{?$uid?}</td>
+    <td width="214" rowspan="11" class="even" align="center">
+	<img src="{?function jieqi_geturl:'system':'avatar':$uid:'l':$avatar?}" class="avatar" alt="头像"><br />
+	{?if $jieqi_modules['badge']['publish'] > 0?}
+	<br />
+    {?if $jieqi_group_imageurl != ""?}<img src="{?$jieqi_group_imageurl?}" border="0" title="{?$group?}"><br />{?/if?}
+    {?if $jieqi_honor_imageurl != ""?}<img src="{?$jieqi_honor_imageurl?}" border="0" title="{?$honor?}"><br />{?/if?}
+    {?section name=i loop=$jieqi_badgerows?}<img src="{?$jieqi_badgerows[i].imageurl?}" border="0" title="{?$jieqi_badgerows[i].caption?}">{?/section?}
+    {?/if?}
+	</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">用户名：</td>
+    <td class="even">{?$uname?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">昵称：</td>
+    <td class="even">{?$name?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">等级：</td>
+    <td class="even">{?$group?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">头衔：</td>
+    <td class="even">{?$honor?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">性别：</td>
+    <td class="even">{?$sex?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">Email：</td>
+    <td class="even">{?if $viewemail == 1?}<a href="mailto:{?$email?}">{?$email?}</a>{?else?}保密{?/if?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">QQ：</td>
+    <td class="even">{?$qq?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">MSN：</td>
+    <td class="even"><a href="mailto:{?$msn?}">{?$msn?}</a></td>
+  </tr>
+  <tr align="left">
+    <td class="odd">网站：</td>
+    <td class="even"><a href="{?$url?}" target="_blank">{?$url?}</a></td>
+  </tr>
+  <tr>
+    <th colspan="3">积分相关</th>
+  </tr>
+  <tr align="left">
+    <td class="odd">注册日期：</td>
+    <td colspan="2" class="even">{?$regdate?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">贡献值：</td>
+    <td colspan="2" class="even">{?$credit?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">经验值：</td>
+    <td colspan="2" class="even">{?$experience?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">现有积分：</td>
+    <td colspan="2" class="even">{?$score?}</td>
+  </tr>
+  {?if $ismaster == 1?}
+  <tr>
+    <th colspan="3">VIP信息</th>
+  </tr>
+  <tr align="left">
+    <td class="odd">VIP类型：</td>
+    <td colspan="2" class="even">{?if $isvip <= 0?}非vip会员{?else?}VIP会员{?/if?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">{?$egoldname?}</td>
+    <td colspan="2" class="even">{?if $jieqi_silverusage==1?}{?$emoney?} ({?$egold?}/{?$esilver?}){?else?}{?$egold?}{?/if?}</td>
+  </tr>
+  {?/if?}
+  <tr>
+    <th colspan="3">其他信息</th>
+  </tr>
+  <tr align="left">
+    <td class="odd">用户签名：</td>
+    <td colspan="2" class="even">{?$sign?}</td>
+  </tr>
+  <tr align="left">
+    <td class="odd">个人简介：</td>
+    <td colspan="2" class="even">{?$intro?}</td>
+  </tr>
+</table>
+<br />

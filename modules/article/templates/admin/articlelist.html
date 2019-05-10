@@ -1,0 +1,44 @@
+<form name="frmsearch" method="post" action="{?$url_article?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="odd">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>文章名称
+            <input type="radio" name="keytype" class="radio" value="1">作者 
+			<input type="radio" name="keytype" class="radio" value="2">发表者 
+            <input type="submit" name="btnsearch" class="button" value="搜 索">
+            &nbsp;&nbsp;<a href="{?$jieqi_modules['article']['url']?}/admin/article.php">全部文章</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/article.php?display=ready">待审文章</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/article.php?display=show">已审文章</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/article.php?display=hide">隐藏文章</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/article.php?display=cool">冷门文章</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/article.php?display=empty">空文章</a>         
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$url_batchdel?}" method="post" name="checkform" id="checkform" onSubmit="javascript:if(confirm('确实要批量删除文章么？')) return true; else return false;">
+<table class="grid" width="100%" align="center">
+<caption>{?$articletitle?}</caption>
+  <tr align="center">
+    <th width="4%">&nbsp;</th>
+    <th width="14%">文章名称</th>
+    <th width="24%">最新章节</th>
+    <th width="10%">作者</th>
+    <th width="10%">发表者</th>
+    <th width="8%">更新</th>
+    <th width="30%">操作</th>
+  </tr>
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td class="odd" align="center">{?$articlerows[i].checkbox?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'article':'article':$articlerows[i].articleid:'info'?}" target="_blank">{?$articlerows[i].articlename?}</a></td>
+    <td class="odd"><a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a></td>
+    <td class="even">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td class="odd" align="center"><a href="{?function jieqi_geturl:'system':'user':$articlerows[i].posterid?}" target="_blank">{?$articlerows[i].poster?}</a></td>
+    <td class="even" align="center">{?$articlerows[i].uptime|date:m-d?}</td>
+    <td class="odd" align="center">{?if $articlerows[i].display == 0?}<a href="{?$article_dynamic_url?}/admin/article.php?action=hide&id={?$articlerows[i].articleid?}&display={?$display?}">隐藏</a> <a href="{?$article_dynamic_url?}/admin/article.php?action=ready&id={?$articlerows[i].articleid?}&display={?$display?}">待审</a>{?elseif $articlerows[i].display == 1?}<a href="{?$article_dynamic_url?}/admin/article.php?action=hide&id={?$articlerows[i].articleid?}&display={?$display?}">隐藏</a> <a href="{?$article_dynamic_url?}/admin/article.php?action=show&id={?$articlerows[i].articleid?}&display={?$display?}">审核</a>{?else?}<a href="{?$article_dynamic_url?}/admin/article.php?action=show&id={?$articlerows[i].articleid?}&display={?$display?}">显示</a> <a href="{?$article_dynamic_url?}/admin/article.php?action=ready&id={?$articlerows[i].articleid?}&display={?$display?}">待审</a>{?/if?}{?if $articlerows[i].display == 0?} <a href="{?$article_dynamic_url?}/admin/setgood.php?id={?$articlerows[i].articleid?}&display={?$display?}" target="_blank">推荐</a>/<a href="{?$article_dynamic_url?}/admin/setgood.php?id={?$articlerows[i].articleid?}&action=no&display={?$display?}" target="_blank">不荐</a>{?else?} 推荐/不荐{?/if?} <a href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}" target="_blank">管理</a> <a href="{?$article_static_url?}/articleedit.php?id={?$articlerows[i].articleid?}&display={?$display?}" target="_blank">编辑</a> <a href="javascript:if(confirm('确实要删除该文章么？')) document.location='{?$article_static_url?}/admin/article.php?action=del&id={?$articlerows[i].articleid?}&display={?$display?}'">删除</a></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td width="5%" class="odd" align="center">{?$checkall?}</td>
+    <td colspan="6" align="left" class="odd"><input type="submit" name="Submit" value="批量删除" class="button"><input name="batchdel" type="hidden" value="1"><input name="url_jump" type="hidden" value="{?$url_jump?}"><strong></strong></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

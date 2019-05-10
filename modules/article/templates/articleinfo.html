@@ -1,0 +1,213 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+{?set $jieqi_pagetitle = "$articlename - $author - $jieqi_sitename"?}
+{?set $meta_keywords = "$articlename $author"?}
+<table width="96%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+      <tr align="center">
+        <td colspan="4">
+            <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="80%" align="center" valign="middle"><span style="font-size:16px; font-weight: bold; line-height: 150%">{?$articlename?}</span></td>
+                    <td width="20%" align="right" valign="middle">[<a href="{?$url_manage?}">管理</a>]&nbsp; [<a href="{?$url_report?}">举报</a>]&nbsp; </td>
+                </tr>
+            </table></td>
+        </tr>
+      <tr>
+        <td width="25%">类&nbsp;&nbsp;&nbsp; 别：{?$sort?}</td>
+        <td width="25%">作&nbsp;&nbsp;&nbsp; 者：{?if $authorid > 0?}<a href="{?function jieqi_geturl:'system':'user':$authorid?}" target="_blank">{?$author?}</a>{?else?}{?$author?}{?/if?}</td>
+        <td width="25%">管 理 员：{?if $agentid > 0?}<a href="{?function jieqi_geturl:'system':'user':$agentid?}" target="_blank">{?$agent?}</a>{?else?}{?$agent?}{?/if?}</td>
+        <td width="25%">全文长度：{?$size_c?}字</td>
+      </tr>
+      <tr>
+        <td>最后更新：{?$lastupdate?}</td>
+        <td>文章状态：{?$fullflag?}</td>
+        <td>授权级别：{?$permission?}</td>
+        <td>首发状态：{?$firstflag?}</td>
+      </tr>
+      <tr>
+        <td>总点击数：{?$allvisit?}</td>
+        <td>本月点击：{?$monthvisit?}</td>
+        <td>本周点击：{?$weekvisit?}</td>
+        <td>收 藏 数：{?$goodnum?}</td>
+      </tr>
+      <tr>
+        <td>总推荐数：{?$allvote?}</td>
+        <td>本月推荐：{?$monthvote?}</td>
+        <td>本周推荐：{?$weekvote?}</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000" height="1"></td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+      <tr>
+        <td width="20%" align="center" valign="top">
+		<ul class="ulrow">
+		<li><a class="btnlink" href="{?$url_read?}">点击阅读</a></li>
+		<li><a class="btnlink" href="javascript:Ajax.Request('{?$url_bookcase?}',{onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));}});">加入书架</a></li>
+		<li><a class="btnlink" href="javascript:Ajax.Request('{?$url_uservote?}',{onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));}});">推荐本书</a></li>
+		<li><a class="btnlink" href="{?if $authorid > 0?}{?$url_authorpage?}{?else?}{?$url_authorarticle?}{?/if?}">作者专栏</a></li>
+		<li><a class="btnlink" href="{?$url_fullpage?}">全文阅读</a></li>
+		{?if $hasobook == 1?}
+		<li><a class="btnlink" href="{?$jieqi_modules['obook']['url']?}/obookinfo.php?aid={?$articleid?}">VIP 章节</a></li>
+		{?/if?}
+		{?if $makezip > 0?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packdown.php?id={?$articleid?}&type=zip&fname={?$articlename|urlencode?}">ZIP 下载</a></li>
+		{?/if?}
+		{?if $maketxtfull > 0?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packdown.php?id={?$articleid?}&type=txt&fname={?$articlename|urlencode?}">TXT 全文</a></li>
+		{?/if?}
+		{?if $maketxt > 0?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packshow.php?id={?$articleid?}&type=txtchapter">TXT 单章</a></li>
+		{?/if?}
+		{?if $makeumd == 1?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packdown.php?id={?$articleid?}&type=umd&fname={?$articlename|urlencode?}">UMD 下载</a></li>
+		{?elseif $makeumd > 1?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packshow.php?id={?$articleid?}&type=umd">UMD 下载</a></li>
+		{?/if?}
+		{?if $makejar == 1?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packdown.php?id={?$articleid?}&type=jar">JAR 下载</a></li>
+		<li><a class="btnlink" href="{?$article_static_url?}/packdown.php?id={?$articleid?}&type=jad">JAD 下载</a></li>
+		{?elseif $makejar > 1?}
+		<li><a class="btnlink" href="{?$article_static_url?}/packshow.php?id={?$articleid?}&type=jar">JAR 下载</a></li>
+		<li><a class="btnlink" href="{?$article_static_url?}/packshow.php?id={?$articleid?}&type=jad">JAD 下载</a></li>
+		{?/if?}
+		</ul>
+		</td>
+        <td width="80%" valign="top">
+          {?if $hasimage == 1?}<a href="{?$url_limage?}" target="_blank"><img src="{?$url_simage?}" border="0" width="100" height="125" align="right" hspace="5" vspace="5" /></a>{?/if?}
+          <span class="hottext">最近章节：</span><a href="{?$url_lastchapter?}">{?$lastchapter?}</a><br />
+		  {?if $hasobook == 1?}<span class="hottext">最近VIP：</span><a href="{?$jieqi_modules['obook']['url']?}/reader.php?aid={?$obook_obookid?}&cid={?$obook_lastchapterid?}">{?$obook_lastchapter?}</a><br />{?/if?}
+		  <br/>
+          <span class="hottext">内容简介：</span><br />{?$intro?}<br /><br />
+		  <span class="hottext">作品关键字：</span>{?$keywords?}<br /><br />
+          {?if $notice != ""?}<span class="hottext">本书公告：</span><br />{?$notice?}{?/if?}
+      </td>
+      </tr>
+    </table></td>
+  </tr>
+  {?if $showvote > 0?}
+  <form name="frmvote" method="post" action="{?$jieqi_modules['article']['url']?}/votedo.php" target="_blank">
+  <tr>
+    <td bgcolor="#000000" height="1"></td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%"><span class="hottext">作品投票调查：</span></td>
+    <td width="50%" align="right">
+	  <input name="aid" type="hidden" value="{?$articleid?}" />
+	  <input name="vid" type="hidden" value="{?$voteid?}" />
+      <input type="submit" name="votepost" value="提交投票" class="button" />&nbsp;
+      <input type="button" name="voteshow" value="查看结果" class="button" onclick="window.open('{?$jieqi_modules['article']['url']?}/voteresult.php?id={?$voteid?}')" />
+      &nbsp;</td>
+  </tr>
+</table>
+</td>
+  </tr>
+  <tr>
+    <td>主题：<strong>{?$votetitle?}</strong></td>
+  </tr>
+  <tr>
+    <td>
+	<ul>
+		{?section name=i loop=$voteitemrows?}
+		<li style="width:49%;float:left;padding:3px;">
+		{?if $mulselect == 1?}
+		<input name="voteitem[]" type="checkbox" value="{?$voteitemrows[i].id?}" />
+		{?else?}
+		<input name="voteitem" type="radio" value="{?$voteitemrows[i].id?}" />
+		{?/if?}
+		{?$voteitemrows[i].item?}
+		</li>
+		{?/section?}
+    </ul>
+	</td>
+  </tr>
+  </form>
+  {?/if?}
+  {?if $eachlinknum > 0 && $eachlinkcount > 0?}
+  <tr>
+    <td bgcolor="#000000" height="1"></td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+        <tr>
+          <td class="odd"><span class="hottext">推荐阅读：</span></td>
+        </tr>
+        <tr>
+          <td>
+		  {?section name=i loop=$eachlinkrows?}
+		  <li style="width:24%;float:left;padding:3px;">《<a href="{?$eachlinkrows[i].url_articleinfo?}" target="_blank">{?$eachlinkrows[i].articlename?}</a>》</li>
+		  {?/section?}</td>
+        </tr>
+    </table></td>
+  </tr>
+  {?/if?}
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td>
+	<table class="grid" width="100%" align="center" style="margin-bottom:3px;">
+	 <caption>[最新书评]&nbsp;&nbsp;&nbsp; [<a href="{?$url_goodreview?}" target="_blank">精华书评</a>]&nbsp;&nbsp;&nbsp; [<a href="{?$url_allreview?}" target="_blank">全部书评</a>]</caption>
+    {?section name=i loop=$reviewrows?}
+	<tr><td class="odd">
+	<table class="hide" width="100%" align="center">
+    <tr>
+      <td width="55%">{?if $reviewrows[i].istop == 1?}<span class="hottext">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="hottext">[精]</span>{?/if?}<a href="{?$jieqi_modules['article']['url']?}/reviewshow.php?rid={?$reviewrows[i].topicid?}" target="_blank"><strong>{?$reviewrows[i].title|str_replace:"<br />":" "?}</strong></a></td>
+      <td width="20%">回复({?$reviewrows[i].replies?})/查看({?$reviewrows[i].views?})</td>
+      <td width="15%">{?if $reviewrows[i].posterid > 0?}<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank">{?$reviewrows[i].poster?}</a>{?else?}游客{?/if?}</td>
+      <td width="10%">{?$reviewrows[i].replytime|date:m-d H:i?}</td>
+    </tr>
+	</table>
+	</td></tr>
+	<tr><td class="even">{?$reviewrows[i].posttext?}</td></tr>
+    {?/section?}
+	</table>
+	 </td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+      <td><form name="frmreview" method="post" action="{?$url_review?}" target="_blank">
+          <table class="grid" width="100%" align="center">
+              <caption>发表书评：</caption>
+			  <tr>
+			    <td class="odd" width="25%">标题</td>
+                  <td class="even"><input type='text' class='text' name='ptitle' id='ptitle' size='60' maxlength='60' value='' /></td>
+              </tr>
+              <tr>
+                <td class="odd" width="25%">内容</td>
+                  <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" cols="60" rows="12"></textarea>
+				  <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script></td>
+              </tr>
+{?if $postcheckcode > 0?}
+<tr>
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+              <tr>
+                <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newpost" /></td>
+                  <td class="even"><input type="submit" name="Submit" class="button" value=" 发表书评 "></td>
+              </tr>
+          </table>
+      </form></td>
+  </tr>
+</table>

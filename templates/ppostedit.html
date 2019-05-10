@@ -1,0 +1,36 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "defaultblocks"?}
+<script language="javascript" type="text/javascript">
+<!--
+function frmppostedit_validate(){
+}
+//-->
+</script>
+
+<div class="c_head"><a href="{?$jieqi_url?}/ptopicshow.php?tid={?$topicid?}">主题：{?$subject?}</a></div>
+<form name="frmppostedit" id="frmppostedit" action="ppostedit.php?do=submit" method="post" onsubmit="return frmppostedit_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>编辑贴子</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">标题</td>
+  <td class="even"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="{?$ptitle?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">内容</td>
+  <td class="even">
+  <textarea class="textarea" name="pcontent" id="pcontent" rows="10" cols="60">{?$pcontent?}</textarea>
+  <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+  </td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="pid" id="pid" value="{?$pid?}" /><input type="hidden" name="action" id="action" value="update" /></td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /></td>
+</tr>
+</table>
+</form>

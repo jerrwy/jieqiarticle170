@@ -1,0 +1,44 @@
+<script language="javascript">
+function checkFrom(obj)
+{	
+	if(obj.modules.value=='')
+	{
+	   alert('请选择模块！');
+	   return false
+	}else if(obj.file.value==''){
+	   alert('请填写文件名称！');
+	   return false
+	}else if(obj.name.value==''){
+	   alert('请填写配置文件说明！');
+	   return false
+	}
+	return true;
+}
+</script>
+<body>
+
+<form name="frmnewmessage" id="frmnewmessage" action="blocksaction.php" method="post" onsubmit="return checkFrom(this);">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>添加区块配置文件</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">所属模块</td>
+  <td class="even"><select class="select" name="modules" id="modules" onchange="">
+     <option value="">选择模块</option>
+	{?section name=i loop=$jieqi_modules?}
+      <option value="{?$i['key']?}"{?if $modules == $i['key']?} selected{?/if?}>{?$jieqi_modules[i].caption?}</option>
+	{?/section?}  
+</select></td>
+</tr>
+  <tr valign="middle" align="left"><td class="odd" width="25%">文件名称</td>
+  <td class="even"><input type="text" class="text" name="file" id="file" size="30" maxlength="100" value="" />.php</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">配置文件说明</td>
+  <td class="even"><textarea class="textarea" name="name" id="name" rows="12" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="发 送" /><input type="hidden" name="action" id="action" value="addModule" /></td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,20 @@
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td align="center">{?$sort_form?}</td>
+  </tr>
+</table>
+<br />
+<table class="grid" width="580" align="center">
+  <caption>文章分类</caption>
+  <tr align="center">
+    <th width="70%">分类名称</th>
+    <th width="30%">操作</th>
+  </tr>
+  {?section name=i loop=$sortrows?}
+  <tr>
+    <td class="odd">{?$sortrows[i].name?}</td>
+    <td class="even">{?$sortrows[i].operate?}</td>
+  </tr>
+  {?/section?}
+</table>
+

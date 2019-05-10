@@ -1,0 +1,16 @@
+<table class="hide fix" width="100%" align="center">
+  <tr align="center">
+    <th width="30%">文章名称</th>
+    <th width="40%">最新章节</th>
+    <th width="20%">更新</th>
+    <th width="10%">操作</th>
+  </tr>
+{?section name=i loop=$bookcaserows?}
+  <tr>
+    <td class="even"><a href="{?$bookcaserows[i].url_articleinfo?}" target="_blank">{?$bookcaserows[i].articlename?}</a></td>
+    <td class="odd"><a href="{?$bookcaserows[i].url_lastchapter?}" target="_blank">{?$bookcaserows[i].lastchapter?}</a></td>
+    <td class="odd" align="center">{?$bookcaserows[i].lastupdate|date:"m-d"?}</td>
+    <td class="even" align="center"><a href="{?$jieqi_modules['article']['url']?}/addbookcase.php?bid={?$bookcaserows[i].articleid?}">收藏</a></td>
+  </tr>
+{?/section?}  
+</table>

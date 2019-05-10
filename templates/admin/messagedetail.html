@@ -1,0 +1,57 @@
+<table class="grid" width="100%" align="center">
+<caption>标题：{?$title?}</caption>
+  <tr>
+    <td width="20%" class="odd">发送人：</td>
+    <td width="80%" class="even">{?if $fromid > 0?}<a href="{?function jieqi_geturl:'system':'user':$fromid?}" target="_blank">{?$fromname?}</a> [<a href="{?$jieqi_url?}/admin/usermanage.php?id={?$fromid?}">管理用户</a>]{?else?}<span class="hottext">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="odd">接收人：</td>
+    <td class="even">{?if $toid > 0?}<a href="{?function jieqi_geturl:'system':'user':$toid?}" target="_blank">{?$toname?}</a> [<a href="{?$jieqi_url?}/admin/usermanage.php?id={?$toid?}">管理用户</a>]{?else?}<span class="hottext">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="odd">时&nbsp; 间：</td>
+    <td class="even">{?$postdate?}</td>
+  </tr>
+  <tr>
+    <td class="odd">内&nbsp; 容：</td>
+    <td class="even">{?$content?}</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="foot">{?if $fromid > 0?}<a href="{?$jieqi_url?}/admin/newmessage.php?reid={?$messageid?}">回复消息</a>&nbsp;&nbsp;&nbsp;&nbsp;{?/if?}<a href="{?$jieqi_url?}/admin/newmessage.php?fwid={?$messageid?}">转发消息</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:if(confirm('确实要删除该消息么？')) document.location='{?$jieqi_url?}/admin/message.php?box={?$box?}&delid={?$messageid?}'">删除消息</a></td>
+  </tr>
+</table>
+{?if $fromid > 0?}
+<br />
+<form name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/admin/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table class="grid" width="100%" align="center">
+  <caption>快速回复</caption>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">收件人</td>
+    <td class="even">{?if $fromid > 0?}<a href="{?function jieqi_geturl:'system':'user':$fromid?}" target="_blank">{?$fromname?}</a><input type="hidden" name="receiver" id="receiver" size="30" maxlength="30" value="{?$fromname?}" />{?else?}<span class="hottext">网站管理员</span><input type="hidden" name="tosys" id="tosys" value="1" />{?/if?}</td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">标题</td>
+    <td class="even"><input type="text" class="text" name="title" id="title" size="30" maxlength="100" value="Re:{?$title?}" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">内容</td>
+    <td class="even"><textarea class="textarea" name="content" id="content" rows="8" cols="60"></textarea></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">&nbsp;</td>
+    <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="回复消息" /><input type="hidden" name="action" id="action" value="newmessage" /></td>
+  </tr>
+</table>
+</form>
+<script type="text/javascript">
+<!--
+  function frmnewmessage_validate(){
+    if ( document.frmnewmessage.title.value == "" ){
+      alert( "请输入标题" );
+      document.frmnewmessage.title.focus();
+      return false;
+    }
+  }
+//-->
+</script>
+{?/if?}

@@ -1,0 +1,87 @@
+<script language="javascript" type="text/javascript">
+<!--
+function frmnewchapter_validate(){
+  if(document.frmnewchapter.chaptername.value == ""){
+    alert("请输入章节标题");
+    document.frmnewchapter.chaptername.focus();
+    return false;
+  }
+}
+//-->
+</script>
+<form name="frmnewchapter" id="frmnewchapter" action="{?$url_newchapter?}" method="post" onsubmit="return frmnewchapter_validate();" enctype="multipart/form-data">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>增加章节</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">文章名称</td>
+  <td class="even"><a href="{?$article_static_url?}/articlemanage.php?id={?$articleid?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">分卷名称</td>
+  <td class="even">
+  <select class="select"  size="1" name="volumeid" id="volumeid">
+  {?section name=i loop=$volumerows?}
+  <option value="{?$volumerows[i].volumeid?}"{?if $volumerows[i].volumeid == $volumeid?} selected="selected"{?/if?}>{?$volumerows[i].volumename?}</option>
+  {?/section?}
+  </select>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">章节标题</td>
+  <td class="even"><input type="text" class="text" name="chaptername" id="chaptername" size="50" maxlength="50" value="{?$chaptername?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">章节类型</td>
+  <td class="even"><input type="radio" class="radio" name="chaptertype" value="0" checked="checked" />未完待续
+<input type="radio" class="radio" name="chaptertype" value="1" />完结篇
+</td>
+</tr>
+{?if $authtypeset == 1?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">文章排版</td>
+  <td class="even"><input type="radio" class="radio" name="typeset" value="1" checked="checked" />自动排版
+<input type="radio" class="radio" name="typeset" value="0" />无需排版
+</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">章节内容 <br /><span class="hottext"><br /><input name="textstat" type="button" class="button" onclick="javascript:alert('当前长度 '+ document.getElementById('chaptercontent').value.length + ' 字。');" value="字数统计" /></span></td>
+  <td class="even"><textarea class="textarea" name="chaptercontent" id="chaptercontent" rows="15" cols="60">{?$chaptercontent?}</textarea></td>
+</tr>
+{?if $canupload == true?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件限制：</td>
+  <td class="even">文件类型：{?$attachtype?}, 图片最大：{?$maximagesize?}K, 文件最大：{?$maxfilesize?}K</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件1</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件2</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件3</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件4</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件5</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">
+  &nbsp;
+  <input type="hidden" name="action" id="action" value="newchapter" />
+  <input type="hidden" name="aid" id="aid" value="{?$articleid?}" />
+  {?if $userchappid > 0?}<input type="hidden" name="userchappid" id="userchappid" value="{?$userchappid?}" />{?/if?}
+  </td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /></td>
+</tr>
+</table>
+</form>

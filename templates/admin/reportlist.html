@@ -1,0 +1,46 @@
+<form name="frmreportlist" method="post" action="{?$jieqi_url?}/admin/reportlist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="even" align="right">关键字：
+            <input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50">
+			<input name="keytype" type="radio" value="reportname" checked="checked" />提交人
+			<input name="keytype" type="radio" value="authname" />处理人
+			<input name="keytype" type="radio" value="reporttitle" />标题
+            <input type="submit" name="Submit" value="搜 索" class="button">&nbsp;&nbsp;<a href="{?$jieqi_url?}/admin/reportlist.php">显示全部</a>&nbsp;&nbsp;</td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$jieqi_url?}/admin/reportlist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>
+用户提交信息列表
+</caption>
+  <tr>
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <th width="13%">提交人</th>
+    <th width="15%">内容类型</th>
+    <th width="40%">标题</th>
+    <th width="10%">日期</th>
+	<th width="5%">状态</th>
+    <th width="12%">操作</th>
+  </tr>
+{?section name=i loop=$reportrows?}
+  <tr>
+    <td class="odd" align="center" valign="top"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$reportrows[i].reportid?}"></td>
+    <td class="even" valign="top"><a href="{?function jieqi_geturl:'system':'user':$reportrows[i].reportuid?}" target="_blank">{?$reportrows[i].reportname?}</a></td>
+    <td class="odd" valign="top">{?$reportrows[i].typename?}</td>
+    <td class="odd" valign="top"><a href="reportdetail.php?id={?$reportrows[i].reportid?}">{?$reportrows[i].reporttitle?}</a>
+	</td>
+    <td class="even" valign="top" align="center">{?$reportrows[i].reporttime|date:"Y-m-d"?}</td>
+	<td class="odd" valign="top" align="center">{?if $reportrows[i].authflag == 0?}<span class="hottext">未阅</span>{?else?}已阅{?/if?}</td>
+    <td class="even" valign="top" align="center"><a href="javascript:if(confirm('确实要删除该报告么？')) document.location='reportlist.php?checkaction=1&checkid[]={?$reportrows[i].reportid?}';">删除</a></td>
+  </tr>
+{?/section?}
+  <tr>
+    <td colspan="7" class="foot">&nbsp;<input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">&nbsp;&nbsp;<input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">&nbsp;&nbsp;<input type="button" name="delcheck" value="删除选中记录" class="button" onclick="javascript:if(confirm('确实要删除选中记录么？')){ this.form.checkaction.value='1'; this.form.submit();}">&nbsp;&nbsp;<input name="checkaction" type="hidden" id="checkaction" value="0"></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

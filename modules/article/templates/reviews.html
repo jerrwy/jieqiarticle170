@@ -1,0 +1,58 @@
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><table width="100%"  border="0" cellspacing="2" cellpadding="3">
+            <tr>
+                <td width="40%" align="left"><a href="{?$url_articleinfo?}">《{?$articlename?}》</a> 书评列表</td>
+                <td width="60%" align="right">{?if $type == "good"?}&nbsp;&nbsp;&nbsp;&nbsp;[<a href="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}&type=all">全部书评</a>] &nbsp;&nbsp; [精华书评]{?else?}&nbsp;&nbsp;&nbsp;&nbsp;[全部书评] &nbsp;&nbsp; [<a href="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}&type=good">精华书评</a>]{?/if?}</td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <td width="54%" class="title">主题</td>
+    <td width="12%" class="title">回复/查看</td>
+    <td width="17%" class="title">发表人/回复人</td>
+    <td width="15%" class="title">发表时间</td>
+  </tr>
+  {?section name=i loop=$reviewrows?}
+  <tr>
+    <td class="odd">{?if $reviewrows[i].istop == 1?}<span class="hottext">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="hottext">[精]</span>{?/if?}<a href="{?$jieqi_modules['article']['url']?}/reviewshow.php?rid={?$reviewrows[i].topicid?}">{?$reviewrows[i].title?}</a></td>
+    <td align="center" class="even">{?$reviewrows[i].replies?}/{?$reviewrows[i].views?}</td>
+    <td class="odd">{?if $reviewrows[i].posterid > 0?}<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank">{?$reviewrows[i].poster?}</a>{?else?}游客{?/if?}{?if $reviewrows[i].replyflag > 0?}/{?if $reviewrows[i].replierid > 0?}<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].replierid?}" target="_blank">{?$reviewrows[i].replier?}</a>{?else?}游客{?/if?}{?/if?}</td>
+    <td align="center" class="even">{?$reviewrows[i].posttime|date:"Y-m-d H:i:s"?}{?if $ismaster == 1?}<br />{?if $reviewrows[i].istop == 0?}[<a href="{?$jieqi_modules['article']['url']?}/reviews.php?action=top&aid={?$articleid?}&rid={?$reviewrows[i].topicid?}">置顶</a>]{?else?}[<a href="{?$jieqi_modules['article']['url']?}/reviews.php?action=untop&aid={?$articleid?}&rid={?$reviewrows[i].topicid?}">置后</a>]{?/if?} {?if $reviewrows[i].isgood == 0?}[<a href="{?$jieqi_modules['article']['url']?}/reviews.php?action=good&aid={?$articleid?}&rid={?$reviewrows[i].topicid?}">加精</a>]{?else?}[<a href="{?$jieqi_modules['article']['url']?}/reviews.php?action=normal&aid={?$articleid?}&rid={?$reviewrows[i].topicid?}">去精</a>]{?/if?} [<a href="javascript:if(confirm('确实要删除该书评么？')) document.location='{?$jieqi_modules['article']['url']?}/reviews.php?action=del&aid={?$articleid?}&rid={?$reviewrows[i].topicid?}';">删除</a>]{?/if?}</td>
+  </tr>
+  {?/section?}
+</table>
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+    <tr>
+        <td align="right">{?$url_jumppage?}</td>
+    </tr>
+</table>
+{?if $enablepost == 1?}
+<form name="frmreview" method="post" action="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}">
+<table class="grid" width="100%" align="center">
+  <caption>发表书评：</caption>
+  <tr>
+    <td class="odd" width="25%">标题</td>
+    <td class="even"><input type='text' class='text' name='ptitle' id='ptitle' size='60' maxlength='60' value='' /></td>
+  </tr>
+  <tr>
+    <td class="odd" width="25%">内容</td>
+    <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" cols="60" rows="12"></textarea>
+    <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+    </td>
+  </tr>
+{?if $postcheckcode > 0?}
+<tr>
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+  <tr>
+    <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newpost" /></td>
+    <td class="even"><input type="submit" name="Submit" class="button" value=" 发表书评 "></td>
+  </tr>
+</table>
+</form>
+{?/if?}

@@ -1,0 +1,79 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<script language="javascript">
+function addlink(){
+	$('tblmylink').style.display = 'block';
+	$('capmylink').setValue('添加新链接');
+	$('action').setValue('add');
+}
+
+function editlink(ulid, ultitle, ulurl, ulinfo){
+	$('tblmylink').style.display = 'block';
+	$('capmylink').setValue('修改链接');
+	$('ulid').setValue(ulid);
+	$('ultitle').setValue(ultitle);
+	$('ulurl').setValue(ulurl);
+	$('ulinfo').setValue(ulinfo.replace(/\<br\s*\/?\>/ig, "\n")); 
+	$('action').setValue('edit');
+}
+
+function cancellink(){
+	$('tblmylink').style.display = 'none';
+}
+
+function check_mylink(){
+	if ( window.document.frmmylink.ultitle.value == "" ){
+		alert( "请输入标题！" );window.document.frmmylink.ultitle.focus();
+		return false;
+	}
+	if ( window.document.frmmylink.ulurl.value == "" ){
+		alert( "请输入网址！" );window.document.frmmylink.ulurl.focus();
+		return false;
+	}
+	return true;
+}
+</script>
+<form id="frmmylink" name="frmmylink" method="post" action="mylink.php?do=submit" onsubmit="return check_mylink();">
+<table class="grid" align="center" width="100%" style="display:none;margin-bottom:20px;" id="tblmylink" name="tblmylink">
+<caption id="capmylink"></caption>
+  <tr>
+    <td width="30%" align="center" valign="middle" class="odd">标题</td>
+    <td width="70%" align="left" valign="middle" class="even"><input name="ultitle" type="text" class="text" id="ultitle" size="50" /></td>
+    </tr>
+  <tr>
+    <td align="center" valign="middle" class="odd">网址</td>
+    <td align="left" valign="middle" class="even"><input name="ulurl" type="text" class="text" id="ulurl" value="http://" size="50" /></td>
+    </tr>
+  <tr>
+    <td align="center" valign="middle" class="odd">说明</td>
+    <td align="left" valign="middle" class="even"><textarea name="ulinfo" cols="48" rows="4" class="textarea" id="ulinfo"></textarea></td>
+    </tr>
+  <tr>
+    <td colspan="2" align="center" valign="middle" class="foot">
+	<input type="hidden" name="action" id="action" value="" />
+	<input type="hidden" name="ulid" id="ulid" value="0" />
+	<input type="submit" class="button" name="btnsubmit" id="btnsubmit" value=" 提交 " /> &nbsp;&nbsp; 
+    <input type="button" class="button" name="btncancel" id="btncancel" value=" 取消 " onclick="cancellink();" /></td>
+  </tr>
+</table>
+</form>
+<table class="grid" align="center" width="100%">
+  <caption>我的友情链接 | <a href="#" onclick="addlink();">添加新链接</a></caption>
+  <tr>
+    <td width="23%" class="head">链接</td>
+    <td width="45%" class="head">说明</td>
+    <td width="13%" class="head">加入时间</td>
+    <td width="19%" class="head">操作</td>
+  </tr>
+  {?section name=i loop=$linkrows?}
+  <tr>
+    <td align="center" valign="middle"><a href="{?$linkrows[i].ulurl?}" target="_blank" title="{?$linkrows[i].ulurl?}">{? $linkrows[i].ultitle?}</a></td>
+    <td align="center" valign="middle">{?$linkrows[i].ulinfo?}</td>
+    <td align="center" valign="middle">{? $linkrows[i].addtime|date:"Y-m-d"?}</td>
+    <td align="center" valign="middle">
+	<a href="#" onclick="editlink({?$linkrows[i].ulid?},'{?$linkrows[i].e_ultitle?}','{?$linkrows[i].e_ulurl?}','{?$linkrows[i].e_ulinfo?}')">修改</a> | 
+	{?if $linkrows[i].toptime == "0"?}<a href="mylink.php?action=top&ulid={?$linkrows[i].ulid?}">置顶</a>{?else?}<a href="mylink.php?action=untop&ulid={?$linkrows[i].ulid?}">置后</a>{?/if?} | 
+	<a href="#" onclick="javascript:if (confirm('确实要删除这个连接吗？')){window.location.href='mylink.php?action=delete&ulid={?$linkrows[i].ulid?}'}else{return false;}">删除</a></td>
+  </tr>
+  {?/section?}
+</table>

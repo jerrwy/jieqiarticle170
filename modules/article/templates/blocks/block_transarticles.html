@@ -1,0 +1,5 @@
+<ul class="ulitem">
+{?section name=i loop=$articlerows?}
+  <li><a href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}">{?$articlerows[i].articlename?}</a></li>
+{?/section?}
+</ul>

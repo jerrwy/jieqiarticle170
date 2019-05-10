@@ -1,0 +1,35 @@
+<br />
+{?section name=i loop=$forumcats?}
+<table class="grid" width="100%" align="center">
+<caption>{?$forumcats[i].name?} [序号：{?$forumcats[i].order?}]&nbsp; {?$forumcats[i].manage?}</caption>
+    <tr align="center" class="head">
+        <td width="5%">&nbsp;</td>
+        <td width="50%">论坛</td>
+        <td width="10%">主题数</td>
+        <td width="10%">帖子数</td>
+        <td width="25%">进入管理</td>
+    </tr>
+	{?section name=j loop=$forums[i]?}
+    <tr>
+        <td align="center" valign="middle" class="odd">{?$forums[i][j].icon?}</td>
+      <td valign="middle" class="even">
+		{?$forums[i][j].name?} [序号：{?$forums[i][j].order?}] </td>
+        <td align="center" valign="middle" class="odd">{?$forums[i][j].topics?}</td>
+        <td align="center" valign="middle" class="even">{?$forums[i][j].posts?}</td>
+        <td valign="middle" class="odd">{?$forums[i][j].manage?}</td>
+    </tr>
+	{?/section?}
+</table>
+<br />
+{?/section?}
+<br />
+<br />
+{?$forumcat_form?}
+<br />
+<br />
+{?$forum_form?}
+<br />
+<br />
+{?$union_form?}
+<br />
+<br />

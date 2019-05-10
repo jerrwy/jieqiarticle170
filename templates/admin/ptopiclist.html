@@ -1,0 +1,47 @@
+<form name="frmsearch" method="post" action="{?$jieqi_url?}/admin/ptopiclist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+      <td class="odd">
+        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="65%">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>
+            会客室主人 
+            <input type="radio" name="keytype" class="radio" value="1">
+            发表人 
+			<input type="radio" name="keytype" class="radio" value="2">
+            主题&nbsp;&nbsp;
+       <input type="submit" name="btnsearch" class="button" value="搜 索"></td>
+           <td width="35%" align="right">[<a href="{?$jieqi_url?}/ptopiclist.php?type=all">全部主题</a>]&nbsp;&nbsp;[<a href="{?$jieqi_url?}/ptopiclist.php?type=good">精华主题</a>]&nbsp;</td>
+         </tr>
+       </table></td>
+    </tr>
+</table>
+</form>
+<br />
+<form name="frmsearch" method="post" action="{?$jieqi_url?}/admin/ptopiclist.php">
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <td width="5%" class="title"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <td width="40%" class="title">主题</td>
+    <td width="11%" class="title">会客室主人</td>
+    <td width="11%" class="title">点击/回复</td>
+    <td width="11%" class="title">发表人</td>
+    <td width="16%" class="title">发表时间</td>
+	<td width="6%" class="title">操作</td>
+  </tr>
+  {?section name=i loop=$ptopicrows?}
+  <tr>
+  	<td class="even" align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$ptopicrows[i].topicid?}"></td>
+    <td class="odd">{?if $ptopicrows[i].istop == 1?}<span class="hottext">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hottext">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}" target="_blank">{?$ptopicrows[i].title?}</a></td>
+    <td class="even"><a href="{?$jieqi_url?}/ptopics.php?oid={?$ptopicrows[i].ownerid?}" target="_blank">{?$ptopicrows[i].ownername?}</a></td>
+    <td align="center" class="odd">{?$ptopicrows[i].views?}/{?$ptopicrows[i].replies?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'system':'user':$ptopicrows[i].posterid?}" target="_blank">{?$ptopicrows[i].poster?}</a></td>
+    <td align="center" class="odd">{?$ptopicrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+	<td align="center" class="even"><a href="javascript:if(confirm('确实要删除该主题么？')) document.location='{?$jieqi_url?}/admin/ptopiclist.php?action=del&tid={?$ptopicrows[i].topicid?}';">删除</a></td>
+  </tr>
+  {?/section?}
+</table>
+<div style="width:15%;float:left;text-align:left;padding:3px;"><input type="submit" name="Submit" value="批量删除" class="button"><input name="batchdel" type="hidden" value="1"></div>
+</form>
+<div style="width:84%;float:right;text-align:right;padding:3px;">{?$url_jumppage?}</div>

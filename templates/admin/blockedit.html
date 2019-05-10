@@ -1,0 +1,60 @@
+<html><head><title>文学系统</title>   <meta http-equiv="Content-Type" content="text/html; charset=gbk"> <meta name="keywords" content="杰奇"> <meta name="description" content=""> <meta name="author" content=""> <meta name="copyright" content=""> <meta name="generator" content="jieqi"> <link rel="stylesheet" type="text/css" media="all" href="blockedit_data/style.css"></head><body> <table align="center" cellspacing="0" width="100%"><tbody><tr><td> <div id="content"><br>
+<form name="blockedit" id="blockedit" action="?action=edited" method="post">
+<input name="id" id="id" value="{?$modules['bid']?}" type="hidden">
+<input name="file" id="file" value="{?$file?}" type="hidden">
+<input name="key" id="key" value="{?$key?}" type="hidden">
+<input name="modname" id="modname" value="{?$modules['module']?}" type="hidden">
+<input name="hasvars" id="modname" value="{?$row['vars']?}" type="hidden">
+<input name="filename" id="modname" value="{?$modules['filename']?}" type="hidden">
+<input name="classname" id="modname" value="{?$modules['classname']?}" type="hidden">
+<input name="contenttype" id="contenttype" value="{?$modules['contenttype']?}" type="hidden">
+<table class="grid" align="center" cellspacing="1" width="580"><caption>修改系统区块</caption><tbody>
+{?if $modules['filename']!=''?}
+<tr align="left" valign="middle"><td class="odd" width="25%">区块文件</td><td class="even">{?$modules['filename']?}.php</td></tr>
+{?/if?}
+{?if $modules['module']!=''?}
+<tr align="left" valign="middle"><td class="odd" width="25%">模块名称</td><td class="even">{?$modules['module']?}</td></tr>
+{?/if?}
+<tr align="left" valign="middle"><td class="odd" width="25%">区块名称</td><td class="even"><input class="text" name="blockname" id="blockname" size="30" maxlength="50" value="{?$modules['title']?}" type="text"></td></tr><tr align="left" valign="middle"><td class="odd" width="25%">显示位置</td><td class="even"><select class="select" size="1" name="side" id="side">
+<option value="0" {?if $modules['side']==0?}selected="selected"{?/if?}>左边</option>
+<option value="1" {?if $modules['side']==1?}selected="selected"{?/if?}>右边</option>
+<option value="2" {?if $modules['side']==2?}selected="selected"{?/if?}>中左</option>
+<option value="3" {?if $modules['side']==3?}selected="selected"{?/if?}>中右</option>
+<option value="4" {?if $modules['side']==4?}selected="selected"{?/if?}>中上</option>
+<option value="5" {?if $modules['side']==5?}selected="selected"{?/if?}>中中</option>
+<option value="6" {?if $modules['side']==6?}selected="selected"{?/if?}>中下</option>
+<option value="7" {?if $modules['side']==7?}selected="selected"{?/if?}>顶部</option>
+<option value="8" {?if $modules['side']==8?}selected="selected"{?/if?}>底部</option>
+</select></td></tr><tr align="left" valign="middle"><td class="odd" width="25%">是否显示</td><td class="even"><input class="radio" name="publish" value="0" {?if $modules['publish']==0?} checked="checked" {?/if?} type="radio">不显示
+<input class="radio" name="publish" value="1" {?if $modules['publish']==1?} checked="checked" {?/if?} type="radio">仅登录前显示
+<input class="radio" name="publish" value="2" {?if $modules['publish']==2?} checked="checked" {?/if?} type="radio">仅登录后显示
+<input class="radio" name="publish" value="3" {?if $modules['publish']==3?} checked="checked" {?/if?} type="radio">都显示
+</td></tr><tr align="left" valign="middle"><td class="odd" width="25%">内容类型</td><td class="even">{?$conenttype?}</td></tr><tr align="left" valign="middle"><td class="odd" width="25%">区块描述</td><td class="even">{?$row['introduce'] | nl2br?}</td></tr>
+
+{?if $modules['vars']!=''?}
+<tr align="left" valign="middle"><td class="odd" width="25%">区块参数</td><td class="even"><textarea class="textarea" name="blockvars" id="blockvars" rows="3" cols="60">{?$modules['vars']?}</textarea></td></tr>
+{?/if?}
+
+{?if $modules['template']!=''?}
+<tr align="left" valign="middle"><td class="odd" width="25%">模板文件名称</td><td class="even"><input class="text" name="blocktemplate" id="blocktemplate" size="30" maxlength="50" value="{?$modules['template']?}" type="text"></td></tr>
+{?/if?}
+
+{?if $content!=''?}
+<tr align="left" valign="middle">
+  <td class="odd" width="25%">静态html内容</td>
+  <td class="even"><textarea class="textarea" name="content" id="content" rows="3" cols="60">{?$content?}</textarea></td>
+</tr>
+{?/if?}
+
+<tr align="left" valign="middle">
+  <td class="odd" width="25%">清除该模块缓存文件</td>
+  <td class="even"><input name="decache" type="radio" value="1" checked>
+    是
+      <input type="radio" name="decache" value="0">
+      否</td>
+</tr>
+
+<tr align="left" valign="middle"><td class="odd" width="25%">&nbsp;</td>
+<td class="even"><input class="button" name="submit" id="submit" value="保存区块" type="submit"></td></tr></tbody></table></form>
+
+<br></div> </td></tr></tbody></table> </body></html>

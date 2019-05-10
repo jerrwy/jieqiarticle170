@@ -1,0 +1,24 @@
+<form action="{?$url_action?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>{?$boxname?}</caption>
+  <tr>
+    <th width="5%">{?$checkall?}</th>
+    <th width="20%">{?$usertitle?}</th>
+    <th width="55%">标题</th>
+    <th width="20%">日期</th>
+  </tr>
+{?section name=i loop=$messagerows?}
+  <tr>
+    <td class="odd" align="center">{?$messagerows[i].checkbox?}</td>
+    <td class="even">{?if $messagerows[i].userid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].userid?}" target="_blank">{?$messagerows[i].username?}</a>{?else?}<span class="hottext">网站管理员</span>{?/if?}</td>
+    <td class="odd"><a href="{?$jieqi_url?}/admin/messagedetail.php?id={?$messagerows[i].messageid?}">{?$messagerows[i].title?}</a></td>
+    <td class="even">{?$messagerows[i].postdate|date:"Y-m-d"?}</td>
+  </tr>
+{?/section?}
+  <tr>
+    <td colspan="4" class="foot">&nbsp;<input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">&nbsp;&nbsp;<input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">&nbsp;&nbsp;<input type="button" name="delcheck" value="删除选中记录" class="button" onclick="javascript:if(confirm('确实要删除选中记录么？')){ this.form.checkaction.value='1'; this.form.submit();}">&nbsp;&nbsp;<input type="button" name="delall" value="清空所有记录" class="button" onclick="javascript:if(confirm('确实要清空所有记录么？'))document.location='{?$url_delete?}'"><input name="checkaction" type="hidden" id="checkaction" value="0"></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

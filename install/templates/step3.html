@@ -1,0 +1,30 @@
+<div class="block-head">{?$step_menu3?}</div>
+<div class="block-title">{?$step_title?}</div>
+<div class="block-summary">{?$step_summary?}</div>
+<div class="block-content">
+	<table cellpadding="0" cellspacing="1">
+		<tr class="font-bold">
+			<td width="30%">名称</td>
+			<td width="30%">当前设置</td>
+			<td width="25%">推荐设置</td>
+			<td width="15%">检测结果</td>
+		</tr>
+		{?section name=i loop=$sysinfo_list?}
+		<tr>
+			<td>{?$sysinfo_list[i].name?}</td>
+			<td>{?$sysinfo_list[i].value?}</td>
+			<td>{?$sysinfo_list[i].advice?}</td>
+			<td>{?if $sysinfo_list[i].status == 1?}<span class="span-green">成功</span>
+			    {?else if $sysinfo_list[i].status == 2?}<span class="span-yellow">注意</span>
+				{?else?}<span class="span-red">失败</span>
+				{?/if?}
+			</td>
+		</tr>
+		{?/section?}
+	</table>
+</div>
+<div class="block-menu">
+	<input type="button" name="bt0" value="返回安装首页" class="button" onclick="window.location='./index.php';"><span class="span-space"></span>
+	<input type="button" name="bt1" value="重新测试" class="button" onclick="location.reload();">
+	<input type="button" name="bt2" value="下一步" class="button" onclick="window.location='{?$next_page?}';" {?if $check_status == 0?}disabled{?/if?}>
+</div>

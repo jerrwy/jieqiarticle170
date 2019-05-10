@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{?$jieqi_charset?}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>{?$jieqi_pagetitle?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/themes/{?$jieqi_theme?}/styleframe.css" />
+{?$jieqi_head?}
+</head>
+<body>
+<form name="framelogin" method="post" action="{?$jieqi_user_url?}/loginframe.php">
+<table width="95%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="middle" class="odd">用户名：
+    <input name="username" type="text" class="text" onkeypress="javascript: if (event.keyCode==32) return false;" value="{?$username?}" size="10" maxlength="30" /></td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd">密&nbsp; 码：
+      <input type="password" class="text" size="10" maxlength="30" name="password" /></td>
+  </tr>
+  {?if $show_checkcode == 1?}
+  <tr>
+    <td valign="middle" class="odd">
+	验证码：
+    <input type="text" class="text" size="4" maxlength="8" name="checkcode" />
+&nbsp;<img src="{?$url_checkcode?}" style="cursor:pointer;" onclick="this.src='{?$url_checkcode?}';" />
+	
+	</td>
+  </tr>
+  {?/if?}
+  <tr>
+    <td valign="middle" class="odd">有效期：<select name="usecookie" class="select">
+              <option value="0">浏览器进程</option>
+              <option value="86400">保存一天</option>
+			  <option value="2592000">保存一月</option>
+			  <option value="315360000">保存一年</option>
+            </select></td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd"><input type="hidden" name="action" value="login" /><input type="submit" class="button" value="登&nbsp;&nbsp;录" name="submit" /> </td>
+  </tr>
+  <tr>
+    <td valign="middle" class="odd"><a href="{?$jieqi_user_url?}/register.php" target="_top">用户注册</a> | <a href="{?$jieqi_url?}/getpass.php" target="_top">取回密码</a></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

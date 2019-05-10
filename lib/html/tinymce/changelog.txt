@@ -1,0 +1,22 @@
+TinyMCE Version: 3.2.1
+
+精简插件 
+save advhr advlink iespell insertdatetime print directionality fullscreen noneditable visualchars nonbreaking xhtmlxtras spellchecker compat2x example
+
+skin只保留default
+lang保留en和zh
+删除源码tiny_mce_src.js，保留压缩后的js，tiny_mce.js
+修改了 /themes/advanced/skins/default 下面的css，使字体符合中文习惯
+
+删除 plugins 里面插件的js原始代码 **_src.js ，只保留压缩后的代码
+
+修改 /themes/advanced/editor_template.js ,支持自定义插入图片的对话框地址
+url:tinymce.baseURL+'/themes/advanced/image.htm
+改成
+url : typeof tinyMCE.dialog_image_url == 'undefined' ? tinymce.baseURL + '/themes/advanced/image.htm' : tinyMCE.dialog_image_url
+调用的时候
+tinyMCE.dialog_image_url = "http://****/upimage.php";
+tinyMCE.init()
+
+
+2008-11-17

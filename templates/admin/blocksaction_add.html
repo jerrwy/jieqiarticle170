@@ -1,0 +1,111 @@
+<script language="javascript">
+<!--
+function createBlock(obj){
+   var title = obj.title.value;
+   var varcontent = obj.varcontent.value;
+   var side =  obj.side.value;
+   var bid = obj.bid.value;
+   var module = obj.module.value;
+   var filename = obj.filename.value;
+   var classname = obj.classname.value;
+   var vars = obj.vars.value;
+   var template = obj.template.value;
+   var contenttype = obj.contenttype.value;
+   var custom = obj.custom.value;
+   var publish = obj.publish.value;
+   var hasvars = obj.hasvars.value;
+   //alert(module+filename+classname+vars+template+contenttype+custom);
+   var blockKEY = document.sel.blockKEY.value;
+   blockKEY++;
+   document.sel.blockKEY.value = blockKEY;//return false;
+   
+   //创建弹出层的背景div
+   var Bdiv=document.createElement("div"); 
+   //设置背景div的id
+   Bdiv.id="block_title_"+blockKEY;
+   //设置title参数
+   Bdiv.title = varcontent;
+   //给背景div设置样式
+   Bdiv.className='block';
+   ///设置内容
+   Bdiv.innerHTML="<div class='blocktitle' id='block_subject_"+blockKEY+"'>"+title+"</div>";
+   Bdiv.innerHTML+="<div class='blockoperate'><a href='javascript:;' onclick='editBlock("+blockKEY+",this.parentNode.parentNode.parentNode.title);'>编辑</a>|<a href='javascript:;' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>删除</a>&nbsp;</div>";
+   Bdiv.innerHTML+="<div class='blockcontent'><div id='block_content_"+blockKEY+"'></div></div>";
+   var sidename = new Array();
+   sidename[0] = 'left';
+   sidename[1] = 'right';
+   sidename[2] = 'cleft';
+   sidename[3] = 'cright';
+   sidename[4] = 'centers';
+   sidename[5] = 'centers';
+   sidename[6] = 'centers';
+   sidename[7] = 'topc';
+   sidename[8] = 'bottomc';
+   var address = document.getElementById(sidename[side]);
+   if(address.childNodes.length>0){
+      if(side==5){
+	      address.insertBefore(Bdiv,$('csplit'));
+	  }else if(side==6){
+	      address.appendChild(Bdiv);
+	  }else{
+          address.insertBefore(Bdiv,address.childNodes[0]);  
+	  }
+   }else{
+      address.appendChild(Bdiv);
+   } 
+   Ajax.Update("/blockshow.php?bid="+bid+"&module="+module+"&filename="+filename+"&classname="+classname+"&vars="+vars+"&template="+template+"&contenttype="+contenttype+"&custom="+custom+"&publish="+publish+"&hasvars="+hasvars+"", {outid:"block_content_"+blockKEY, tipid:"block_content_"+blockKEY, onLoading:"正在载入..."});
+   drag_init();
+}
+//-->
+</script>
+<table  class="grid" width="500" align="center">
+  <caption>
+  区块文件列表[<a href="#">{?$modulename?}</a>]
+  </caption>
+  <tr align="center">
+    <th width="5%">序号</th>
+    <th width="14%">区块名</th>
+    <th width="10%">模块名</th>
+    <th width="7%">显示位置</th>
+    <!--<th width="7%">排序</th>-->
+    <th width="9%">显示类型</th>
+    <th width="14%">操作</th>
+  </tr>
+  {?section name=i loop=$blocks?}
+  <tr>
+    <td class="odd" align="center">{?$blocks[i].bid?}</td>
+    <td class="even" align="center">{?$blocks[i].blockname?}</td>
+    <td class="odd" align="center">{?$blocks[i].modnamer?}</td>
+    <td class="even" align="center"><form id="forblock{?$i['key']?}" name="forblock{?$i['key']?}">
+	<select class="select" size="1" name="side" id="side">
+		<option value="0" {?if $blocks[i].side=='0'?}selected{?/if?}>左边</option>
+		<option value="1" {?if $blocks[i].side=='1'?}selected{?/if?}>右边</option>
+		<option value="2" {?if $blocks[i].side=='2'?}selected{?/if?}>中左</option>
+		<option value="3" {?if $blocks[i].side=='3'?}selected{?/if?}>中右</option>
+		<option value="4" {?if $blocks[i].side=='4'?}selected{?/if?}>中上</option>
+		<option value="5" {?if $blocks[i].side=='5'?}selected{?/if?}>中中</option>
+		<option value="6" {?if $blocks[i].side=='6'?}selected{?/if?}>中下</option>
+		<option value="7" {?if $blocks[i].side=='7'?}selected{?/if?}>顶部</option>
+		<option value="8" {?if $blocks[i].side=='8'?}selected{?/if?}>底部</option>
+	</select>
+	<input type="hidden" name="title" value="{?$blocks[i].title?}">
+	<input type="hidden" name="varcontent" value="{?$blocks[i].var?}">
+	<input type="hidden" name="bid" value="{?$blocks[i].bid?}">
+	<input type="hidden" name="module" value="{?$blocks[i].modname?}">
+	<input type="hidden" name="filename" value="{?$blocks[i].filename?}">
+	
+	<input type="hidden" name="classname" value="{?$blocks[i].classname?}">
+	<input type="hidden" name="vars" value="{?$blocks[i].vars?}">
+	<input type="hidden" name="template" value="{?$blocks[i].template?}">
+	<input type="hidden" name="contenttype" value="{?$blocks[i].contenttype?}">
+	<input type="hidden" name="custom" value="{?$blocks[i].custom?}">
+	<input type="hidden" name="publish" value="{?$blocks[i].publish?}">
+	<input type="hidden" name="hasvars" value="{?$blocks[i].hasvars?}">
+	</form>
+	</td>
+   <!-- <td class="odd" align="center">{?$blocks[i].weight?}</td>-->
+    <td class="even" align="center">{?$blocks[i].publisher?}</td>
+    <td class="even" align="center"><input type="button" name='button{?$i['key']?}' value='添加区块' onclick="createBlock(document.forblock{?$i['key']?});"></td>
+  </tr>
+  {?/section?}
+</table>

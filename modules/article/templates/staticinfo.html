@@ -1,0 +1,125 @@
+<table width="96%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+      <tr align="center">
+        <td colspan="4">
+            <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="80%" align="center" valign="middle"><strong><font size="4">{?$articlename?}</font></strong></td>
+                    <td width="20%" align="right" valign="middle">[<a href="{?$url_manage?}">管理</a>]&nbsp; [<a href="{?$url_report?}">举报</a>]&nbsp; </td>
+                </tr>
+            </table></td>
+        </tr>
+      <tr>
+        <td width="25%">类&nbsp;&nbsp;&nbsp; 别：{?$sort?}</td>
+        <td width="25%">作&nbsp;&nbsp;&nbsp; 者：{?if $authorid > 0?}<a href="{?function jieqi_geturl:'system':'user':$authorid?}" target="_blank">{?$author?}</a>{?else?}{?$author?}{?/if?}</td>
+        <td width="25%">管 理 员：{?if $agentid > 0?}<a href="{?function jieqi_geturl:'system':'user':$agentid?}" target="_blank">{?$agent?}</a>{?else?}{?$agent?}{?/if?}</td>
+        <td width="25%">全文长度：{?$size_c?}字</td>
+      </tr>
+      <tr>
+        <td>最后更新：{?$lastupdate?}</td>
+        <td>文章状态：{?$fullflag?}</td>
+        <td>授权级别：{?$permission?}</td>
+        <td>首发状态：{?$firstflag?}</td>
+      </tr>
+      <tr>
+        <td>总点击数：{?$allvisit?}</td>
+        <td>本月点击：{?$monthvisit?}</td>
+        <td>本周点击：{?$weekvisit?}</td>
+        <td>收 藏 数：{?$goodnum?}</td>
+      </tr>
+      <tr>
+        <td>总推荐数：{?$allvote?}</td>
+        <td>本月推荐：{?$monthvote?}</td>
+        <td>本周推荐：{?$weekvote?}</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000" height="1"></td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+      <tr>
+        <td width="20%" align="center" valign="top"><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+          <tr>
+            <td align="center"><a href="{?$url_read?}">点击阅读</a></td>
+          </tr>
+          <tr>
+            <td align="center"><a href="{?$url_bookcase?}" target="_blank">加入书架</a></td>
+          </tr>
+          <tr>
+            <td align="center"><a href="{?$url_uservote?}" target="_blank">推荐本书</a></td>
+          </tr>
+          <tr>
+            <td align="center"><a href="{?$url_authorpage?}">作者专栏</a></td>
+          </tr>
+          <tr>
+            <td align="center"><a href="{?$url_download?}">打包下载</a></td>
+          </tr>
+        </table></td>
+        <td width="80%" valign="top">
+          {?if $hasimage == 1?}<a href="{?$url_limage?}" target="_blank"><img src="{?$url_simage?}" border="0" width="100" height="125" align="right" hspace="5" vspace="5" /></a>{?/if?}
+          <span class="hottext">最近章节：</span><a href="{?$url_lastchapter?}">{?$lastchapter?}</a><br /><br/>
+          <span class="hottext">内容简介：</span><br />{?$intro?}<br /><br />
+          <span class="hottext">本书公告：</span><br />{?$notice?}
+      </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td>{?if $isvip == 1?}
+      <table class="grid" width="100%" align="center">
+      <caption>相关电子书</caption>
+        <tr align="center">
+          <th width="59%">电子书名</th>
+          <th width="18%">发布时间</th>
+          <th width="12%">价格</th>
+          <th width="11%">订阅</th>
+        </tr>
+        {?section name=i loop=$ebookrows?}
+        <tr>
+          <td class="odd"><a href="{?$article_dynamic_url?}/modules/ebookshop/ebookinfo.php?id={?$ebookrows[i].ebookid?}" target="_blank">{?$ebookrows[i].ebookname?}{?if $ebookrows[i].ebookchapter != ""?}（{?$ebookrows[i].ebookchapter?}）{?/if?}</a></td>
+          <td align="center" class="odd">{?$ebookrows[i].postdate?}</td>
+          <td align="center" class="odd">{?$ebookrows[i].price?}</td>
+          <td align="center" class="odd"><a href="{?$ebookrows[i].url_buy?}" target="_blank">订阅</a></td>
+        </tr>
+        {?/section?}
+      </table>      {?/if?}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000" height="1"></td>
+  </tr>
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+        <tr>
+            <td align="center" class="title">[最新书评]&nbsp;&nbsp;&nbsp; [<a href="{?$url_goodreview?}" target="_blank">精华书评</a>]&nbsp;&nbsp;&nbsp; [<a href="{?$url_allreview?}" target="_blank">全部书评</a>] </td>
+        </tr>
+        <tr>
+            <td><script language="javascript" src="{?$articleid?}r.js"></script></td>
+        </tr>
+    </table></td>
+  </tr>
+  <tr>
+      <td><form name="frmreview" method="post" action="{?$jieqi_modules['article']['url']?}/staticreview.php?aid={?$articleid?}" target="_blank">
+          <table width="100%"  border="0" cellspacing="0" cellpadding="3">
+              <tr>
+                  <td>发表书评：</td>
+              </tr>
+              <tr>
+                  <td><textarea name="content" cols="60" rows="6" id="content" class="textarea"></textarea></td>
+              </tr>
+              <tr>
+                  <td><input type="submit" name="Submit" class="button" value=" 发表书评 "></td>
+              </tr>
+          </table>
+      </form></td>
+  </tr>
+</table>

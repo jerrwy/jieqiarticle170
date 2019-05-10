@@ -1,0 +1,14 @@
+<script language="javascript" src="js/jumpmenu.js"></script>
+<div class="block-head">{?$step_menu1?}</div>
+<div class="block-title">{?$step_title?}</div>
+<div class="block-summary">{?$step_summary?}</div>
+<div class="block-content">
+<select name="s1" onchange="MM_jumpMenu('self',this,0);">
+	<option value="{?$jump_url?}?charset=gbk"{?if $jieqi_charset != 'big5'?} selected{?/if?}>简体中文[gbk]</option>
+	<option value="{?$jump_url?}?charset=big5"{?if $jieqi_charset == 'big5'?} selected{?/if?}>繁体中文[big5]</option>
+</select>
+</div>
+<div class="block-menu">
+	<input type="button" name="bt0" value="返回安装首页" class="button" onclick="window.location='./index.php';"><span class="span-space"></span>
+	<input type="button" name="bt1" value="下一步" class="button" onclick="window.location='{?$next_page?}';">
+</div>

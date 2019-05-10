@@ -1,0 +1,35 @@
+<div style="padding:5px;">
+<div class="fl">论坛首页</a>{?$forumguide?}</div>
+<div class="fr"><a href="{?$url_search?}">论坛搜索</a></div>
+<div class="cb"></div>
+</div>
+
+{?section name=i loop=$forumcats?}
+<table class="grid" width="100%" align="center">
+<caption>{?$forumcats[i]?}</caption>
+    <tr align="center" class="head">
+        <td width="5%">&nbsp;</td>
+        <td width="40%">论坛</td>
+        <td width="9%">主题数</td>
+        <td width="9%">帖子数</td>
+        <td width="18%">最后发表</td>
+		<td width="19%">版主</td>
+    </tr>
+	{?section name=j loop=$forums[i]?}
+    <tr>
+        <td align="center" valign="middle" class="odd"><img src="{?$jieqi_modules['forum']['url']?}/images/nonew_big.gif" border="0" /></td>
+        <td valign="middle" class="even">
+		[ <a href="{?$jieqi_modules['forum']['url']?}/topiclist.php?fid={?$forums[i][j].forumid?}"><strong>{?$forums[i][j].forumname?}</strong></a> ]
+		<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;{?$forums[i][j].desc?}
+		</td>
+        <td align="center" valign="middle" class="odd">{?$forums[i][j].topics?}</td>
+        <td align="center" valign="middle" class="even">{?$forums[i][j].posts?}</td>
+        <td valign="middle" class="odd">{?if $forums[i][j].lasttime > 0?}{?$forums[i][j].lasttime|date:"Y-m-d H:i:s"?}<br />由 {?if $forums[i][j].lastuid > 0?}<a href="{?function jieqi_geturl:'system':'user':$forums[i][j].lastuid?}">{?$forums[i][j].lastuname?}</a>{?else?}<em>游客</em>{?/if?}发表{?/if?}</td>
+		<td valign="middle" class="even">{?section name=k loop=$forums[i][j]['masters']?}<a href="{?function jieqi_geturl:'system':'user':$forums[i][j]['masters'][k].uid?}">{?$forums[i][j]['masters'][k].uname?}</a> {?/section?}</td>
+    </tr>
+	{?/section?}
+</table>
+<br />
+{?/section?}
+

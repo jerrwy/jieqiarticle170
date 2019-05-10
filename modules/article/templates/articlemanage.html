@@ -1,0 +1,140 @@
+<style type="text/css">
+<!--
+ul.chaplist{
+	list-style: none;
+	clear: both;
+	text-align: left;
+	width: 100%;
+}
+
+li.chapter{
+	float: left;
+	width: 49%;
+	line-height: 150%;
+}
+
+li.volume{
+	width: 100%;
+	clear: both;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 150%;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+}
+
+ul.packflag{
+	list-style: none;
+	clear: both;
+	text-align: left;
+	width: 100%;
+}
+
+ul.packflag li{
+	float: left;
+	width: 49%;
+	line-height: 150%;
+}
+-->
+</style>
+
+<table class="grid" cellspacing="1" width="100%" align="center">
+<form name="chapterdel" id="chapterdel" action="{?$url_chaptersdel?}" method="post">
+ <caption>《{?$articlename?}》[<a href="{?$url_articleinfo?}" target="_blank">信息</a>] [<a href="{?$url_articleindex?}" target="_blank">阅读</a>]</caption>
+ <tr>
+   <td align="center" class="head">
+   [<a href="{?$article_static_url?}/newvolume.php?aid={?$articleid?}">新建分卷</a>] 
+   [<a href="{?$article_static_url?}/newchapter.php?aid={?$articleid?}">增加章节</a>] 
+   [<a href="{?$article_static_url?}/articleedit.php?id={?$articleid?}">编辑文章</a>] 
+   [<a href="javascript:if(confirm('确实要删除该文章么？')) document.location='{?$article_static_url?}/articledel.php?id={?$articleid?}';">删除文章</a>] 
+   [<a href="javascript:if(confirm('确实要清空（删除所有章节）该文章么？')) document.location='{?$article_static_url?}/articleclean.php?id={?$articleid?}';">清空文章</a>] 
+   [<a href="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}">管理书评</a>] 
+   {?if $articlevote > 0?}
+   [<a href="{?$article_static_url?}/votenew.php?aid={?$articleid?}">新建投票</a>] 
+   [<a href="{?$article_static_url?}/votearticle.php?id={?$articleid?}">管理投票</a>]
+   {?/if?}
+   </td>
+ </tr>
+ <tr>
+ <td class="odd">
+ <ul class="chaplist">
+ {?section name=i loop=$chapterrows?}
+ {?if $chapterrows[i].chaptertype == 0?}
+ <li class="chapter"><input type="checkbox" class="checkbox" name="chapterid[]" value="{?$chapterrows[i].chapterid?}" /><a href="{?$chapterrows[i].url_chapterread?}" target="_blank">{?$chapterrows[i].chaptername?}</a> <a href="{?$chapterrows[i].url_chapteredit?}">[编]</a> <a href="javascript:if(confirm('确实要删除该章节么？')) document.location='{?$chapterrows[i].url_chapterdelete?}';">[删]</a></li>
+ {?else?}
+ <li class="volume"><input type="checkbox" class="checkbox" name="chapterid[]" value="{?$chapterrows[i].chapterid?}" /><a href="{?$chapterrows[i].url_chapterread?}" target="_blank">{?$chapterrows[i].chaptername?}</a> <a href="{?$chapterrows[i].url_chapteredit?}">[编]</a> <a href="javascript:if(confirm('确实要删除该分卷么？')) document.location='{?$chapterrows[i].url_chapterdelete?}';">[删]</a></li>
+ {?/if?}
+ {?/section?}
+ </ul>
+ </td>
+ </tr>
+ <tr>
+   <td class="foot">
+   <input type="hidden" name="articleid" id="articleid" value="{?$articleid?}" />
+   <input type="button" name="allcheck" value="选择全部章节" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">&nbsp;&nbsp;<input type="button" name="nocheck" value="取消全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">&nbsp;&nbsp;<input type="button" name="delcheck" value="批量删除章节" class="button" onclick="javascript:if(confirm('确实要批量删除章节么？')){this.form.submit();}">
+   </td>
+ </tr>
+</form>
+</table>
+
+<br />
+<table width="100%" class="grid" cellspacing="1" align="center">
+<form name="chaptersort" id="chaptersort" action="{?$url_chaptersort?}" method="post">
+<caption>章节排序</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">选择章节或分卷</td>
+  <td class="even">
+  <select class="select"  size="1" name="fromid" id="fromid">
+  {?section name=i loop=$chapterrows?}
+  {?if $chapterrows[i].chaptertype == 0?}
+  <option value="{?$chapterrows[i].chapterorder?}">|-{?$chapterrows[i].chaptername?}</option>
+  {?else?}
+  <option value="{?$chapterrows[i].chapterorder?}">{?$chapterrows[i].chaptername?}</option>
+  {?/if?}
+  {?/section?}
+  </select>
+  </td>
+</tr>
+  <tr valign="middle" align="left"><td class="odd" width="25%">移动到</td>
+  <td class="even">
+  <select class="select"  size="1" name="toid" id="toid">
+  <option value="0">--最前面--</option>
+  {?section name=i loop=$chapterrows?}
+  {?if $chapterrows[i].chaptertype == 0?}
+  <option value="{?$chapterrows[i].chapterorder?}">|-{?$chapterrows[i].chaptername?}</option>
+  {?else?}
+  <option value="{?$chapterrows[i].chapterorder?}">{?$chapterrows[i].chaptername?}</option>
+  {?/if?}
+  {?/section?}
+  </select>
+  <span class="hottext">之后</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even"><input type="submit" class="button" name="submit_sort"  id="submit_sort" value="确 定" /><input type="hidden" name="aid" id="aid" value="{?$articleid?}" /></td>
+</tr>
+</form>
+</table>
+<br/>
+
+<table width="100%" class="grid" cellspacing="1" align="center">
+<form name="repack" id="repack" action="{?$url_repack?}" method="post">
+<caption>重新生成</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">生成选项</td>
+  <td class="even">
+  <ul class="packflag">
+  {?section name=i loop=$packflag?}
+  <li><input type="checkbox" class="checkbox" name="packflag[]" value="{?$packflag[i].value?}" />{?$packflag[i].title?} </li>
+  {?/section?}
+  </ul>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;</td>
+  <td class="even"><input type="submit" class="button" name="submit_repack" id="submit_repack" value="确 定" /><input type="hidden" name="id" id="id" value="{?$articleid?}" /></td>
+</tr>
+</form>
+</table>

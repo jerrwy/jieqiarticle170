@@ -1,0 +1,7 @@
+<ul class="ulmul">
+{?section name=i loop=$articlerows?}
+<li style="float:left;width:24.99%;text-align:center;line-height:200%;">
+<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img src="{?$articlerows[i].url_image?}" style="border:1px solid gray;width:85px;height:100px;"></a><br /><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a>
+</li>
+{?/section?}
+</ul>

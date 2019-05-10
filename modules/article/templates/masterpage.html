@@ -1,0 +1,36 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<form action="{?$url_article?}" method="post" name="checkform" id="checkform">
+<div class="gridtop">{?$articletitle?} [<a href="{?$jieqi_modules['article']['url']?}/masterpage.php">全部文章</a>] [<a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=author">原创文章</a>] [<a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=poster">转载文章</a>] [<a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=agent">代管文章</a>]</div>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="17%">文章名称</th>
+    <th width="25%">最新章节</th>
+    <th width="11%">作者</th>
+    <th width="11%">发表者</th>
+    <th width="11%">代管人</th>
+    <th width="9%">更新</th>
+	<th width="9%">收藏</th>
+    <th width="9%">操作</th>
+  </tr>
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td class="even"><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></td>
+    <td class="odd"><a href="{?$articlerows[i].url_articleindex?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a></td>
+    <td class="even">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td class="odd" align="center"><a href="{?function jieqi_geturl:'system':'user':$articlerows[i].posterid?}" target="_blank">{?$articlerows[i].poster?}</a></td>
+    <td class="even" align="center">{?if $articlerows[i].agentid == 0?}{?$articlerows[i].agent?}{?else?}<a href="{?function jieqi_geturl:'system':'user':$articlerows[i].agentid?}" target="_blank">{?$articlerows[i].agent?}</a>{?/if?}</td>
+    <td class="even" align="center">{?$articlerows[i].lastupdate?}</td>
+	<td class="odd" align="center">{?$articlerows[i].goodnum?}</td>
+    <td class="even" align="center"><a href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}" target="_blank">管理</a></td>
+  </tr>
+  {?/section?}
+</table>
+</form>
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+  <tr>
+    <td width="12%" align="right"></td>
+    <td width="88%" align="right">{?$url_jumppage?}</td>
+  </tr>
+</table>
+

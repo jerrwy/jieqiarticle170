@@ -1,0 +1,34 @@
+<table class="grid" width="100%" align="center">
+    <caption>配置说明</caption>
+    <tr>
+        <td class="odd">
+		<ul>
+		<li>采集网站列表的配置文件为：configs/article/collectsite.php</li>
+		<li>某个网站的采集规则配置文件为：configs/article/site_网站英文标识.php</li>
+		<li>网站英文标识不可以重复</li>
+		</ul>
+		</td>
+    </tr>
+</table>
+
+<br />
+<div class="gridtop">采集规则配置 | <a href="{?$article_static_url?}/admin/collectnew.php">添加新的采集规则</a></div>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="40%">网站名称</th>
+    <th width="20%">网站英文标识</th>
+    <th width="20%">单篇采集规则</th>
+    <th width="20%">批量采集规则</th>
+  </tr>
+  {?section name=i loop=$siterows?}
+  <tr>
+    <td class="odd" align="center"><a href="{?$siterows[i].url?}" target="_blank">{?$siterows[i].name?}</a></td>
+    <td align="center" class="even">{?$siterows[i].config?}</td>
+    <td align="center" class="odd"><a href="{?$article_static_url?}/admin/collectedit.php?config={?$siterows[i].config?}">编辑</a> | <a href="javascript:if(confirm('确实要删除该采集规则么？')) document.location='{?$article_static_url?}/admin/collectset.php?action=del&config={?$siterows[i].config?}'">删除</a></td>
+    <td align="center" class="odd"><a href="{?$article_static_url?}/admin/collectpage.php?config={?$siterows[i].config?}">进入管理</a></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="4" align="right" class="even"><a href="{?$article_static_url?}/admin/collectnew.php">添加新的采集规则</a>&nbsp;</td>
+  </tr>
+</table>

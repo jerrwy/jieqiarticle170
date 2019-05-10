@@ -1,0 +1,6 @@
+<ul class="ulmul" style="width:100%">
+{?section name=i loop=$articlerows?}
+<li class="fl lm" style="width:70%;">[{?$articlerows[i].sort?}] ¡¶<a class="poptext" href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a>¡· <a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastchapter?}</a></li><li class="fr tr" style="width:30%;">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a class="notetext" href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?} ({?$articlerows[i].update?})</li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$url_more?}">¸ü¶à...</a></div> 

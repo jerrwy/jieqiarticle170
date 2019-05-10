@@ -1,0 +1,47 @@
+<form name="frmsearch" method="post" action="{?$url_chapter?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="odd">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>
+            文章名称
+			<input type="radio" name="keytype" class="radio" value="1">
+            发表者 &nbsp;&nbsp;
+            <input type="submit" name="btnsearch" class="button" value="搜 索">
+            &nbsp;&nbsp;&nbsp; <a href="{?$url_chapter?}">显示全部章节</a></td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$url_article?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>{?$articletitle?}</caption>
+  <tr align="center">
+    <th width="5%">{?$checkall?}</th>
+    <th width="18%">文章名称</th>
+    <th width="28%">章节名称</th>
+    <th width="11%">发表者</th>
+    <th width="11%">字数</th>
+    <th width="17%">更新</th>
+    <th width="10%">类型</th>
+  </tr>
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td class="odd" align="center">{?$articlerows[i].checkbox?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'article':'article':$articlerows[i].articleid:'info'?}" target="_blank">{?$articlerows[i].articlename?}</a></td>
+    <td class="odd">{?if $articlerows[i].chaptertype == 0?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].chaptername?}</a>{?else?}{?$articlerows[i].chaptername?}{?/if?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'system':'user':$articlerows[i].posterid?}" target="_blank">{?$articlerows[i].poster?}</a></td>
+    <td class="odd" align="center">{?$articlerows[i].size_k?}K</td>
+    <td class="even" align="center">{?$articlerows[i].lastupdate?}</td>
+    <td class="odd" align="center">{?$articlerows[i].typename?}</td>
+  </tr>
+  {?/section?}
+</table>
+</form>
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+  <tr>
+    <td width="12%" align="right"><!--<input type="submit" name="Submit" value="批量删除" class="button">
+                <input name="batchdel" type="hidden" value="1">--></td>
+    <td width="88%" align="right">{?$url_jumppage?}</td>
+  </tr>
+</table>
+

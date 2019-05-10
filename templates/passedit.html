@@ -1,0 +1,48 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<script language="javascript" type="text/javascript">
+<!--
+function frmpassedit_validate(){
+  if (document.frmpassedit.oldpass.value == ""){
+    alert( "请输入原密码！" );
+	document.frmpassedit.oldpass.focus();
+	return false;
+  }
+  if(document.frmpassedit.newpass.value == ""){
+    alert( "请输入新密码！" );
+	document.frmpassedit.newpass.focus();
+	return false;
+  }
+  if (document.frmpassedit.repass.value != document.frmpassedit.newpass.value){
+    alert( "两次新密码输入不同，请重新输入！" );
+	document.frmpassedit.repass.focus();
+	return false;
+  }
+}
+//-->
+</script>
+<form name="frmpassedit" id="frmpassedit" action="{?$url_passedit?}" method="post" onsubmit="return frmpassedit_validate();">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>用户密码修改</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">用户名</td>
+  <td class="even">{?$jieqi_username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">原密码</td>
+  <td class="even"><input type="password" class="text" name="oldpass" id="oldpass" size="25" maxlength="20" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">新密码</td>
+  <td class="even"><input type="password" class="text" name="newpass" id="newpass" size="25" maxlength="20" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">重复新密码</td>
+  <td class="even"><input type="password" class="text" name="repass" id="repass" size="25" maxlength="20" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="update" /></td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="保 存" /></td>
+</tr>
+</table>
+</form>

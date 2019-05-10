@@ -1,0 +1,87 @@
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><table width="100%"  border="0" cellspacing="2" cellpadding="3">
+            <tr>
+                <td width="40%" align="left"><a href="{?$url_articleinfo?}">《{?$articlename?}》</a> 书评回复</td>
+                <td width="60%" align="right">[<a href="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}&type=all">全部书评</a>] &nbsp;&nbsp; [<a href="{?$article_dynamic_url?}/reviews.php?aid={?$articleid?}&type=good">精华书评</a>]</td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+<table class="grid" width="100%" align="center">
+    <tr><th><strong>主题：{?$title?}</strong></td></tr>
+</table>
+{?section name=i loop=$replyrows?}
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td width="20%" valign="top" class="odd">
+		<div style="padding:5px 0px 5px 15px;line-height:150%;">
+		{?if $replyrows[i].userid > 0?}
+			<img src="{?function jieqi_geturl:'system':'avatar':$replyrows[i].userid:'l':$replyrows[i].avatar?}" class="avatar" alt="头像"><br />
+			<strong><a href="{?function jieqi_geturl:'system':'user':$replyrows[i].userid?}" target="_blank">{?$replyrows[i].username?}</a></strong><br />
+  			{?if $jieqi_modules['badge']['publish'] > 0?}
+  				{?if $replyrows[i].groupurl != ""?}<img src="{?$replyrows[i].groupurl?}" border="0" title="{?$replyrows[i].groupname?}"><br />{?/if?}
+				{?if $replyrows[i].honorurl != ""?}<img src="{?$replyrows[i].honorurl?}" border="0" title="{?$replyrows[i].honor?}"><br />{?/if?}
+  				{?section name=j loop=$replyrows[$i['key']]['badgerows']?}
+				<img src="{?$replyrows[$i['key']]['badgerows'][$j['key']]['imageurl']?}" border="0" title="{?$replyrows[$i['key']]['badgerows'][$j['key']]['caption']?}">
+				{?/section?}
+				{?if $replyrows[$i['key']]['badgerows']|count > 0?}<br />{?/if?}
+			{?else?}
+				{?$replyrows[i].groupname?}<br />
+				{?$replyrows[i].honor?}<br />
+  			{?/if?}
+			加入日期：{?$replyrows[i].regdate|date:"Y-m-d"?}<br />
+			经　　验：{?$replyrows[i].experience?}<br />
+			积　　分：{?$replyrows[i].score?}<br /><br />
+			<a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$replyrows[i].useruname|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends{?$i['order']?}" href="javascript:;" onclick="Ajax.Tip(event, '{?$jieqi_url?}/addfriends.php?id={?$replyrows[i].userid?}', 3000);">加为好友</a><br />
+			<a href="{?function jieqi_geturl:'system':'user':$replyrows[i].userid?}" target="_blank">查看资料</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$replyrows[i].userid?}" target="_blank">会 客 室</a>
+		{?else?}
+			<strong>游客</strong><br /><br /><br /><br /><br />
+		{?/if?}
+		</div>
+		</td>
+        <td width="80%" valign="top" align="right" class="even">
+		<div style="width:60%;float:left;text-align:left;"><strong>{?$replyrows[i].subject?}</strong></div>
+		<div style="width:39%;float:right;text-align:right;">{?$replyrows[i].posttime|date:"Y-m-d H:i:s"?}
+		{?if $jieqi_userid == $replyrows[i].posterid || $jieqi_userstatus == 2?} | <a href="{?$jieqi_modules['article']['url']?}/reviewedit.php?yid={?$replyrows[i].postid?}">编辑</a>{?/if?}
+		{?if $ismaster == 1?} | {?if $replyrows[i].istopic == 1?}<a href="javascript:if(confirm('确实要删除该书评么？')) document.location='{?$jieqi_modules['article']['url']?}/reviews.php?action=del&aid={?$articleid?}&rid={?$topicid?}';">删除</a>{?else?}<a href="javascript:if(confirm('确实要删除该回复么？')) document.location='{?$jieqi_modules['article']['url']?}/reviewshow.php?action=del&aid={?$articleid?}&rid={?$topicid?}&did={?$replyrows[i].postid?}';">删除</a>{?/if?}{?/if?}
+		 | <a href="#yid{?$replyrows[i].postid?}" name="yid{?$replyrows[i].postid?}">{?$replyrows[i].order?}#</a>&nbsp;
+		</div>
+		<hr />
+		<div style="width:100%;text-align:left;">{?$replyrows[i].posttext?}</div></td>
+    </tr>
+</table>
+{?/section?}
+
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+    <tr>
+        <td align="right">{?$url_jumppage?}</td>
+    </tr>
+</table>
+{?if $enablepost == 1?}
+<form name="frmreview" method="post" action="{?$article_dynamic_url?}/reviewshow.php?rid={?$topicid?}&aid={?$articleid?}">
+<table class="grid" width="100%" align="center">
+  <caption>发表书评：</caption>
+  <tr>
+    <td class="odd" width="25%">标题</td>
+    <td class="even"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="" /></td>
+  </tr>
+  <tr>
+    <td class="odd" width="25%">内容</td>
+    <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" cols="60" rows="12"></textarea>
+    <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+    </td>
+  </tr>
+{?if $postcheckcode > 0?}
+<tr>
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+  <tr>
+    <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newpost" /></td>
+    <td class="even"><input type="submit" name="Submit" class="button" value=" 发表书评 "></td>
+  </tr>
+</table>
+</form>
+{?/if?}

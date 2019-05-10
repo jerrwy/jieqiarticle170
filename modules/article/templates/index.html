@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$article_title?}-{?$sortname?}-{?$jieqi_sitename?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" href="{?$jieqi_local_url?}/configs/article/page.css" type="text/css" media="all"  />
+<script type="text/javascript">
+<!--
+var preview_page = "{?$preview_page?}";
+var next_page = "{?$next_page?}";
+var index_page = "{?$index_page?}";
+var article_id = "{?$article_id?}";
+var chapter_id = "{?$chapter_id?}";
+
+function jumpPage() {
+  if (event.keyCode==37) location=preview_page;
+  if (event.keyCode==39) location=next_page;
+  if (event.keyCode==13) location=index_page;
+}
+document.onkeydown=jumpPage;
+-->
+</script>
+</head>
+<body bgcolor="#f6f6f6">
+<div id="adtop"><script type="text/javascript" src="{?$jieqi_local_url?}/configs/article/indextop.js"></script></div>
+<div id="headlink">
+<div id="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a>-&gt;<a href="{?$url_bookroom?}">书库首页</a>-&gt;<a href="{?$url_articleinfo?}">{?$article_title?}</a></div>
+<div id="linkright"><a href="{?$dynamic_url?}/addbookcase.php?bid={?$articleid?}" target="_blank">加入书架</a> | <a href="{?$dynamic_url?}/uservote.php?id={?$articleid?}" target="_blank">推荐本书</a> | <a href="{?$url_articleinfo?}">返回书页</a></div>
+</div>
+<div id="title">{?$article_title?}</div>
+<div id="info">作者：{?$author?}</div>
+<table border="0" align="center" cellpadding="3" cellspacing="1" class="acss">
+  {?section name=i loop=$indexrows?}
+  {?if $indexrows[i].ctype == "volume"?}
+  <tr>
+    <td colspan="4" class="vcss">
+	{?if $indexrows[i].vname == ""?}
+    &nbsp;   
+    {?else?}
+    {?$indexrows[i].vname?}
+    {?/if?}
+	[<a href="{?$static_url?}/showvolume.php?aid={?$articleid?}&vid={?$indexrows[i].vid?}">分卷阅读</a>]
+	</td>
+  </tr>
+  {?else?}
+  <tr>
+    <td class="ccss">
+	{?if $indexrows[i].cname1 == ""?}
+    &nbsp;   
+    {?else?}
+    <a href="{?$indexrows[i].curl1?}">{?$indexrows[i].cname1?}</a>
+    {?/if?}
+	</td>
+    <td class="ccss">
+	{?if $indexrows[i].cname2 == ""?}
+    &nbsp;   
+    {?else?}
+    <a href="{?$indexrows[i].curl2?}">{?$indexrows[i].cname2?}</a>
+    {?/if?}
+    </td>
+    <td class="ccss">
+	{?if $indexrows[i].cname3 == ""?}
+    &nbsp;   
+    {?else?}
+    <a href="{?$indexrows[i].curl3?}">{?$indexrows[i].cname3?}</a>
+    {?/if?}
+    </td>
+	<td class="ccss">
+	{?if $indexrows[i].cname4 == ""?}
+    &nbsp;   
+    {?else?}
+    <a href="{?$indexrows[i].curl4?}">{?$indexrows[i].cname4?}</a>
+    {?/if?}
+    </td>
+  </tr>
+  {?/if?}
+  {?/section?}
+</table>
+<div id="adbottom"><script type="text/javascript" src="{?$jieqi_local_url?}/configs/article/indexbottom.js"></script></div>
+</body>
+</html>

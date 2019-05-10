@@ -1,0 +1,23 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<table class="grid" width="100%" align="center">
+<caption>我的好友（最多好友数：{?$maxfriends?}，现有好友数：{?$nowfriends?}）</caption>
+  <tr align="center">
+    <th width="25%">好友名称</th>
+    <th width="15%">加入日期</th>
+    <th width="15%">用户信息</th>
+    <th width="15%">发短消息</th>
+    <th width="15%">好友会客室</th>
+    <th width="15%">删除好友</th>
+  </tr>
+{?section name=i loop=$friendsrows?}
+  <tr>
+    <td class="odd">{?$friendsrows[i].yourname?}</td>
+    <td align="center" class="even">{?$friendsrows[i].adddate?}</td>
+    <td align="center" class="odd">[<a href="{?function jieqi_geturl:'system':'user':$friendsrows[i].yourid?}" target="_blank">查看信息</a>]</td>
+    <td align="center" class="odd">[<a href="{?$jieqi_url?}/newmessage.php?receiver={?$friendsrows[i].yourname|urlencode?}" target="_blank">写新消息</a>]</td>
+    <td align="center" class="even">[<a href="{?$jieqi_url?}/ptopics.php?oid={?$friendsrows[i].yourid?}" target="_blank">好友会客室</a>]</td>
+    <td align="center" class="even">[<a href="javascript:if(confirm('确实要删除该好友么？'))document.location='{?$jieqi_url?}/myfriends.php?delid={?$friendsrows[i].yourid?}'">删除好友</a>]</td>
+  </tr>
+{?/section?}</table>
+<div class="pages">{?$url_jumppage?}</div>

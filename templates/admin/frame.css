@@ -1,0 +1,299 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	padding-right: 0px;
+	overflow-y: visible;
+	padding-left: 0px;
+	font-size: 12px;
+	padding-bottom: 0px;
+	margin: 0px;
+	color: #000000;
+	padding-top: 0px;
+	font-family: 宋体, 新细明体, verdana, arial, sans-serif;
+	text-align: center;
+	background-color: #ffffff;
+	background-image: url("images/b_bg.gif");
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+img{
+	border:none;
+}
+	
+table{
+	text-align: left;
+}
+
+table td{
+	font-size: 12px; 
+	font-family: 宋体, 新细明体, verdana, arial, sans-serif;
+}
+
+div{
+	text-align: left;
+}
+
+a{
+	color: #258eca;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #ff6600;
+}
+
+#tops{
+	height:39px;
+	margin-top:10px;
+}
+
+#logo{
+	float:left;
+	width:153px;
+	height:39px;
+	margin-top:10px;
+	margin-left:10px;
+}
+	
+#banben{
+	width:auto;
+	float:right;
+	margin-right:15px;
+}
+	
+#banben a{
+	display:block;
+	float:left;
+	text-align:right;
+	line-height:21px;
+	margin-left:10px;
+	margin-top:15px;
+	white-space: nowrap;  
+}
+	
+#top_nav{
+	height:34px;
+	float:left;
+	padding-left:20px;
+	margin-top:5px;
+}
+	
+ #nav_bg_l{
+	height:34px;
+	width:5px;
+	float:left;
+	line-height:normal;
+	font-size:0px;
+	background-image: url("images/nav_bg_l.gif");
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+ 
+#nav_bg_r{
+	height:34px;
+	width:5px;
+	float:left;
+	line-height:normal;
+	font-size:0px;
+	background-color: #e4e4e4;
+	background-image: url("images/nav_bg_r.gif");
+	background-repeat: no-repeat;
+	background-position:left top;
+}
+ 
+#admintop {
+	font-weight: bold;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+#topleft {
+	vertical-align: middle; 
+	width: 195px
+}
+
+#topright {
+	vertical-align: bottom;
+}
+
+#topsplit{
+	border-top: 1px solid #c6c6c6;
+}
+
+#nav_left{
+	text-align:left;
+	padding-left:20px;
+	float: left;
+	color: #258eca;
+}
+
+#nav_right{
+	text-align:right;
+	padding-right:15px;
+	float: right;
+}
+
+#adminframe {
+	
+}
+
+#adminleft {
+	width: 180px;
+}
+
+#adminmiddle {
+	font-size: 12px; 
+	width: 10px; 
+	cursor: hand; 
+	color: #258eca; 
+	font-family: webdings;
+	background: #f1f1f1;
+	vertical-align: middle; 
+}
+
+#adminright {
+	margin:0px; 
+	padding:0px;
+}
+
+#leftframe{
+  width: 180px;
+  height: 100%;
+  visibility: inherit;
+  z-index: 2;
+}
+
+#mainframe {
+	z-index: 1; 
+	visibility: inherit; 
+	width: 100%; 
+	height: 100%;
+	margin-top:0px
+}
+
+#admin_menu {
+	width:474px;
+	height:34px;
+	float:left;
+	list-style:none;
+	background-color: #e4e4e4;
+}
+
+#admin_menu li.l_ts{
+	margin-top:9px;
+}
+	
+#admin_menu a {
+	display:block;
+	width: 90px; 
+	height: 24px; 
+	text-align: center;
+}
+
+#admin_menu a:link {
+	color: #fff;
+	text-decoration:none;
+}
+
+#admin_menu a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#admin_menu a:hover {
+	color: #ffffff; 
+	text-decoration: none;
+}
+#admin_menu li {
+	width:90px;
+	height:24px;
+	line-height:24px;
+	font-weight:bold;
+	font-size:14px;
+	float: left;
+	margin: 0 2px;
+	background-color: #f0f7ff;
+}
+
+#admin_menu li ul.l_tu{
+}
+	
+#admin_menu li ul.l_tu li{
+	margin:0;
+	padding:0;
+}
+#admin_menu li a{
+	background-image: url("images/m_bg_h.gif");
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+#admin_menu li a:hover {
+	background-image: url("images/m_bg.gif");
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+#admin_menu li ul {
+	padding-right: 0px;
+	padding-left: 0px;
+	left: -999em;
+	width: 90px;
+	line-height: 20px;
+	list-style-type:none;
+	position: absolute;
+	text-align:left;
+	border: 1px solid #1c79a9;
+}
+
+#admin_menu li ul li {
+	width:90px;
+	float: left;
+	font-weight:normal;
+	font-size:12px;
+	background-color: #f6f6f6;
+	background-image: none;
+}
+
+#admin_menu li ul li a {
+	display:block;
+	width:90px;
+	color: #258eca;
+	text-align:center;
+	background-image: none;
+	margin:0;
+	padding:0;
+}
+
+#admin_menu li ul a:link {
+	color: #258eca;
+	text-decoration:none;
+	background-image: none;
+}
+
+#admin_menu li ul a:visited {
+	color: #258eca; 
+	text-decoration: none;
+}
+
+#admin_menu li ul a:hover {
+	font-weight: normal;
+	color: #ffffff;
+	text-decoration:none;
+	text-decoration:none;
+	background-color: #258eca;
+	background-image: none;
+}
+
+#admin_menu li:hover ul {
+	left: auto;
+}
+
+#admin_menu li.sfhover ul {
+	left: auto;
+}

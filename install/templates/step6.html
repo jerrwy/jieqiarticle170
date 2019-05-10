@@ -1,0 +1,15 @@
+<div class="block-head">{?$step_menu6?}</div>
+<div class="block-title">{?$step_title?}</div>
+<div class="block-summary">{?$step_summary?}</div>
+<div class="block-content">
+	{?if $link_status == true?}
+	<span class="span-green">{?$step_content?}</span>
+	{?else?}
+	<span class="span-red">{?$step_content?}</span>
+	{?/if?}
+</div>
+<div class="block-menu">
+	<input type="button" name="bt0" value="返回安装首页" class="button" onclick="window.location='./index.php';"><span class="span-space"></span>	
+	<input type="button" name="bt1" value="重新配置" class="button" onclick="history.go(-1);">
+	<input type="button" name="bt2" value="下一步" class="button" onclick="window.location='{?$next_page?}';" {?if $link_status == 0?}disabled{?/if?}>
+</div>

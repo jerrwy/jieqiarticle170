@@ -1,0 +1,51 @@
+<form name="frmsearch" method="post" action="{?$url_article?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="odd">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>文章名称
+            <input type="radio" name="keytype" class="radio" value="1">作者 
+			<input type="radio" name="keytype" class="radio" value="2">发表者 
+            <input type="submit" name="btnsearch" class="button" value="搜 索">
+            &nbsp;&nbsp;<a href="{?$article_dynamic_url?}/admin/articleper.php">全部文章</a>
+			{?section name=i loop=$articlepers?}
+			 | <a href="{?$article_dynamic_url?}/admin/articleper.php?permission={?$i['key']?}">{?$i['value']?}</a>
+			{?/section?}        
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$url_batchdel?}" method="post" name="checkform" id="checkform" onSubmit="javascript:if(confirm('确实要批量删除文章么？')) return true; else return false;">
+<table class="grid" width="100%" align="center">
+<caption>文章授权设置</caption>
+  <tr align="center">
+    <th width="4%">&nbsp;</th>
+    <th width="14%">文章名称</th>
+    <th width="10%">作者</th>
+    <th width="10%">发表者</th>
+    <th width="8%">更新</th>
+	<th width="14%">授权状态</th>
+    <th width="40%">授权设置</th>
+  </tr>
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td class="odd" align="center">{?$articlerows[i].checkbox?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'article':'article':$articlerows[i].articleid:'info'?}" target="_blank">{?$articlerows[i].articlename?}</a></td>
+    <td class="odd">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$article_dynamic_url?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td class="even" align="center"><a href="{?function jieqi_geturl:'system':'user':$articlerows[i].posterid?}" target="_blank">{?$articlerows[i].poster?}</a></td>
+    <td class="odd" align="center">{?$articlerows[i].lastupdate|date:m-d?}</td>
+	<td class="even" align="center">{?$articlerows[i].permission?}</td>
+    <td class="odd" align="center">
+	{?section name=j loop=$articlepers?}
+	{?if $articlerows[i].permission == $j['value']?}{?$j['value']?}{?else?}<a href="{?$article_dynamic_url?}/admin/articleper.php?action=setper&id={?$articlerows[i].articleid?}&per={?$j['key']?}">{?$j['value']?}</a>{?/if?} 
+	{?/section?}
+  </td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td width="5%" class="odd" align="center">{?$checkall?}</td>
+    <td colspan="6" align="left" class="odd"><input type="submit" name="Submit" value="批量删除" class="button"><input name="batchdel" type="hidden" value="1"><input name="url_jump" type="hidden" value="{?$url_jump?}"><strong></strong></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

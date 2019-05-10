@@ -1,0 +1,60 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+<table width="100%"  border="0" cellspacing="2" cellpadding="0">
+  <tr align="center" valign="middle">
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'1'?}">[0]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'A'?}">[A]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'B'?}">[B]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'C'?}">[C]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'D'?}">[D]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'E'?}">[E]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'F'?}">[F]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'G'?}">[G]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'H'?}">[H]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'I'?}">[I]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'J'?}">[J]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'K'?}">[K]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'L'?}">[L]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'M'?}">[M]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'N'?}">[N]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'O'?}">[O]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'P'?}">[P]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'Q'?}">[Q]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'R'?}">[R]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'S'?}">[S]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'T'?}">[T]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'U'?}">[U]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'V'?}">[V]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'W'?}">[W]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'X'?}">[X]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'Y'?}">[Y]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'Z'?}">[Z]</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'initial':1:'0'?}">[#]</a></td>
+  </tr>
+</table>
+<table class="grid" width="100%" align="center">
+<caption>
+文章列表
+{?if $sort != ""?} - {?$sort?}{?/if?}
+{?if $initial != ""?} - {?$initial?}{?/if?}
+</caption>
+  <tr align="center">
+    <th width="20%">文章名称</th>
+    <th width="40%">最新章节</th>
+    <th width="15%">作者</th>
+	<th width="9%">字数</th>
+    <th width="10%">更新</th>
+    <th width="6%">状态</th>
+  </tr>
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td class="odd"><a href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></td>
+    <td class="even"><a href="{?$articlerows[i].url_articleindex?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a></td>
+    <td class="odd">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+	<td class="even">{?$articlerows[i].size_k?}K</td>
+    <td class="odd" align="center">{?$articlerows[i].lastupdate?}</td>
+    <td class="even" align="center">{?$articlerows[i].fullflag?}</td>
+  </tr>
+  {?/section?}
+</table>
+<div class="pages">{?$url_jumppage?}</div>

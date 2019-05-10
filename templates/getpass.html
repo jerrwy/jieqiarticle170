@@ -1,0 +1,35 @@
+<script language="javascript" type="text/javascript">
+<!--
+function frmgetpass_validate(){
+  if(document.frmgetpass.uname.value == ""){
+    alert( "请输入用户名" );
+	document.frmgetpass.uname.focus();
+	return false;
+  }
+  if(document.frmgetpass.email.value == ""){
+    alert( "请输入Email" );
+	document.frmgetpass.email.focus();
+	return false;
+  }
+}
+//-->
+</script>
+<br />
+<form name="frmgetpass" id="frmgetpass" action="getpass.php?do=submit" method="post" onsubmit="return frmgetpass_validate();">
+<table width="580" class="grid" cellspacing="1" align="center">
+  <caption>取回密码</caption>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">用户名</td>
+    <td class="even"><input type="text" class="text" name="uname" id="uname" size="25" maxlength="30" value="" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">Email</td>
+	<td class="even"><input type="text" class="text" name="email" id="email" size="25" maxlength="60" value="" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="odd" width="25%">&nbsp;</td>
+	<td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /><input type="hidden" name="action" id="action" value="sendpass" /></td>
+  </tr>
+</table>
+</form>
+<br /><br /><br /><br />

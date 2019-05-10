@@ -1,0 +1,48 @@
+<form action="?action=editlist&configid={?$configid?}" method="post">
+<table class="grid" width="95%" align="center">
+  <caption>
+  “{?$configname?}”的配置管理   [<!--<a href="?action=addblock&modules={?$module?}&name={?$mname | urlencode?}">添加一个区块</a> | --><a href="?action=listconfig">返回区块配置文件列表</a>]
+  </caption>
+  <tr>
+	<td align="center">序号</td>
+    <td align="center">区块名称</td>
+	<td align="center">所属模块</td>
+	<td align="center">显示位置</td>
+	<td align="center">配置文件写法</td>
+	<td align="center">JS调用</td>
+	<td align="center">排序</td>
+    <td width="20%" align="center">操作</td>
+  </tr>
+{?section name=i loop=$blocks?}
+  <tr>
+  <td align="center">{?$blocks[i].bid?}</td>
+    <td align="center">{?$blocks[i].blockname?}</td>
+	<td align="center">{?$blocks[i].modname?}</td>
+	<td align="center">
+{?if $blocks[i].side==0?}左边{?/if?}
+{?if $blocks[i].side==1?}右边{?/if?}
+{?if $blocks[i].side==2?}中左{?/if?}
+{?if $blocks[i].side==3?}中右{?/if?}
+{?if $blocks[i].side==4?}中上{?/if?}
+{?if $blocks[i].side==5?}中中{?/if?}
+{?if $blocks[i].side==6?}中下{?/if?}
+{?if $blocks[i].side==7?}顶部{?/if?}
+{?if $blocks[i].side==8?}底部{?/if?}	
+</td>
+<td align="center"><input class="text" name="textfield" type="text" value="$jieqiBlocks[]=array('bid'=>{?$blocks[i].bid?}, 'blockname'=>'{?$blocks[i].blockname?}', 'module'=>'{?$blocks[i].module?}', 'filename'=>'{?$blocks[i].filename?}', 'classname'=>'{?$blocks[i].classname?}', 'side'=>{?$blocks[i].side?}, 'title'=>'{?$blocks[i].title?}', 'vars'=>'{?$blocks[i].vars?}', 'template'=>'{?$blocks[i].template?}', 'contenttype'=>{?$blocks[i].contenttype?}, 'custom'=>{?$blocks[i].custom?}, 'publish'=>{?$blocks[i].publish?}, 'hasvars'=>{?$blocks[i].hasvars?});" size="15" onFocus="this.select()"></td>
+
+<td align="center"><input class="text" name="textfield" type="text" value="<script language='javascript' type='text/javascript src='{?$jieqi_url?}/blockshow.php?bid={?$blocks[i].bid?}&module={?$blocks[i].module | urlencode?}&filename={?$blocks[i].filename  | urlencode?}&classname={?$blocks[i].classname?}&vars={?$blocks[i].vars  | urlencode?}&template={?$blocks[i].template  | urlencode?}&contenttype={?$blocks[i].contenttype?}&custom={?$blocks[i].custom?}&publish=3&hasvars={?$blocks[i].hasvars?}'></script>" size="15" onFocus="this.select()"></td>
+
+	<td align="center"><input class="text" name="key[{?$i.key?}]" type="text" id="key[{?$i.key?}]" size="3" value="{?$i.key?}" maxlength="3">
+	  </td>
+    <td align="center"> <a href="?action=edit&configid={?$configid?}&key={?$i.key?}">修改</a> | <a href="javascript:if(confirm('确实要删除本区块么？')) document.location='manageblocks.php?action=delete&configid={?$configid?}&key={?$i.key?}'">删除</a><!-- | <a href="{?$jieqi_url?}/admin/blockupdate.php?configid={?$configid?}&key={?$i.key?}" target="_blank">刷新</a>--> </td>
+  </tr>
+{?/section?}
+ <tr>
+    <td colspan="8" align="center"><p>
+      <input class="button" type="submit" name="Submit" value="更新排序">
+    </p>
+      <p>*显示页面相同位置区块的排序按照这里的次序由低到高排列，您可以修改区块排序来调整显示次序，序号请不要重复。</p></td>
+  </tr>
+</table>
+</form>

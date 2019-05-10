@@ -1,0 +1,34 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset={?$jieqi_charset?}" />
+<meta http-equiv="refresh" content='4; url={?$url?}'>
+<title>{?$pagetitle?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_themecss?}" />
+<script language="Javascript">
+function Show(divid) 
+{
+  divid.filters.revealTrans.apply(); 
+  divid.style.visibility = "visible"; 
+  divid.filters.revealTrans.play(); 
+}
+function Hide(divid) 
+{
+  divid.filters.revealTrans.apply();
+  divid.style.visibility = "hidden";
+  divid.filters.revealTrans.play();
+}
+setTimeout("Hide(msgboard)",3000);
+</script>
+<script language="javascript" type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+</head>
+<body onload="Show(msgboard)">
+<div style="width:100%; height:100%; text-align:center;">
+<div id="msgboard" style="FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); margin-top:150px; width:350px; height:100px; z-index:1; visibility: hidden">
+  <div class="block">
+    <div class="blocktitle">{?$title?}</div>
+    <div class="blockcontent"><br />{?$content?}<br /><br />如不能自动跳转，<a href="{?$url?}">点击这里直接进入！</a><br /><br /></div>
+  </div>
+</div>
+</div>
+</body>
+</html>

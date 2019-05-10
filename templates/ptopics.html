@@ -1,0 +1,73 @@
+<table width="100%"  border="0" cellspacing="5" cellpadding="3">
+  <tr>
+    <td width="40%" align="left"><a href="{?function jieqi_geturl:'system':'user':$ownerid?}">{?$ownername?}</a> 的会客室 </td>
+    <td width="60%" align="right">{?if $type == "good"?}[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=all">全部主题</a>]&nbsp;&nbsp;[精华主题]{?else?}[全部主题]&nbsp;&nbsp;[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=good">精华主题</a>]{?/if?}{?if $enablepost == 1?}&nbsp;&nbsp;[<a href="#postnew">发表主题</a>]{?/if?}</td>
+  </tr>
+</table>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="54%" class="head">主题</th>
+    <th width="12%" class="head">回复/查看</th>
+    <th width="17%" class="head">发表人/回复人</th>
+    <th width="15%" class="head">发表时间</th>
+  </tr>
+  {?section name=i loop=$ptopicrows?}
+  <tr>
+    <td class="odd">{?if $ptopicrows[i].istop == 1?}<span class="hottext">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hottext">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}">{?$ptopicrows[i].title?}</a></td>
+    <td align="center" class="even">{?$ptopicrows[i].replies?}/{?$ptopicrows[i].views?}</td>
+    <td class="odd">{?if $ptopicrows[i].posterid > 0?}<a href="{?function jieqi_geturl:'system':'user':$ptopicrows[i].posterid:'space'?}" target="_blank">{?$ptopicrows[i].poster?}</a>{?else?}游客{?/if?}{?if $ptopicrows[i].replyflag > 0?}/{?if $ptopicrows[i].replierid > 0?}<a href="{?function jieqi_geturl:'system':'user':$ptopicrows[i].replierid?}" target="_blank">{?$ptopicrows[i].replier?}</a>{?else?}游客{?/if?}{?/if?}</td>
+    <td align="center" class="even">{?$ptopicrows[i].posttime|date:"Y-m-d H:i:s"?}
+	{?if $ismaster == 1?}
+	<br />{?if $ptopicrows[i].istop == 0?}[<a href="{?$jieqi_url?}/ptopics.php?action=top&oid={?$ownerid?}&tid={?$ptopicrows[i].topicid?}">置顶</a>]{?else?}[<a href="{?$jieqi_url?}/ptopics.php?action=untop&oid={?$ownerid?}&tid={?$ptopicrows[i].topicid?}">置后</a>]{?/if?} 
+	{?if $ptopicrows[i].isgood == 0?}[<a href="{?$jieqi_url?}/ptopics.php?action=good&oid={?$ownerid?}&tid={?$ptopicrows[i].topicid?}">加精</a>]{?else?}[<a href="{?$jieqi_url?}/ptopics.php?action=normal&oid={?$ownerid?}&tid={?$ptopicrows[i].topicid?}">去精</a>]{?/if?} 
+	[<a href="javascript:if(confirm('确实要删除该主题么？')) document.location='{?$jieqi_url?}/ptopics.php?action=del&oid={?$ownerid?}&tid={?$ptopicrows[i].topicid?}';">删除</a>]
+	{?/if?}
+	</td>
+  </tr>
+  {?/section?}
+</table>
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+    <tr>
+        <td align="right">{?$url_jumppage?}</td>
+    </tr>
+</table>
+{?if $enablepost == 1?}
+<a name="postnew"></a>
+<script language="javascript" type="text/javascript">
+<!--
+function frmptopic_validate(){
+  if(document.frmptopic.pcontent.value == ""){
+    alert("请输入内容");
+    document.frmptopic.pcontent.focus();
+    return false;
+  }
+}
+//-->
+</script>
+<form name="frmptopic" id="frmptopic" action="ptopics.php?oid={?$oid?}&do=submit" method="post" onsubmit="return frmptopic_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>发表主题</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">标题</td>
+  <td class="even"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">内容</td>
+  <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" rows="12" cols="60"></textarea>
+  <script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+  </td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newpost" /></td>
+  <td class="even"><input type="submit" class="button" name="btnpost"  id="btnpost" value="提 交" /></td>
+</tr>
+</table>
+</form>
+{?/if?}
+<br />

@@ -1,0 +1,21 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<table class="grid" width="100%" align="center">
+<caption>{?$owner?} 的好友</caption>
+  <tr align="center">
+    <th width="31%">好友名称</th>
+    <th width="21%">加入日期</th>
+    <th width="13%">用户信息</th>
+    <th width="18%">发送短消息</th>
+    <th width="17%">加为好友</th>
+  </tr>
+{?section name=i loop=$friendsrows?}
+  <tr>
+    <td class="odd">{?$friendsrows[i].yourname?}</td>
+    <td align="center" class="even">{?$friendsrows[i].adddate?}</td>
+    <td align="center" class="odd">[<a href="{?function jieqi_geturl:'system':'user':$friendsrows[i].yourid?}" target="_blank">查看信息</a>]</td>
+    <td align="center" class="odd">[<a href="{?$jieqi_url?}/newmessage.php?receiver={?$friendsrows[i].yourname|urlencode?}" target="_blank">写新消息</a>]</td>
+    <td align="center" class="even">[<a href="{?$jieqi_url?}/addfriends.php?id={?$friendsrows[i].yourid?}">加为好友</a>]</td>
+  </tr>
+{?/section?}</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,297 @@
+<h1>常见问题及使用技巧</h1>
+<ul class="ulitem">
+<li><a href="#tip1">常用模板文件说明</a></li>
+<li><a href="#tip2">常用配置文件说明</a></li>
+<li><a href="#tip3">新系统入门必读</a></li>
+<li><a href="#tip4">修改导航菜单</a></li>
+<li><a href="#tip5">整合discuz通行证</a></li>
+<li><a href="#tip6">制作自定义页面</a></li>
+<li><a href="#tip7">远程调用区块</a></li>
+<li><a href="#tip8">增加和管理广告</a></li>
+<li><a href="#tip9">点广告增加积分配置方法</a></li>
+<li><a href="#tip10">修改文章类别</a></li>
+<li><a href="#tip11">定时采集配置方法</a></li>
+</ul>
+<hr />
+<a name="tip1"></a>
+<div>
+<p><strong>常用模板文件说明</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;1、系统有一个总体风格模板theme.html，直接影响整个网站风格。默认在 themes/default目录下，如果你在系统定义里面把风格改成别的名称，比如 book，那就使用 themes/book/theme.html这个模板。模板为html格式， &lt;{ 和 }&gt; 之间为程序需要替换的内容，其他可自行修改。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、其他模板目录安排如下：系统功能模板在 /templates 目录下，模块功能模板在 /modules/模块目录/templates下（如文章系统是 /modules/article/templates，论坛是 /modules/forum/templates）<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、其他常用模板说明：<br />
+首页(/index.php) - /themes/风格名称/theme.html (定制首页可使用其他模板)<br />
+文章信息页(/modules/article/articleinfo.php) - /modules/article/templates/articleinfo.html<br />
+文章分类列表(/modules/article/index.php) - /modules/article/templates/articlelist.html<br />
+文章排行榜(/modules/article/toplist.php) - /modules/article/templates/toplist.html<br />
+阅读页面目录页 - /modules/article/templates/index.html
+阅读页面章节页 - /modules/article/templates/style.html
+全文阅读页 - /modules/article/templates/fulltext.html
+</div>
+
+<hr />
+<a name="tip2"></a>
+<div>
+<p><strong>常用配置文件说明</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;1、系统配置 - 保存于 /configs/define.php
+，里面的参数跟后台系统定义相对应。如果因为系统配置错误无法进入后台，则需要手工修改本文件。本文件里面几个主要参数如下：<br />
+JIEQI_URL - 网站根路径，可以不填，也可以设置成网站路径，后面不带"/"，如 http://www.jieqi.com<br />
+JIEQI_DB_TYPE - 数据库类型，目前必须是 mysql<br />
+JIEQI_DB_CHARSET - 数据库编码，根据实际数据库编码设置，如 gbk<br />
+JIEQI_DB_PREFIX - 数据表前缀，目前必须是 jieqi<br />
+JIEQI_DB_HOST - 数据库服务器名字，默认 localhost<br />
+JIEQI_DB_USER - 数据库用户名<br />
+JIEQI_DB_PASS - 数据库用户密码<br />
+JIEQI_DB_NAME - 数据库名称<br />
+JIEQI_IS_OPEN - 网站是否开放，1 表示开放，0 表示关闭<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、后台导航栏配置 - 系统功能导航的配置文件为 /configs/adminmenu.php ，每个模块的后台导航配置文件为 /configs/模块目录名/adminmenu.php<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、区块配置 - 区块配置文件里面内容写法可以参考后台区块管理里面的配置写法，每个区块都有调用代码例子。主要区块配置文件如下<br />
+首页区块 - /configs/define.php<br />
+用户面板区块 - /configs/userblocks.php<br />
+文章列表页面区块 - /configs/article/guideblocks.php<br />
+文章管理页面区块 - /configs/article/authorblocks.php<br />
+</div>
+
+
+<hr />
+<a name="tip3"></a>
+<div>
+<p><strong>新系统入门必读</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;系统装好后，在具体发数据千，用户需要做以下几件事情：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;1、进入后台系统定义里面，把每个系统参数检查和设置下，并保存。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、后台系统和每个模块的参数设置检查并保存。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、进入后台用户组管理，按照您的实际需要将用户分成几个用户组。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4、用户组确认后，设置系统和每个模块的权限管理。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5、进入后台的头衔管理，按照您的实际需要设置头衔。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;6、头衔设置后之后，设置系统个每个模块的权利设置。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;7、用小说连载系统的，请预先设置好小说分类。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;8、根据实际需要制作本站模板。<br />
+</div>
+
+<hr />
+<a name="tip4"></a>
+<div>
+<p><strong>修改导航菜单</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;网站的顶部导航有两种显示方式，一是直接把导航做到模板theme.html里面，以后需要修改也直接修改模板。这种情况可以在后台的系统定义里面把“是否使用系统菜单”设置成否，以减少程序处理。第二种模式是把导航栏目放在配置文件 /configs/mainmenu.php 里面，由程序生成下拉菜单并显示。需要修改则修改此配置文件，菜单有缓存，如果修改后直接生效请手工删除缓存文件 /cache/templates/system_menu 目录里面内容
+</div>
+
+<hr />
+<a name="tip5"></a>
+<div>
+<p><strong>整合discuz通行证</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;1、安装好discuz，并开通设置好其通行证功能。discuz通行证功能的详细说明请见discuz的帮助文档。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、然后用文本编辑器打开杰奇目录下的文件include/funuser_discuz.php，前面有两个参数分别是discuz通行证密码和通行证地址，根据实际情况设置。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、备份好杰奇目录下原来的include/funuser.php（在用户无Discuz接口情况下使用的），然后把上一步中的文件 funuser_discuz.php 改文件名为 funuser.php。
+</div>
+
+<hr />
+<a name="tip6"></a>
+<div>
+<p><strong>制作自定义页面</strong></p>
+
+这个自定义页面是指php页面，有两种模式：一种是整个页面都是自定义的结构和内容，只是这个页面里面需要调用一些系统的区块来显示；第二种是套用系统现有的模板框架的页面，具备统一的页面头部和底部，也可以调用系统区块显示，只是内容部分是自定义的模板。<br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;第一种模式可以参考文件/custom.php的写法，主要步骤如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;1、制作本页调用区块的php配置文件，如 /configs/blocks.php，这个配置文件里面调用区块的写法可参考后台区块管理米面每个区块的调用参数。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、准备一个完整的html页面作为模板文件，比如 /templates/custom.html (模板所在目录不是固定的，一般建议放在templates目录下)，模板中需要调用区块的位置改成区块调用标记。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、模仿/custom.php，设置好需要的模板和区块配置文件即可。<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;第二种模式可以参考文件/custom1.php的写法，主要步骤如下：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;1、制作本页调用区块的php配置文件，如 /configs/blocks.php，这个配置文件里面调用区块的写法可参考后台区块管理米面每个区块的调用参数。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、准备一个只包含内容部分的html页面作为模板文件，比如 /templates/custom1.html (模板所在目录不是固定的，一般建议放在templates目录下)。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、模仿/custom1.php，设置好需要的模板和区块配置文件即可。
+</div>
+
+<hr />
+<a name="tip7"></a>
+<div>
+<p><strong>远程调用区块</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;如果您需要在一台服务器上远程调用另一台服务器上的区块，可以使用js来调用。
+每个区块的js调用写法，请参看区块管理里面的“远程调用js”。</div>
+
+<hr />
+<a name="tip8"></a>
+<div>
+<p><strong>增加和管理广告</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;1、全站通栏广告<br />
+分底部通栏和顶部通栏，代码设置在后台的系统定义里面，这个内容可以显示在全站所有动态页面。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、首页广告<br />
+首页除了统一的顶部和底部，中间都是由一个个区块构成。用户可以在后台的区块管理里面调整某个区块是否显示和显示位置。同样的，如 果要增加广告，或者公告之类区块，也是在区块管理里面增加一个自定义区块，自己填入代码，选择好位置保存即可。<br />
+注意：每个区块都有一个序号，序号大小表示排列顺序，不同区块之间序号不要重复。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;3、阅读页面广告<br />
+阅读页面因为是静态的html，所以广告都通过调用js实现的。默认的阅读页面模板如下：<br />
+a、目录页面模板<br />
+modules/article/templates/index.html 里面的顶部和底部各默认设置了两个广告js分别是 configs/article/indextop.js 和configs/article/indexbottom.js。<br />
+b、章节阅读页面模板<br />
+modules/article/templates/style.html 里面的顶部和底部各默认设置了两个广告js分别是 configs/article/pagetop.js 和configs/article/pagebottom.js。<br />
+c、全文阅读模板<br />
+modules/article/templates/fulltext.html 里面的顶部和底部各默认设置了两个广告js分别是 configs/article/fulltop.js 和configs/article/fullbottom.js<br />
+注意：以上模板用户都可以修改，模板修改后对于以前已经生成的html，可以在后台里面使用文章重新生成功能。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4、其他广告<br />
+如果用户需要在一些特殊页面放置广告，则需要直接找到这个页面的模板，通过修改模板实现。<br />
+</div>
+
+<hr />
+<a name="tip9"></a>
+<div>
+<p><strong>点广告增加积分配置方法</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;首先需要设置好相关参数，在后台系统管理里面的参数设置，设置好“每次点击广告积分”和“每天最多有效广告点击次数”，并保存。然后根据不同的广告设置不同的代码。<br /><br />
+
+系统统计广告点击积分的程序为根目录下的 /adclick.php<br />
+程序有两个参数<br />
+第一个 id ，必须为数字，是广告序号，不同广告不要重复（同一个广告多次点击不会重复计分）<br />
+第二个 url ，是广告点击后要跳转的网址（iframe调用模式下不用设置）<br /><br />
+
+
+本程序有两种调用方法，例子如下<br />
+
+1、自己写代码的文字或者图片链接广告，例子如下<br />
+&lt;a href="http://www.domain.com/adclick.php?id=123&url=http://www.ad.com" target="_blank"&gt;点击显示广告&lt;/a&gt;<br />
+
+其中 http://www.domain.com 是本站域名， 123 是广告序号, http://www.ad.com 是跳转的网址<br /><br />
+
+
+2、用iframe调用显示的广告，例子如下<br />
+&lt;iframe id="jieqiad_123" name="jieqiad_123" width="760" height="60" align="center" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.domain.com/ad.html" onfocus="javascript:adimg=new Image(); adimg.src='http://www.domain.com/adclick.php?id=123';"&gt;&lt;/iframe&gt;<br />
+
+其中 onfocus 是触发点击统计的， http://www.domain.com 是只本站域名， 123 是广告序号
+
+</div>
+
+<hr />
+<a name="tip10"></a>
+<div>
+<p><strong>修改文章类别</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;把分类阅读和发表文章时的系统默认文章分类，修改成别的分类，如：把“都市言情”改名为“情感故事”：
+找到配置文件 configs/article/sort.php,用记事本或别的文本编辑工具打开对其进行修改，文档中是一个php数组，在程序里面是依据此处数组的序号来判断文章类别，所以序号不要重复，也不要轻易修改。将文档中的“都市言情”改名为“情感故事”即可，分类简称“都市”也可作类似修改。如使用的是系统菜单，也要对其进行修改，下方有详细说明。 最后刷新区块（见刷新页面）可看到更改后的效果。 
+</div>
+
+<hr />
+<a name="tip11"></a>
+<div>
+<p><strong>定时采集配置方法</strong></p>
+<p>前言</p>
+<p>要实现采集，默认方式是根据配置好的采集规则，在浏览器提交相应的参数即可完成后面的采集入库全部动作。<br />
+  而实现定时采集，与人工在浏览器提交有些区别，主要分两大步骤：<br />
+  一、编写采集的url和相关参数，访问这个url即可实现想要的采集模式。（这个url直接在浏览器提交同样可以实现采集）<br />
+  二、把定时访问这个url的功能加到系统的定时任务里面，实现无人值守的定时采集。</p>
+<p>具体实现方法请参考下面内容：</p>
+<p>1、对采集配置文件的解释</p>
+<p>任何一个采集都会用到两个采集配置文件（跟后台采集规则配置对应），都可以用文本编辑器打开查看。<br />
+  其中 /configs/article/collectsite.php 是对总的采集站点配置，记录了一共允许采集哪几个站点。<br />
+  里面包含类似这样的内容：</p>
+<p>$jieqiCollectsite['1']['name'] = '采集站点一'; <br />
+  $jieqiCollectsite['1']['config'] = 'abc_com'; <br />
+  $jieqiCollectsite['1']['url'] = 'http://www.abc.com'; <br />
+  $jieqiCollectsite['1']['subarticleid'] = 'floor($articleid/1000)';<br />
+  $jieqiCollectsite['1']['enable'] = '1';</p>
+<p>$jieqiCollectsite['2']['name'] = '采集站点二';<br />
+  $jieqiCollectsite['2']['config'] = 'def_net';<br />
+  $jieqiCollectsite['2']['url'] = 'http://www.def.net';<br />
+  $jieqiCollectsite['2']['subarticleid'] = '';<br />
+  $jieqiCollectsite['2']['enable'] = '1';</p>
+<p>参数含义解释如下：<br />
+  ['1'] - 这里的 1 表示采集网站的数字序号，不同的采集站序号不能重复。<br />
+  ['name'] - 采集网站名称。<br />
+  ['config'] - 网站英文标识，这个网站采集规则配置文件有关，比如这个值是 abc_com ，那么采集规则配置文件就是 /configs/article/site_abc_com.php。<br />
+  ['url'] - 采集网站网址。<br />
+  ['subarticleid'] - 采集网站，文章子序号运算方式，本项目主要为了兼容以前程序，新版本里面文章子序号可以通过采集获得。<br />
+  ['enable'] - 是否允许采集，1 表示允许，0 表示禁止，默认为 1。</p>
+<p>如前面所说，每个采集网站有个专门的采集规则配置文件，/configs/article/ 目录下以 site_ 开头的php文件，如 /configs/article/site_abc_com.php。</p>
+<p>里面内容都与后台采集规则设置相对应，具体细节不一一解释。需要了解的是本文件里面内容分两大部分，前面内容都是对网站内容采集规则的配置，而最后面 $jieqiCollect['listcollect']['0']，$jieqiCollect['listcollect']['1'] 这样的设置是对网站&quot;批量采集规则&quot;的配置，比如按最近更新采集、按排行榜采集，可以设置多个。['0'] 这里的数字 0 表示批量采集类别的数字序号，同一个网站也不能重复。</p>
+<p>2、编写采集内容的url及参数</p>
+<p>这里的采集是针对多篇文章批量采集，分两种模式：<br />
+  一、按页面批量采集，比如采集最新更新列表或者排行榜列表，每个链接采集一页。<br />
+  链接格式如下：</p>
+<p>http://www.domain.com/modules/article/admin/pagecollect.php?action=collect&amp;siteid=1&amp;collectname=0&amp;startpageid=1&amp;maxpagenum=1&amp;notaddnew=0&amp;jieqi_username=admin&amp;jieqi_userpassword=1234</p>
+<p>参数含义解释如下：<br />
+  www.domain.com - 是指您的网址。<br />
+  action - 字符串，程序执行的动作命令，固定值为 collect。<br />
+  siteid - 数字类型，要采集的网站序号，具体哪个网站对应什么序号见配置文件collectsite.php。<br />
+  collectname - 数字类型，按页面批量采集的类别序号，见配置文件site_xxxx.php里面下面的。$jieqiCollect['listcollect']['0'] 这样配置的数字。<br />
+  startpageid -- 页码标志，表示从列表的第几页开始采集。一般是数字类型，有些网站也可能是字符串。<br />
+  maxpagenum -- 数字类型，表示表示一共采集几页。（默认为 1 ，如果要采集多页，是需要浏览器跳转的，只有在windows环境下调用浏览器时候有效，linux下调用wget时候最多只能采集一页，需要采集多页可设置多个采集命令。）<br />
+  notaddnew -- 数字类型，0-表示采集全部文章，1-表示只更新本站已有的文章。<br />
+  jieqi_username - 字符串，用户名(这个用户必须是本站有权限采集的用户)。<br />
+  jieqi_userpassword - 字符串，用户密码。<br />
+</p>
+<p>二、按照文章序号批量采集<br />
+  链接格式如下：<br />
+  http://www.domain.com/modules/article/admin/batchcollect.php?action=bcollect&amp;siteid=1&amp;batchids=123,234,345&amp;jieqi_username=admin&amp;jieqi_userpassword=1234</p>
+<p>参数含义解释如下：<br />
+  www.domain.com - 是指您的网址。<br />
+  action - 字符串，程序执行的动作命令，固定值为 bcollect。<br />
+  siteid - 数字类型，要采集的网站序号，具体哪个网站对应什么序号见配置文件collectsite.php。<br />
+  batchids - 要采集的对方网站文章序号（不是本地的文章序号），采集多个文章，序号用英文逗号分开，如 123,234,345。<br />
+  jieqi_username - 字符串，用户名(这个用户必须是本站有权限采集的用户)。<br />
+  jieqi_userpassword - 字符串，用户密码。</p>
+<p>注：一个url需要放到IE浏览器里面提交的时候，整个url最大长度度不要超过2083字节，所以一般建议这里的url不要设置成太长，文章多的可以拆分成多个url。<br />
+</p>
+<p>3、利用系统任务实现定时采集</p>
+<p>一、windows环境下做法</p>
+<p>windows里面可以用系统的任务计划来实现定时执行程序，不过首先需要制作一个批处理文件，在这个文件里面用命令来调用浏览器来执行采集url。需要注意的是命令只能打开浏览器而不会采集好之后自动关闭，要实现采集完自动关闭可以通过javascript实现。自动关闭本窗口的js代码为：</p>
+<p>&lt;script language=&quot;javascript&quot;&gt; self.opener=NULL; setTimeout(&quot;window.close();&quot;, 3000); &lt;/script&gt;</p>
+<p>这里的参数 3000 是指延迟关闭时间，单位是毫秒，3000表示延迟3秒关闭。<br />
+  这段代码可以在两个地方加入：</p>
+<p>一个是加入到提示信息模板 /themes/风格名称/msgwin.html 里面，&lt;body&gt;和&lt;/body&gt;之间加入上面那段js。这样的效果是整个系统任何提示信息页面都会在3秒钟后自动关闭。</p>
+<p>如果您希望仅仅自动关闭采集成功后的提示页面，可以在采集提示信息的语言包里面加入以上javascript，这个配置文件是 /modules/article/lang/lang_collect.php， 里面 $jieqiLang['article']['batch_collect_success'] 是采集成功的提示信息，这个值原来是：</p>
+<p>'恭喜您，全部文章采集完成！';</p>
+<p>改成下面这样即可自动关闭</p>
+<p>'恭喜您，全部文章采集完成！&lt;script language=&quot;javascript&quot;&gt; self.opener=NULL; setTimeout(&quot;window.close();&quot;, 3000); &lt;/script&gt;';</p>
+<p>建立批处理文件方法如下：<br />
+  在任意目录建立一个后缀名为 .bat 的文件，比如 D:\collect.bat，然后用文本编辑器输入类似下面的代码<br />
+</p>
+<p>@echo off<br />
+  &quot;explorer&quot; &quot;http://www.domain.com/modules/article/admin/pagecollect.php?action=collect&amp;siteid=1&amp;collectname=0&amp;startpageid=1&amp;maxpagenum=1&amp;notaddnew=0&amp;jieqi_username=admin&amp;jieqi_userpassword=1234&quot;<br />
+  &quot;explorer&quot; &quot;http://www.domain.com/modules/article/admin/batchcollect.php?action=bcollect&amp;siteid=1&amp;batchids=123,234,345&amp;jieqi_username=admin&amp;jieqi_userpassword=1234&quot;<br />
+  exit<br />
+</p>
+<p>其中<br />
+  第一句 @echo off 是表示关闭显示<br />
+  最后一句 exit 表示执行完退出<br />
+  中间每行表示一个采集命令（可以设置多行），就是利用系统的浏览器来执行前面编辑好的采集url。<br />
+  使用这样的格式：</p>
+<p>&quot;explorer&quot; &quot;url&quot;</p>
+<p>前面部分是命令，后面是采集的url，也可以使用这样的格式：</p>
+<p>&quot;%programfiles%\Internet Explorer\IEXPLORE.EXE&quot; &quot;url&quot;</p>
+<p>前面部分是ie浏览器的路径，后面是采集的url。</p>
+<p>这两种命令模式的区别是，有多行命令的时候，前者会打开多个浏览器窗口同时执行；而后者先打开浏览器执行第一个命令，必须等这个浏览器关闭后才会重新打开一个浏览器执行第二个命令。</p>
+<p>编辑好上面的bat文件后，开始在任务计划里面添加执行这个任务，主要步骤如下（每半小时执行一次采集）：</p>
+<p>a、打开&quot;控制面板&quot;，进入&quot;任务计划&quot;。<br />
+  b、点&quot;添加任务计划&quot;打开任务计划向导进行添加任务。<br />
+  c、点&quot;下一步&quot;，然后点&quot;浏览&quot;选择要执行的程序。（例子里面就是选择 D:\collect.bat）<br />
+  d、设置任务名称及执行频率，比如选择&quot;每天&quot;，点&quot;下一步&quot;。<br />
+  e、选择最开始执行的时间和日期，一般设置比当前时间后面一点就行，点&quot;下一步&quot;。<br />
+  f、设置执行的用户名和密码（本操作系统的帐号），点&quot;下一步&quot;。<br />
+  g、选择&quot;在单击&quot;完成&quot;时，打开此任务的高级属性&quot;，点&quot;完成&quot;。<br />
+  h、在&quot;日程安排&quot;里面，点&quot;高级&quot;，选择&quot;重复任务&quot;，设置&quot;每30分钟&quot;执行一次。<br />
+  i、保存以上设置后即完成系统任务计划。<br />
+</p>
+<p>二、linux环境下做法</p>
+<p>linux下可以利用的系统定时任务来执行，也同样需要先制作一个批处理的脚本，方法如下<br />
+  在任意目录建立一个后缀为 .sh 的文件，比如 /www/collect.sh ，需要赋值可执行权限，如 chmod 755 /www/collect.sh<br />
+  里面内容如下：<br />
+</p>
+<p>wget -qO - &quot;http://www.domain.com/modules/article/admin/pagecollect.php?action=collect&amp;siteid=1&amp;collectname=0&amp;startpageid=1&amp;maxpagenum=1&amp;notaddnew=0&amp;jieqi_username=admin&amp;jieqi_userpassword=1234&quot;<br />
+  wget -qO - &quot;http://www.domain.com/modules/article/admin/batchcollect.php?action=bcollect&amp;siteid=1&amp;batchids=123,234,345&amp;jieqi_username=admin&amp;jieqi_userpassword=1234&quot;</p>
+<p>&nbsp;</p>
+<p>其中每行表示一个采集命令（可以设置多行），是利用系统的wget命令调用url执行，并取消输出。<br />
+  每行命令如下：<br />
+  wget -qO - url<br />
+  前面 &quot;wget -qO - &quot;是wget命令及参数，后面url是编辑好的采集url</p>
+<p>编辑好 sh 文件后，用 crontab 命令添加定时任务，主要步骤如下：</p>
+<p>a、用 crontab -e 命令，打开定时任务编辑器，里面一行表示一个定时任务。<br />
+  b、用vi命令，增加一行定时执行批处理脚本的命令，格式如下：<br />
+  f1 f2 f3 f4 f5 program <br />
+  其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程序。 <br />
+  当 f1 为 * 时表示每分钟都要执行 program，f2 为 * 时表示每小时都要执行程序，其余类推。<br />
+  当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其余类推。<br />
+  当 f1 为 */n 时表示每 n 分钟个时间间隔执行一次，f2 为 */n 表示每 n 小时个时间间隔执行一次，其余类推。<br />
+  当 f1 为 a, b, c,... 时表示第 a, b, c,... 分钟要执行，f2 为 a, b, c,... 时表示第 a, b, c...个小时要执行，其余类推。<br />
+  program 为要执行的命令或者程序文件名</p>
+<p> 例1：每30分钟执行一次采集<br />
+  */30 * * * * /www/collect.sh</p>
+<p> 例2：每小时的第10分钟时候执行一次采集<br />
+  10 * * * * /www/collect.sh</p>
+<p>c、crontab命令详细用法请参看相关文档，一般网上也能搜索到。</p>
+<p>注：windows的任务计划和linux的定时任务都可以设置多个，但是要避免同一本书在同一时间开多个浏览器同时采集，这样在判断最新章节时候会出错。<br />
+</p>
+</div>

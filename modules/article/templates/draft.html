@@ -1,0 +1,24 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<form action="" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+  <caption>您的草稿箱</caption>
+</table>
+<table class="grid" width="100%" align="center">
+  <tr align="center" valign="middle">
+    <th width="5%">{?$checkall?}</th>
+    <th width="30%">文章名称</th>
+    <th width="45%">章节标题</th>
+    <th width="30%">操作</th>
+  </tr>
+{?section name=i loop=$draftrows?}
+  <tr valign="middle">
+    <td align="center" class="odd">{?$draftrows[i].checkbox?}</td>
+    <td class="even"><a href="{?$article_static_url?}/articlemanage.php?id={?$draftrows[i].articleid?}">{?$draftrows[i].articlename?}</a></td>
+    <td class="odd"><a href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">{?$draftrows[i].draftname?}</a></td>
+    <td align="center" class="even"><a href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">编辑</a> <a href="javascript:if(confirm('确实要删除该章节么？')) document.location='{?$draftrows[i].url_delete?}';">删除</a> {?if $draftrows[i].articleid == 0?}&nbsp;&nbsp;&nbsp;&nbsp;{?else?}<a href="{?$article_static_url?}/newchapter.php?aid={?$draftrows[i].articleid?}&draftid={?$draftrows[i].draftid?}">发表</a>{?/if?}</td>
+{?/section?}
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

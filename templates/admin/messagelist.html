@@ -1,0 +1,52 @@
+<script language="javascript">
+function showmsg(id){
+	var msg = document.getElementById(id);
+	if(msg.style.display == 'none') msg.style.display='';
+	else msg.style.display = 'none';
+}
+</script>
+<form name="frmquery" method="post" action="{?$jieqi_url?}/admin/messagelist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="even" align="right">关键字：
+            <input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50">
+			<input name="keytype" type="radio" value="fromname" checked="checked" />发件人
+			<input name="keytype" type="radio" value="toname" />收件人
+			<input name="keytype" type="radio" value="title" />标题
+            <input type="submit" name="Submit" value="搜 索" class="button">&nbsp;&nbsp;<a href="{?$jieqi_url?}/admin/messagelist.php">显示全部</a>&nbsp;&nbsp;</td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$jieqi_url?}/admin/messagelist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>
+站内短信列表
+</caption>
+  <tr>
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <th width="15%">发件人</th>
+    <th width="15%">收件人</th>
+    <th width="40%">标题</th>
+    <th width="15%">日期</th>
+    <th width="10%">操作</th>
+  </tr>
+{?section name=i loop=$messagerows?}
+  <tr>
+    <td class="odd" align="center" valign="top"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$messagerows[i].messageid?}"></td>
+    <td class="even" valign="top">{?if $messagerows[i].fromid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].fromid?}" target="_blank">{?$messagerows[i].fromname?}</a>{?else?}<span class="hottext">网站管理员</span>{?/if?}</td>
+    <td class="odd" valign="top">{?if $messagerows[i].toid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].toid?}" target="_blank">{?$messagerows[i].toname?}</a>{?else?}<span class="hottext">网站管理员</span>{?/if?}</td>
+    <td class="odd" valign="top"><a href="javascript:showmsg('msgc_{?$messagerows[i].messageid?}')">{?$messagerows[i].title?}</a>
+	<div id="msgc_{?$messagerows[i].messageid?}" style="display:none;padding:3px;width:100%;">
+	{?$messagerows[i].content?}	</div>
+	</td>
+    <td class="even" valign="top">{?$messagerows[i].postdate|date:"Y-m-d"?}</td>
+    <td class="odd" valign="top"><a href="messagelist.php?checkaction=1&checkid[]={?$messagerows[i].messageid?}">删除</a></td>
+  </tr>
+{?/section?}
+  <tr>
+    <td colspan="6" class="foot">&nbsp;<input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">&nbsp;&nbsp;<input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">&nbsp;&nbsp;<input type="button" name="delcheck" value="删除选中记录" class="button" onclick="javascript:if(confirm('确实要删除选中记录么？')){ this.form.checkaction.value='1'; this.form.submit();}">&nbsp;&nbsp;<input name="checkaction" type="hidden" id="checkaction" value="0"></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

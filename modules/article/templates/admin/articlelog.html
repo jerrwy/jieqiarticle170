@@ -1,0 +1,40 @@
+<form name="frmsearch" method="post" action="{?$jieqi_modules['article']['url']?}/admin/articlelog.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="odd">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>
+            操作人员
+            <input type="radio" name="keytype" class="radio" value="1">
+            文章名称 &nbsp;&nbsp;
+            <input type="submit" name="btnsearch" class="button" value="搜 索">         
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+<caption>文章删除记录</caption>
+  <tr align="center" valign="middle">
+    <th width="20%">日期</th>
+    <th width="20%">时间</th>
+    <th width="30%">操作用户</th>
+    <th width="30%">文章名称</th>
+  </tr>
+  {?section name=i loop=$logrows?}
+  <tr valign="middle">
+    <td align="center" class="odd">{?$logrows[i].date?}</td>
+    <td align="center" class="even">{?$logrows[i].time?}</td>
+    <td class="odd"><a href="{?function jieqi_geturl:'system':'user':$logrows[i].userid?}" target="_blank">{?$logrows[i].username?}</a></td>
+    <td class="even">{?$logrows[i].articlename?}</td>
+  </tr>
+  {?/section?}
+</table>
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">{?$url_jumppage?}</td>
+  </tr>
+</table>
+<br /><br />

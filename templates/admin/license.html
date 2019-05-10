@@ -1,0 +1,22 @@
+<br />
+<table class="grid" width="580" align="center">
+  <caption>系统授权信息</caption>
+  <tr>
+    <td width="200" class="odd">授权域名</td>
+    <td width="380" class="even">{?$license_domain?}</td>
+  </tr>
+  <tr>
+    <td class="odd">系统版本</td>
+    <td class="even">{?$jieqi_version?} {?$jieqi_vtype?}</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="title" align="center">模块版本</td>
+  </tr>
+  {?section name=i loop=$licenses?}
+  <tr>
+    <td class="odd">{?$licenses[i].modname?}</td>
+    <td class="even">{?$licenses[i].modversion?} {?$licenses[i].modvtype?}</td>
+  </tr>
+  {?/section?}
+</table>
+<br /><br />

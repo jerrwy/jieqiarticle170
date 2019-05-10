@@ -1,0 +1,49 @@
+<table class="grid" width="100%" align="center">
+  <caption>提示</caption>
+  <tr class="odd"><td>
+  <ul>
+  <li>数据表优化可以去除数据库中的碎片，使记录排列紧密，提高读写速度。</li>
+  <li>数据表修复可修复数据库在进行查询，删除，更新等操作时产生的错误。</li>
+  </ul>
+  </td></tr>
+</table>
+<br />
+<form action="{?$url_action?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>数据表优化/修复</caption>
+  <tr>
+    <th width="5%">{?$checkall?}</th>
+    <th width="30%">数据表</th>
+    <th width="13%">类型</th>
+    <th width="13%">记录数</th>
+    <th width="13%">数据</th>
+	<th width="13%">索引</th>
+	<th width="13%">碎片</th>
+  </tr>
+{?section name=i loop=$tablerows?}
+  <tr>
+    <td class="odd">{?$tablerows[i].checkbox?}</td>
+    <td class="even">{?$tablerows[i].Name?}</td>
+    <td class="odd">{?$tablerows[i].Type?}</td>
+    <td class="even">{?$tablerows[i].Rows?}</td>
+    <td class="odd">{?$tablerows[i].Data_length?}</td>
+	<td class="even">{?$tablerows[i].Index_length?}</td>
+    <td class="odd">{?$tablerows[i].Data_free?}</td>
+  </tr>
+{?/section?}
+  <tr>
+    <th></th>
+    <th>{?$totaltable?}个表</th>
+    <th></th>
+    <th>{?$totalrows?}条记录</th>
+    <th>{?$totalsize?}</th>
+	<th>{?$totalindex?}</th>
+    <th>{?$totalfree?}</th>
+  </tr>
+  <tr>
+    <td colspan="7" class="foot"><input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if(this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = true; }">&nbsp;&nbsp;<input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if(this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = false; }">&nbsp;&nbsp;<input name="action" type="radio" value="optimize"{?if $option == "optimize"?} checked="checked"{?/if?} />
+      优化表 <input name="action" type="radio" value="repair"{?if $option == "repair"?} checked="checked"{?/if?} />修复表 &nbsp;&nbsp;&nbsp;<input type="submit" name="Submit" class="button" value=" 提 交 " /></td>
+  </tr>
+</table>
+</form>
+<br /><br />

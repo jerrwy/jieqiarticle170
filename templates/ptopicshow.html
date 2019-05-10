@@ -1,0 +1,91 @@
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><table width="100%"  border="0" cellspacing="2" cellpadding="3">
+            <tr>
+                <td width="40%" align="left"><a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}">{?$ownername?} 的会客室</a> 主题回复</td>
+                <td width="60%" align="right">[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=all">全部主题</a>]&nbsp;&nbsp;[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=good">精华主题</a>]{?if $enablepost == 1?}&nbsp;&nbsp;[<a href="#postnew">发表回复</a>]{?/if?}</td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+<table class="grid" width="100%" align="center">
+    <tr><th><strong>主题：{?$title?}</strong></td></tr>
+</table>
+{?section name=i loop=$ppostrows?}
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td width="20%" valign="top" class="odd">
+		<div style="padding:5px 0px 5px 15px;line-height:150%;">
+		{?if $ppostrows[i].userid > 0?}
+			<img src="{?function jieqi_geturl:'system':'avatar':$ppostrows[i].userid:'l':$ppostrows[i].avatar?}" class="avatar" alt="头像"><br />
+			<strong><a href="{?function jieqi_geturl:'system':'user':$ppostrows[i].userid?}" target="_blank">{?$ppostrows[i].username?}</a></strong><br />
+  			{?if $jieqi_modules['badge']['publish'] > 0?}
+  				{?if $ppostrows[i].groupurl != ""?}<img src="{?$ppostrows[i].groupurl?}" border="0" title="{?$ppostrows[i].groupname?}"><br />{?/if?}
+				{?if $ppostrows[i].honorurl != ""?}<img src="{?$ppostrows[i].honorurl?}" border="0" title="{?$ppostrows[i].honor?}"><br />{?/if?}
+  				{?section name=j loop=$ppostrows[$i['key']]['badgerows']?}
+				<img src="{?$ppostrows[$i['key']]['badgerows'][$j['key']]['imageurl']?}" border="0" title="{?$ppostrows[$i['key']]['badgerows'][$j['key']]['caption']?}">
+				{?/section?}
+				{?if $ppostrows[$i['key']]['badgerows']|count > 0?}<br />{?/if?}
+			{?else?}
+				{?$ppostrows[i].groupname?}<br />
+				{?$ppostrows[i].honor?}<br />
+  			{?/if?}
+			加入日期：{?$ppostrows[i].regdate|date:"Y-m-d"?}<br />
+			经　　验：{?$ppostrows[i].experience?}<br />
+			积　　分：{?$ppostrows[i].score?}<br /><br />
+			<a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$ppostrows[i].useruname|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends{?$i['order']?}" href="javascript:;" onclick="Ajax.Tip(event, '{?$jieqi_url?}/addfriends.php?id={?$ppostrows[i].userid?}', 3000);">加为好友</a><br />
+			<a href="{?function jieqi_geturl:'system':'user':$ppostrows[i].userid?}" target="_blank">查看资料</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$ppostrows[i].userid?}" target="_blank">会 客 室</a>
+		{?else?}
+			<strong>游客</strong><br /><br /><br /><br /><br />
+		{?/if?}
+		</div>
+		</td>
+        <td width="80%" valign="top" align="right" class="even"><div style="width:60%;float:left;text-align:left;"><strong>{?$ppostrows[i].subject?}</strong></div><div style="width:39%;float:right;text-align:right;">{?$ppostrows[i].posttime|date:"Y-m-d H:i:s"?}{?if $jieqi_userid == $ppostrows[i].posterid?} | <a href="{?$jieqi_url?}/ppostedit.php?pid={?$ppostrows[i].postid?}">编辑</a>{?/if?}{?if $jieqi_userid == $ppostrows[i].posterid || $jieqi_userid == $ownerid || $ismaster == 1?} | {?if $ppostrows[i].istopic == 1?}<a href="javascript:if(confirm('确实要删除该主题么？')) document.location='{?$jieqi_url?}/ptopics.php?action=del&oid={?$ownerid?}&tid={?$topicid?}';">删除</a>{?else?}<a href="javascript:if(confirm('确实要删除该回复么？')) document.location='{?$jieqi_url?}/ptopicshow.php?action=del&oid={?$ownerid?}&tid={?$topicid?}&pid={?$ppostrows[i].postid?}';">删除</a>{?/if?}{?/if?} | <a href="#pid{?$ppostrows[i].postid?}" name="pid{?$ppostrows[i].postid?}">{?$ppostrows[i].order?}#</a>&nbsp;</div>
+		<hr />
+		<div style="width:100%;text-align:left;">{?$ppostrows[i].posttext?}</div></td>
+    </tr>
+</table>
+{?/section?}
+
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+    <tr>
+        <td align="right">{?$url_jumppage?}</td>
+    </tr>
+</table>
+{?if $enablepost == 1?}
+<a name="postnew"></a>
+<script language="javascript" type="text/javascript">
+<!--
+function frmptopic_validate(){
+  if(document.frmptopic.pcontent.value == ""){
+    alert("请输入内容");
+    document.frmptopic.pcontent.focus();
+    return false;
+  }
+}
+//-->
+</script>
+<form name="frmptopic" id="frmptopic" action="ptopicshow.php?tid={?$topicid?}&do=submit" method="post" onsubmit="return frmptopic_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>发表回复</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">标题</td>
+  <td class="even"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">内容</td>
+  <td class="even"><textarea class="textarea" name="pcontent" id="pcontent" rows="12" cols="60"></textarea><script language="javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script></td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td class="odd">验证码</td>
+  <td class="even"><input type="text" class="text" name="checkcode" id="checkcode" size="8" maxlength="8" value="" /> <span class="hottext">&nbsp;<img src="{?$jieqi_url?}/checkcode.php" style="cursor:pointer;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();"></span></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newpost" /></td>
+  <td class="even"><input type="submit" class="button" name="btnpost"  id="btnpost" value="提 交" /></td>
+</tr>
+</table>
+</form>
+{?/if?}

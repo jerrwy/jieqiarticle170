@@ -1,0 +1,49 @@
+<form name="frmsearch" method="post" action="{?$url_forum?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td class="odd">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> <input name="keytype" type="radio" class="radio" value="0" checked>帖子名称
+            <input type="radio" name="keytype" class="radio" value="1">帖子作者 
+		    <input type="radio" name="keytype" class="radio" value="2">帖子发表日期
+            <input type="submit" name="btnsearch" class="button" value="搜 索">
+			&nbsp;&nbsp;&nbsp;<a href="{?$jieqi_modules['forum']['url']?}/admin/forumdels.php" class="radio">全部帖子</a>
+            &nbsp;&nbsp;<small style="color:red;font-size:12px;">注意</small>：帖子发表日期格式：2009-09-15
+        </td>
+		<td class="odd"></td>
+    </tr>
+</table>
+<br />
+
+<table class="grid" width="100%" align="center">
+<caption>{?$forumtitle?}</caption>
+  <tr align="center">
+    <th width="5%">&nbsp;</th>
+    <th width="42%">帖子名称</th>
+    <th width="15%">帖子作者</th>
+    <th width="10%">浏览次数</th>
+	<th width="10%">回复次数</th>
+    <th width="18%">发表时间</th>
+  </tr>
+  {?section name=i loop=$forumrows?}
+  <tr>
+    <td class="odd" align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$forumrows[i].topicid?}"></td>
+    <td class="even" align="left"><a href="{?$jieqi_modules['forum']['url']?}/showtopic.php?tid={?$forumrows[i].topicid?}&lpage={?$page?}" 
+	target="_blank">{?$forumrows[i].title?}</a></td>
+	<td class="odd" align="left"><a href="{?function jieqi_geturl:'system':'user':$forumrows[i].posterid?}" target="_blank">{?$forumrows[i].poster?} </a></td>
+    <td class="even" align="center">{?$forumrows[i].views?}</td>
+	<td class="even" align="center">{?$forumrows[i].replies?}</td>
+    <td class="even" align="center">{?$forumrows[i].posttime|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="10" align="left" class="odd">
+		<input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = true; }" />
+		<input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = false; }" />
+		<input type="submit" name="delcheck" value="批量删除选中记录" class="button" onclick="javascript:if(confirm('确实要删除选中记录么？')){ this.form.checkaction.value='1';this.form.submit();}else{return false;}" />
+		<input name="keywordurl" type="hidden" id="keywordurl" value="{?$keywordurl?}">
+		<input name="keytypeurl" type="hidden" id="keytypeurl" value="{?$keytypeurl?}">
+		<input name="checkaction" type="hidden" id="checkaction" value="0" />
+	</td>
+  </tr></form>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

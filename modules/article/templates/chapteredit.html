@@ -1,0 +1,83 @@
+<script language="javascript" type="text/javascript">
+<!--
+function frmchapteredit_validate(){
+  if(document.frmchapteredit.chaptername.value == ""){
+    alert("请输入章节章节标题");
+    document.frmchapteredit.chaptername.focus();
+    return false;
+  }
+}
+//-->
+</script>
+<form name="frmchapteredit" id="frmchapteredit" action="{?$url_chapteredit?}" method="post" onsubmit="return frmchapteredit_validate();" enctype="multipart/form-data">
+<table width="580" class="grid" cellspacing="1" align="center">
+<caption>{?if $chaptertype == 1?}编辑分卷{?else?}编辑章节{?/if?}</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">文章名称</td>
+  <td class="even"><a href="{?$article_static_url?}/articlemanage.php?id={?$articleid?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">{?if $chaptertype == 1?}分卷标题{?else?}章节标题{?/if?}</td>
+  <td class="even"><input type="text" class="text" name="chaptername" id="chaptername" size="50" maxlength="50" value="{?$chaptername?}" /></td>
+</tr>
+{?if $chaptertype != 1?}
+{?if $authtypeset == 1?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">文章排版</td>
+  <td class="even"><input type="radio" class="radio" name="typeset" value="1" checked="checked" />自动排版
+<input type="radio" class="radio" name="typeset" value="0" />无需排版
+</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">章节内容<br /><span class="hottext"><br /><input name="textstat" type="button" class="button" onclick="javascript:alert('当前长度 '+ document.getElementById('chaptercontent').value.length + ' 字。');" value="字数统计" /></span></td>
+  <td class="even"><textarea class="textarea" name="chaptercontent" id="chaptercontent" rows="15" cols="60">{?$chaptercontent?}</textarea></td>
+</tr>
+{?if $attachnum > 0?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">现有附件： <br /><span class="hottext">（取消打勾表示删除该附件）</span></td>
+  <td class="even">
+  {?section name=i loop=$attachrows?}
+  <input type="checkbox" class="checkbox" name="oldattach[]" value="{?$attachrows[i].attachid?}" checked="checked" />{?$attachrows[i].name?} 
+  {?/section?}
+  </td>
+</tr>
+{?/if?}
+{?if $canupload == true?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件限制：</td>
+  <td class="even">文件类型：{?$attachtype?}, 图片最大：{?$maximagesize?}K, 文件最大：{?$maxfilesize?}K</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件1</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件2</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件3</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件4</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">附件5</td>
+  <td class="even"><input type="file" class="text" size="50" name="attachfile[]" id="attachfile[]" /></td>
+</tr>
+{?/if?}
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">
+  &nbsp;
+  <input type="hidden" name="action" id="action" value="update" />
+  <input type="hidden" name="id" id="id" value="{?$chapterid?}" />
+  <input type="hidden" name="chaptertype" id="chaptertype" value="{?$chaptertype?}" />
+  </td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /></td>
+</tr>
+</table>
+</form>

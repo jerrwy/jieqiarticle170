@@ -1,0 +1,32 @@
+<div class="gridtop">作者申请记录&nbsp;&nbsp;&nbsp; <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php">全部记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=ready">待审记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=success">已审记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=failure">被拒记录</a></div>
+<form id="form1" name="form1" method="post" action="{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=batchdel" onSubmit="javascript:if(confirm('确实要删除选中记录么？')) return true; else return false;">
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="4%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <th width="18%">申请时间</th>
+    <th width="14%">申请人</th>
+    <th width="16%">审核时间</th>
+    <th width="14%">审核人</th>
+    <th width="10%">审核状态</th>
+    <th width="10%">申请内容</th>
+    <th width="14%">操作</th>
+  </tr>
+  {?section name=i loop=$applyrows?}
+  <tr>
+    <td class="odd" align="center"><input name="applyid[]" type="checkbox" id="applyid[]" value="{?$applyrows[i].applyid?}" /></td>
+    <td class="odd" align="center">{?$applyrows[i].applytime?}</td>
+    <td class="even"><a href="{?$jieqi_url?}/admin/usermanage.php?id={?$applyrows[i].applyuid?}" target="_blank">{?$applyrows[i].applyname?}</a></td>
+    <td class="odd">{?$applyrows[i].authtime?}</td>
+    <td class="even"><a href="{?function jieqi_geturl:'system':'user':$applyrows[i].authuid?}" target="_blank">{?$applyrows[i].authname?}</a></td>
+    <td class="odd" align="center">{?$applyrows[i].authstatus?}</td>
+    <td class="even" align="center"><a href="{?$jieqi_modules['article']['url']?}/admin/applyinfo.php?id={?$applyrows[i].applyid?}" target="_blank">点击查看</a></td>
+    <td class="odd" align="center">{?if $applyrows[i].applyflag == 0?}<a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=confirm&id={?$applyrows[i].applyid?}">审核</a> <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=refuse&id={?$applyrows[i].applyid?}">拒绝</a> {?/if?}<a href="javascript:if(confirm('确实要删除该申请记录么？')) document.location='{?$jieqi_modules['article']['url']?}/admin/applylist.php?action=delete&id={?$applyrows[i].applyid?}'">删除</a></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="8" align="left" class="odd"><input type="submit" name="Submit" value="批量删除" class="button" /></td>
+    </tr>  
+</table>
+</form>
+
+<div class="pages">{?$url_jumppage?}</div>

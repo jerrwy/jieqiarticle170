@@ -1,0 +1,35 @@
+<div style="padding-left:10px">
+<ul class="ulrow">
+  <li style="float:left; margin-top:14px;"><img src="{?function jieqi_geturl:'system':'avatar':$jieqi_userid:'s':$jieqi_avatar?}" class="avatars" alt="{?$jieqi_username?}"></li>
+  <li><strong>{?$jieqi_username?}</strong></li>
+  {?if $jieqi_modules['badge']['publish'] > 0?}
+    {?if $jieqi_group_imageurl != ""?}<li><img src="{?$jieqi_group_imageurl?}" border="0" title="{?$jieqi_groupname?}"></li>{?/if?}
+    {?if $jieqi_honor_imageurl != ""?}<li><img src="{?$jieqi_honor_imageurl?}" border="0" title="{?$jieqi_honor?}"></li>{?/if?}
+    {?if $jieqi_badgerows|count > 0?}<li>{?/if?}
+    {?section name=i loop=$jieqi_badgerows?}
+      <img src="{?$jieqi_badgerows[i].imageurl?}" border="0" alt="{?$jieqi_badgerows[i].caption?}">
+    {?/section?}
+    {?if $jieqi_badgerows|count > 0?}</li>{?/if?}
+  {?else?}
+    <li>{?$jieqi_groupname?}</li>
+    <li>{?$jieqi_honor?}</li>
+  {?/if?}
+</ul>
+<ul style="width:100%;overflow:hidden;padding:0px;margin:0px;">
+  <li style="width:49%;float:left;"><a href="{?$jieqi_url?}/message.php?box=inbox" class="message">短 消 息</a></li>
+  <li style="width:49%;float:left;"><a href="{?$jieqi_url?}/ptopics.php?oid=self"  class="parlor">会 客 室</a></li>
+  <li style="width:49%;float:left;"><a href="{?$jieqi_url?}/myfriends.php" class="friend">我的好友</a></li>
+{?if $jieqi_modules['article']['publish']==1?}
+  <li style="width:49%;float:left;"><a href="{?$jieqi_modules['article']['url']?}/bookcase.php" class="bookcase">我的书架</a></li>
+{?/if?}
+{?if $jieqi_modules['group']['publish']==1?}
+  <li style="width:49%;float:left;"><a href="{?$jieqi_modules['group']['url']?}/mangroup.php" class="group">我的圈子</a></li>
+{?/if?}
+{?if $jieqi_modules['space']['publish']==1?}
+  <li style="width:49%;float:left;"><a href="{?$jieqi_modules['space']['url']?}/space.php?uid={?$jieqi_userid?}" class="space">我的空间</a></li>
+{?/if?}
+  <li style="width:49%;float:left;"><a href="{?$jieqi_url?}/userdetail.php" class="userinfo">个人资料</a></li>
+  <li style="width:49%;float:left;"><a href="{?$jieqi_user_url?}/logout.php" class="logout">退出登录</a></li>
+</ul>
+<div class="cb"></div>
+</div>

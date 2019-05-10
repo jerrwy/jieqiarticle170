@@ -1,0 +1,23 @@
+<form action="?action=addblock&dosubmit=1&modules={?$module?}" method="post">
+<table class="grid" width="80%" align="center">
+  <caption>
+  在 {?$uname?} 下添加配置文件 
+  </caption>
+  <tr>
+    <td width="60%" height="20" align="center">配置文件名称:</td>
+	<td width="40%" align="center">
+	  <input name="title" type="text" id="title" maxlength="15">	</td>
+  </tr>
+    <tr>
+    <td width="60%" align="center">文件名称:(不要后缀名)</td>
+	<td width="40%" align="center">
+	  <input name="file" type="text" id="file" maxlength="5"></td>
+  </tr>
+      <tr>
+    <td width="60%" align="center" colspan="2"><label>
+      <input type="submit" name="Submit" value="提交">
+    </label></td>
+  </tr>
+
+</table>
+</form>

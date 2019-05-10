@@ -1,0 +1,106 @@
+<script language="javascript" type="text/javascript">
+<!--
+function frmnewarticle_validate(){
+  if(document.frmnewarticle.sortid.value == ""){
+    alert("请输入类别");
+    document.frmnewarticle.sortid.focus();
+    return false;
+  }
+  if(document.frmnewarticle.articlename.value == ""){
+    alert("请输入文章名称");
+    document.frmnewarticle.articlename.focus();
+    return false;
+  }
+}
+//-->
+</script>
+<form name="frmnewarticle" id="frmnewarticle" action="{?$url_newarticle?}" method="post" onsubmit="return frmnewarticle_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>发表新作</caption>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">类别</td>
+  <td class="even">
+  <select class="select" size="1" onchange="showtypes(this)" name="sortid" id="sortid">
+  <option value="0">请选择类别</option>
+  {?section name=i loop=$sortrows?}
+  <option value="{?$i['key']?}">{?$sortrows[i].caption?}</option>
+  {?/section?}
+  </select>
+  <span id="typeselect" name="typeselect"></span>
+  <script language="javascript">
+  function showtypes(obj){
+    var typeselect=document.getElementById('typeselect');
+    typeselect.innerHTML='';
+    {?section name=i loop=$sortrows?}
+	  {?if $sortrows[i].types != ''?}
+	  if(obj.options[obj.selectedIndex].value == {?$i['key']?}) typeselect.innerHTML='<select class="select" size="1" name="typeid" id="typeid">{?section name=j loop=$sortrows[i].types?}<option value="{?$j['key']?}">{?$sortrows[i]['types'][j]?}</option>{?/section?}</select>';
+	  {?/if?}
+    {?/section?}
+  }
+  </script>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">文章名称</td>
+  <td class="even"><input type="text" class="text" name="articlename" id="articlename" size="30" maxlength="50" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">关键字</td>
+  <td class="even"><input type="text" class="text" name="keywords" id="keywords" size="30" maxlength="50" value="" /> <span class="hottext">主角姓名,特定名词等,以空格分隔</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">管理员</td>
+  <td class="even"><input type="text" class="text" name="agent" id="agent" size="30" maxlength="30" value="" /> <span class="hottext">可以指定一个本站现有用户作为管理员</span></td>
+</tr>
+{?if $allowtrans > 0?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">作者</td>
+  <td class="even"><input type="text" class="text" name="author" id="author" size="30" maxlength="30" value="" /> <span class="hottext">发表自己作品请留空</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">管理授权</td>
+  <td class="even">
+  {?section name=i loop=$authorflag['items']?}
+  <input type="radio" class="radio" name="authorflag" value="{?$i['key']?}" {?if $i['key'] == $authorflag['default']?}checked="checked" {?/if?}/>{?$authorflag['items'][i]?} 
+  {?/section?}
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">授权级别</td>
+  <td class="even">
+  {?section name=i loop=$permission['items']?}
+  <input type="radio" class="radio" name="permission" value="{?$i['key']?}" {?if $i['key'] == $permission['default']?}checked="checked" {?/if?}/>{?$permission['items'][i]?} 
+  {?/section?}
+</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">首发状态</td>
+  <td class="even">
+  {?section name=i loop=$firstflag['items']?}
+  <input type="radio" class="radio" name="firstflag" value="{?$i['key']?}" {?if $i['key'] == $firstflag['default']?}checked="checked" {?/if?}/>{?$firstflag['items'][i]?} 
+  {?/section?}
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">内容简介</td>
+  <td class="even"><textarea class="textarea" name="intro" id="intro" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">本书公告</td>
+  <td class="even"><textarea class="textarea" name="notice" id="notice" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">封面小图</td>
+  <td class="even"><input type="file" class="text" size="30" name="articlespic" id="articlespic" /> <span class="hottext">图片格式：.jpg</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">封面大图</td>
+  <td class="even"><input type="file" class="text" size="30" name="articlelpic" id="articlelpic" /> <span class="hottext">图片格式：.jpg</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="odd" width="25%">&nbsp;<input type="hidden" name="action" id="action" value="newarticle" /></td>
+  <td class="even"><input type="submit" class="button" name="submit"  id="submit" value="提 交" /></td>
+</tr>
+</table>
+</form>
